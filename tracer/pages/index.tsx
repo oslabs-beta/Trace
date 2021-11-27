@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import ResolverData from '../components/resolverdata'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -13,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        This is the main content
+        <ResolverData/>
       </main>
       
     </div>
