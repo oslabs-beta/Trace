@@ -26,7 +26,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
 
   return (
       <Flex
-          mt={30}
+          mt={25}
           flexDir="column"
           w="100%"
           alignItems={navSize == "small" ? "center" : "flex-start"}
@@ -36,10 +36,10 @@ export default function NavItem({ icon, title, path, description, active=false, 
             isOpen={isOpen}
           >
               <Link
-                  backgroundColor={active ? "#AEC8CA" : 'white'}
+                  backgroundColor={active ? 'blue.200' : 'white'}
                   p={3}
                   borderRadius={8}
-                  _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
+                  _hover={{ textDecor: 'none', backgroundColor: 'blue.200' }}
                   w={navSize == "big" ? "100%" : 'auto'}
                   path={path}
               >
@@ -49,8 +49,8 @@ export default function NavItem({ icon, title, path, description, active=false, 
                     onMouseLeave={onClose}
                   >
                       <Flex>
-                          <Icon as={icon} fontSize="l" color={active ? "#82AAAD" : "gray.500"} />
-                          <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>
+                          <Icon as={icon} fontSize="l" color={active ? "white" : "gray.500"} />
+                          <Text ml={5} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
                       </Flex>
                   </MenuButton>
               </Link>
