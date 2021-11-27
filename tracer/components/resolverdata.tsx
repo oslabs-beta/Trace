@@ -1,20 +1,21 @@
-
-const ResolverData = ({ data }:any) => {
-  return (
-    <div>
-      {data}
-    </div>
-  )
+type Props = {
+  metrics: Array<any>
 }
 
-// This gets called on every request
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`http://localhost:3000/api/resolvers`)
-  const data = await res.json()
-  console.log('data', data);
-  // Pass data to the page via props
-  return { props: { data } }
+const ResolverData = ({ metrics }: Props) => {
+  const data = metrics[0].fullQuery;
+  let formattedData = [];
+
+  for (let index in data) {
+    formattedData.push(<h2>{data[index].parentType}</h2>)
+  }
+
+  return (
+    <div>
+      <h1>resolver data</h1>
+      {formattedData}
+    </div>
+  )
 }
 
 export default ResolverData

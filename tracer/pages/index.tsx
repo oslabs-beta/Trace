@@ -1,10 +1,13 @@
-import type { NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import ResolverData from '../components/resolverdata'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+type Props = {
+  data: Array<any>
+}
+
+const Home = ({ data }: Props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -14,11 +17,17 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <ResolverData/>
+        <ResolverData metrics={data} />
       </main>
       
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch(`http://localhost:3000/api/data`)
+  const data = await res.json()
+  return { props: { data } }
 }
 
 export default Home
