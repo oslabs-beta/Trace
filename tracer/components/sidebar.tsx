@@ -27,10 +27,18 @@ import {
 
 // Framer Motion
 import { motion } from 'framer-motion';
-const variants = {
+const mainVariants = {
   'small': { width: '75px' },
   'big': { width: '200px' }
 }
+const innerVariants = {
+  'small': { alignItems: 'center' },
+  'big': { 
+    alignItems: 'flex-start',
+    transition: { duration: 1.5 },
+   }
+}
+
 
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState("small")
@@ -40,7 +48,7 @@ const Sidebar = () => {
       animate={navSize === 'small' ? 'small' : 'big'}
       style={ { marginTop: '1vh', left: '5' } }
       transition={ { ease: 'easeInOut' } }
-      variants={variants}
+      variants={mainVariants}
     >
       <Flex
         pos='sticky'
@@ -49,12 +57,11 @@ const Sidebar = () => {
         flexDir='column'
         justify='space-between'
       >
-        <Flex
-          p="5%"
-          flexDir="column"
-          w="100%"
-          alignItems={navSize == "small" ? "center" : "flex-start"}
-          as="nav"
+        <motion.div
+          animate={navSize === 'small' ? 'small' : 'big'}
+          transition={ { ease: 'easeInOut' } }
+          variants={innerVariants}
+          style={ { display: 'flex', padding: '5%', flexDirection: 'column', width: '100%' } }
         >
           
             <IconButton
@@ -67,16 +74,17 @@ const Sidebar = () => {
                     if (navSize == "small") changeNavSize("big")
                     else changeNavSize("small")
                 }}
+                style={ { alignItems: 'center' }}
             />
           
-          
+            
             <NavItem navSize={navSize} icon={FiGrid} title="Dashboard" description="See all your resolver metrics in one place." path='/' />
             <NavItem navSize={navSize} icon={FiBarChart} title="Insights" description="View valuable insights gathered from your resolver data." path='/insights' />
             <NavItem navSize={navSize} icon={FiAlertTriangle} title="Error" description="See all your errors all in one place." path='/errors' />
             <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
             <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/>
             <NavItem navSize={navSize} icon={FiSettings} title="Settings" description="Configure Trace to fit your needs." path='/settings'/>
-        </Flex>
+        </motion.div>
       </Flex>
     </motion.div>
   )

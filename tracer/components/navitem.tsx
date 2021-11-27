@@ -41,7 +41,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
                   borderRadius={8}
                   _hover={{ textDecor: 'none', backgroundColor: 'blue.200' }}
                   w={navSize == "big" ? "100%" : 'auto'}
-                  path={path}
+                  href={path}
               >
                   <MenuButton 
                     w="100%"
