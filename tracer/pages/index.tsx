@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Dashboard from '../components/dashboard'
-import styles from '../styles/Home.module.css'
+import InnerLayout from "../components/innerlayout"
+
 
 type Props = {
   data: Array<any>
@@ -9,18 +10,18 @@ type Props = {
 
 const Home = ({ data }: Props) => {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Trace</title>
         <meta name="description" content="A lightweight GraphQL resolver tracing tool" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <InnerLayout title='Dashboard'>
         <Dashboard metrics={data} />
-      </main>
+      </InnerLayout>
       
-    </div>
+    </>
   )
 }
 

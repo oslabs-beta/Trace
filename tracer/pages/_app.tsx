@@ -6,7 +6,7 @@ import theme from '../theme/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Layout>
         <Component {...pageProps} />
       </Layout>

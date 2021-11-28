@@ -1,3 +1,4 @@
+
 type Props = {
   metrics: Array<any>
 }
@@ -22,7 +23,7 @@ const Dashboard = ({ metrics }: Props) => {
         </>
       );
     }
-    
+
     return (
       //! turn into its own component later + one for pop-out graph 
       <>
