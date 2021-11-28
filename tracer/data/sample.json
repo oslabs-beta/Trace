@@ -1,0 +1,11 @@
+[{"fullQuery":
+  {"0":{"parentType":"RootQueryType","fieldName":"authors","duration":32,"returnValue":[{"_id":"61944ffe8e1bf389da01e98d","name":"Patrick Rothfuss","age":44,"__v":0},{"_id":"61944ffe8e1bf389da01e98f","name":"Brandon Sanderson","age":42,"__v":0},{"_id":"61944ffe8e1bf389da01e991","name":"Terry Pratchett","age":66,"__v":0},{"_id":"619474420d6085be7b7710c8","name":"Billy Bob Joe","age":30,"__v":0}]},
+  "1":{"parentType":"Author","fieldName":"name","duration":1,"returnValue":"Patrick Rothfuss"},
+  "2":{"parentType":"Author","fieldName":"id","duration":1,"returnValue":"61944ffe8e1bf389da01e98d"},
+  "3":{"parentType":"Author","fieldName":"name","duration":1,"returnValue":"Brandon Sanderson"},
+  "4":{"parentType":"Author","fieldName":"id","duration":1,"returnValue":"61944ffe8e1bf389da01e98f"},
+  "5":{"parentType":"Author","fieldName":"name","duration":1,"returnValue":"Terry Pratchett"},
+  "6":{"parentType":"Author","fieldName":"id","duration":1,"returnValue":"61944ffe8e1bf389da01e991"},
+  "7":{"parentType":"Author","fieldName":"name","duration":1,"returnValue":"Billy Bob Joe"},
+  "8":{"parentType":"Author","fieldName":"id","duration":1,"returnValue":"619474420d6085be7b7710c8"},"finalMetrics":{"startTime":1638043796405,"endTime":1638043796438,"duration":33}}
+}]
