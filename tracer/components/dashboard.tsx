@@ -11,17 +11,18 @@ const Dashboard = ({ metrics }: Props) => {
     let formattedData = [];
 
     for (let [key, value] of Object.entries(data)) {
-      if (key === "0") {
-        rootQuery = value.fieldName;
+      if (key === "0") rootQuery = value.fieldName;
+      if (key === "finalMetrics") {
         overallDuration = value.duration;
-      } else {
-        formattedData.push(
-          <>
-            <p>{value.parentType}.{value.fieldName}: {value.duration}ms</p>
-          </>
-        );
+        continue;
       }
+      formattedData.push(
+        <>
+          <p>{value.parentType}.{value.fieldName}: {value.duration}ms</p>
+        </>
+      );
     }
+    
     return (
       //! turn into its own component later + one for pop-out graph 
       <>
