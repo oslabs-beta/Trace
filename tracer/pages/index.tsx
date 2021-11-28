@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import ResolverData from '../components/resolverdata'
+import Dashboard from '../components/dashboard'
 import styles from '../styles/Home.module.css'
 
 type Props = {
@@ -17,7 +17,7 @@ const Home = ({ data }: Props) => {
       </Head>
 
       <main className={styles.main}>
-        <ResolverData metrics={data} />
+        <Dashboard metrics={data} />
       </main>
       
     </div>
