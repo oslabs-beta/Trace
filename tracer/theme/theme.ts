@@ -1,22 +1,11 @@
 import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
-  components: {
-    Drawer: {
-      baseStyle: {
-        boxShadow: 'none'
-      },
-      variants: {
-        peek: {
-          dialog: {
-            pointerEvents: 'auto',
-          },
-          dialogContainer: {
-            pointerEvents: 'none',
-          },
-        },
-      },
-    },
+  breakpoints: {
+    sm: "0",
+    md: "700px",
+    lg: "960px",
+    xl: "1200px",
   },
 });
 
