@@ -7,7 +7,7 @@ import {
   Box,
   Flex
 } from '@chakra-ui/react';
-import { Key } from 'readline';
+import ResolverGraph from './resolverGraph';
 
 type Props = {
   metrics: Array<any>;
@@ -18,16 +18,15 @@ const Dashboard = ({ metrics, averages }: Props) => {
   const accordianItems = Object.keys(averages).map((value, index) => {
     return (
       <AccordionItem key={index}>
-        <AccordionButton>
-          <Flex as="h3" fontSize="lg" fontWeight="bold">
-            {value}
-            {averages[value]}
+        <AccordionButton display='flex' justifyContent='space-between'>
+          <Flex as="h3" fontSize="lg" fontWeight="bold" justifyContent='space-between'>
+            {value} | {averages[value]}ms
           </Flex>
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
           <Box as="p" fontSize="lg" fontWeight="bold">
-            this is where the graph will go
+            <ResolverGraph />
           </Box>
         </AccordionPanel>
       </AccordionItem>
