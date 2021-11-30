@@ -6,7 +6,6 @@ import {
     Icon
 } from '@chakra-ui/react'
 import { IconType } from 'react-icons'
-import { motion, AnimatePresence } from "framer-motion"
 
 type Props = {
     title: string;
