@@ -5,10 +5,11 @@ import InnerLayout from "../components/innerlayout"
 
 
 type Props = {
-  data: Array<any>
+  data: Array<any>;
+  avgData: Object;
 }
 
-const Home = ({ data }: Props) => {
+const Home = ({ rawData, avgData }: Props) => {
   return (
     <>
       <Head>
@@ -18,7 +19,7 @@ const Home = ({ data }: Props) => {
       </Head>
 
       <InnerLayout title='Dashboard'>
-        <Dashboard metrics={data} />
+        <Dashboard metrics={rawData} averages={avgData} />
       </InnerLayout>
       
     </>
@@ -26,9 +27,9 @@ const Home = ({ data }: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`http://localhost:3000/api/data`)
-  const data = await res.json()
-  return { props: { data } }
+  const res = await fetch(`http://localhost:3000/api/data`);
+  const { rawData, avgData } = await res.json()
+  return { props: { rawData, avgData } }
 }
 
 export default Home

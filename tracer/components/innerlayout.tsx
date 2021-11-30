@@ -24,7 +24,6 @@ const InnerLayout = ({
     <Main>
       {/* Create header component with customizable size (lg, mg, sm) */}
       <div>{title}</div>
-      {/* Create metric tracker component */}
       {children}
     </Main>
   </>

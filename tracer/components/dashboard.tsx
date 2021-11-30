@@ -1,47 +1,43 @@
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+  Flex
+} from '@chakra-ui/react';
+import { Key } from 'readline';
 
 type Props = {
-  metrics: Array<any>
+  metrics: Array<any>;
+  averages: any;
 }
 
-const Dashboard = ({ metrics }: Props) => {
-  const formattedData = metrics.map((obj, i) => {
-    const data = obj.fullQuery;
-    let rootQuery;
-    let overallDuration;
-    //const returnValue = re-work the logic to send back query results
-    let formattedData = [];
-
-    for (let [key, value] of Object.entries(data)) {
-      if (key === "0") rootQuery = value.fieldName;
-      if (key === "finalMetrics") {
-        overallDuration = value.duration;
-        continue;
-      }
-      formattedData.push(
-        <>
-          <p>{value.parentType}.{value.fieldName}: {value.duration}ms</p>
-        </>
-      );
-    }
-
+const Dashboard = ({ metrics, averages }: Props) => {
+  const accordianItems = Object.keys(averages).map((value, index) => {
     return (
-      //! turn into its own component later + one for pop-out graph 
-      <>
-        <div className='resolver-data'>
-          <h1>{rootQuery}: {overallDuration}ms</h1>
-        </div>
-        <div className='resolver-graph'>
-          {formattedData}
-        </div>
-      </>
-    )
+      <AccordionItem key={index}>
+        <AccordionButton>
+          <Flex as="h3" fontSize="lg" fontWeight="bold">
+            {value}
+            {averages[value]}
+          </Flex>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          <Box as="p" fontSize="lg" fontWeight="bold">
+            this is where the graph will go
+          </Box>
+        </AccordionPanel>
+      </AccordionItem>
+    );
   });
 
   return (
-    <div>
-      <h1>Resolver Data</h1>
-      {formattedData}
-    </div>
+    <Accordion>
+      {accordianItems}
+    </Accordion>
   )
 }
 
