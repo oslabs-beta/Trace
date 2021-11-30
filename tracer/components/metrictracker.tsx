@@ -1,3 +1,4 @@
+import { Doughnut } from 'react-chartjs-2';
 // successful resolver executes
 // failing resolver executions
 
@@ -13,10 +14,11 @@
 const MetricTracker = () => {
   return (
     <div>
-      <RadialChart
-        data={myData}
-        width={300}
-        height={300} />
+      <Doughnut
+        option={...}
+        data={...}
+        {...props}
+      />
     </div>
   )
 }
