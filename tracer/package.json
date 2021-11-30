@@ -19,7 +19,10 @@
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.0",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@types/node": "16.11.10",
