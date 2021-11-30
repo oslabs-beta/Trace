@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { helpers } from '../../data/helpers';
+import helpers from '../../data/helpers';
 
 export default function apiHandler(req: NextApiRequest, res: NextApiResponse) {
-    const rawData = helpers.getAll();
-    const avgData = helpers.getAvgs();
-    res.status(200).json({ rawData, avgData });
+    const data = helpers.getAll();
+    // console.log('data.ts', data);
+    res.status(200).json({ data });
 }

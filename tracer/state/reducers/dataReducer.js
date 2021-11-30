@@ -1,28 +1,62 @@
+import * as types from '../constants/actionTypes'
+
 const initialState = {
   rawdata: {},
   averages: {},
   count: {}
 }
 
-const reducer = (state = initialState, action) => {
+const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "new_query":
-      // extract the payload into shorthand variables
-      queryName = action.payload["query"];
-      info = action.payload["info"];
-      // if the queryname isnt already saved to state,
-      // initialize it with the payload info.
-      if (!state.rawData[queryName]) state.rawData[queryName] = info;
-       // otherwise add to the preexisting entry with the info.
-      else state.rawData[queryName] += info;
-      // return the now-modified state
-      return state;
+    case types.UPDATE_DATA:
+      const newData = action.payload;
+      /*
+      {
+        formattedData,
+        count,
+        average
+      }
+      */
+      const stateClone = {...state};
+
+      const newRawData = newData.formattedData;
+      // see which keys are new and which already exist in state.rawdata
+      for (let key in newRawData) {
+        if (state.rawdata[key] === undefined) {
+          stateClone.rawdata[key] = newRawData[key];
+        } else {
+          stateClone.rawdata[key].push(newRawData[key]);
+        }
+      }
+
+      // new count
+      for (let key in newData.count) {
+        if (!stateClone.count[key]) stateClone.count[key] = 0;
+        stateClone.count[key] += newData.count[key];
+      }
+      
+      // new averages
+      console.log('newData: ', newData);
+      for (let key in newData.average) {
+        const newAverage = newData.average[key];
+        const newCount = newData.count[key];
+        const oldAverage = stateClone.averages[key] ? stateClone.averages[key] : 0;
+        const oldCount = stateClone.count[key] ? stateClone.count[key] : 0;
+        
+        const newStateAverage = (oldAverage * oldCount + newAverage * newCount) / (oldCount + newCount);
+
+        stateClone.averages[key] = newStateAverage;
+      }
+      console.log('stateClone: ', stateClone)
+      return stateClone;
+
+
+    case types.DELETE_DATA:
+      return initialState;
+    
     default:
-      // return the untouched state
-      return state
+        return state;
   }
 };
 
-
-
-export default reducer;
+export default dataReducer;
