@@ -26,14 +26,14 @@ const Dashboard = ({ metrics }: Props) => {
 
     return (
       //! turn into its own component later + one for pop-out graph 
-      <>
+      <div key={i}>
         <div className='resolver-data'>
           <h1>{rootQuery}: {overallDuration}ms</h1>
         </div>
         <div className='resolver-graph'>
           {formattedData}
         </div>
-      </>
+      </div>
     )
   });
 
