@@ -17,8 +17,8 @@ const Dashboard = () => {
   const accordianItems = Object.keys(store.averages).map((value, index) => {
     if (store.rawdata.hasOwnProperty(value)) {
       return (
-        <AccordionItem id={index.toString()} p='3'>
-          <AccordionButton display='flex' justifyContent='space-between'>
+        <AccordionItem key={index.toString()} id={index.toString()} p='3'>
+          <AccordionButton display='flex' justifyContent='space-between' id={index.toString()}>
             <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center' color='blue-400' >
               {value}
               <Box ml='2' fontSize="sm" borderRadius='20' p='2' pr='4' pl='4' bg='blue.500' color='white'>

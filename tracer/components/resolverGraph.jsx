@@ -86,7 +86,6 @@ const options = {
   },
   responsive: true,
   scales: {
-    max: 50,
     xAxes: {
       position: 'bottom',
       stacked: true,
@@ -165,9 +164,9 @@ const ResolverGraph = ({ data }) => {
   }, []);
 
   return (
-    <div>
+    <>
       <Bar data={graphData} options={options} />
-    </div>
+    </>
   )
 }
 
