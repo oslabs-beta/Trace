@@ -1,0 +1,8 @@
+[{"Query.getUsers":99.48,"User.username":0.01},
+  {"Query.getUsers":24.75,"User.username":0.02},
+  {"Query.getUsers":29.85,"User.username":0.03},
+  {"Query.getUsers":120.39,"User.username":0.06},
+  {"Mutation.signup":189.2,"AuthToken.token":0.01},
+  {"Mutation.signup":113.72,"AuthToken.token":0.01},
+  {"Mutation.signup":107.96,"AuthToken.token":0.01},
+  {"Mutation.signup":382.72,"AuthToken.token":0.05}]
