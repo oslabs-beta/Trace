@@ -23,7 +23,7 @@ const Dashboard = () => {
       return (
         <AccordionItem key={index}>
           <AccordionButton display='flex' justifyContent='space-between'>
-            <Flex as="h3" fontSize="lg" fontWeight="bold" justifyContent='space-between' alignItems='center'>
+            <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center'>
               <IconButton
                 aria-label='This is the button to delete this query on the dashboard.'
                 background="none"
