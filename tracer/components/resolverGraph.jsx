@@ -1,46 +1,79 @@
 import { Bar } from 'react-chartjs-2';
-import { useLayoutEffect } from 'react';
-import Chart from 'chart.js/auto';
+import { ChartData } from 'chart.js';
 
-// type Props = {
-//   metrics: Array<any>;
-// }
+import {
+  Chart,
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip
+} from 'chart.js';
+import { useEffect, useState } from 'react';
 
-const dummyData = {
+Chart.register(
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip
+);
+
+let graphDataTemplate = {
   labels: [], // each metric object in query array
   datasets: [] // each resolver 
 };
 
-const datasetTemplate = {
-label: '',
-data: [],
-borderWidth: 1,
+function graphDataInit() {
+  this.labels = [];
+  this.datasets = [];
 }
 
-const sampleData = {
-  "Query.getUsers": [
-    {"Query.getUsers":99.48,"User.username":0.01,"totalDuration":99.68},
-    // {"Query.getUsers":24.75,"User.username":0.02,"totalDuration":25.21},
-    // {"Query.getUsers":29.85,"User.username":0.03,"totalDuration":30.1},
-    // {"Query.getUsers":120.39,"User.username":0.06,"totalDuration":120.98},
-    // {"Query.getUsers":44.24,"User.username":0.01,"totalDuration":44.4},
-    // {"Query.getUsers":22.49,"User.username":0.01,"totalDuration":22.61},
-    // {"Query.getUsers":20.82,"User.username":0.01,"totalDuration":20.89},
-    // {"Query.getUsers":30.37,"User.username":0.01,"totalDuration":30.51},
-    // {"Query.getUsers":19.5,"User.username":0.02,"totalDuration":19.87},
-    // {"Query.getUsers":20.39,"User.username":0.01,"totalDuration":20.51},
-    // {"Query.getUsers":22.05,"User.username":0.03,"totalDuration":22.21},
-    // {"Query.getUsers":22.95,"User.username":0.01,"totalDuration":23.06},
-    // {"Query.getUsers":21.51,"User.username":0.01,"totalDuration":21.59},
-    // {"Query.getUsers":20.69,"User.username":0.01,"totalDuration":20.8},
-    // {"Query.getUsers":21.64,"User.username":0.01,"totalDuration":21.72},
-    // {"Query.getUsers":22.48,"User.username":0.01,"totalDuration":22.61},
-    // {"Query.getUsers":32.17,"User.username":0.02,"totalDuration":32.32},
-  ]
+let datasetTemplate = {
+  label: '',
+  data: [],
+  borderWidth: 1,
 }
 
 const options = {
   indexAxis: 'y',
+  barThickness: 20,
   plugins: {
     title: {
       display: true,
@@ -49,11 +82,11 @@ const options = {
   },
   responsive: true,
   scales: {
+    max: 50,
     x: {
       position: 'bottom',
       stacked: true,
       ticks: {
-        // Include a dollar sign in the ticks
         callback: function(value, index, values) {
             return value + 'ms';
         }
@@ -62,7 +95,6 @@ const options = {
     y: {
       stacked: true,
       ticks: {
-        // Include a dollar sign in the ticks
         callback: function(value, index, values) {
             return '';
         }
@@ -72,52 +104,65 @@ const options = {
 };
 
 
+const ResolverGraph = ({ data }) => {
 
-const ResolverGraph = () => {
-  useLayoutEffect(() => {
-    sampleData["Query.getUsers"].forEach((dataObject, index) => {
-      dummyData.labels.push(index.toString());
-      // loop through each key/value pair in dataObject
-      Object.keys(dataObject).forEach((key, index) => {
-        if (key === 'totalDuration') return;
-        if (dummyData.datasets.length === 0) {
-          dummyData.datasets.push({
+  const [graphData, setGraphData] = useState(graphDataTemplate);
+
+  const formatData = () => {
+    const newData =  new graphDataInit();
+
+    let i = 0;
+
+    for (let obj of data) {
+      newData.labels.push(Object.keys(obj)[0]);
+      i++;
+      let curr = obj;
+  
+      for (let resolver in curr) {
+
+        if (newData.datasets.length === 0) {
+          //newData.labels.push(resolver);
+          newData.datasets.push({
             ...datasetTemplate,
-            label: key,
-            data: [dataObject[key]],
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: resolver,
+            data: [curr[resolver]],
+            backgroundColor: '#1A365D',
             showLine: true
-          }) } 
-        else {
-          let i = 0;
-          let found = false;
-          while (i < dummyData.datasets.length) {
-            if (dummyData.datasets[i].label === key) {
-              found = true;
-              dummyData.datasets[i].data.push(dataObject[key]);
-              break;
+          }) } else {
+            // check if there's a dataset with the same label
+            let found = false;
+            for (let dataset of newData.datasets) {
+              if (dataset.label === resolver) {
+                dataset.data.push(curr[resolver]);
+                found = true;
+                break;
+              }
             }
-              i++
+
+            if (!found) {
+              //newData.labels.push(resolver);
+              newData.datasets.push({
+                ...datasetTemplate,
+                label: resolver,
+                data: [curr[resolver]],
+                backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`
+              });
+            }
           }
-    
-          if (!found) {
-            dummyData.datasets.push({
-              ...datasetTemplate,
-              label: key,
-              data: [dataObject[key]],
-              backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`
-            })
-          }
-        }
-    
-      });
-    });
-    console.log(dummyData)
-  }, [])
+      }
+    }
+
+    return newData;
+  }
+
+  useEffect(() => {
+    const newData = formatData();
+    setGraphData(newData);
+  }, []);
 
   return (
     <div>
-      <Bar data={dummyData} options={options}/>
+      <Bar data={graphData} options={options} />
     </div>
   )
 }

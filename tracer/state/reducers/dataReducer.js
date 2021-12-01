@@ -25,7 +25,7 @@ const dataReducer = (state = initialState, action) => {
         if (state.rawdata[key] === undefined) {
           stateClone.rawdata[key] = newRawData[key];
         } else {
-          stateClone.rawdata[key].push(newRawData[key]);
+          stateClone.rawdata[key].concat(newRawData[key]);
         }
       }
 
