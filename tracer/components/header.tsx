@@ -1,13 +1,13 @@
-import { Stack, Box, Divider, Text, Icon } from '@chakra-ui/react'
+import { Box, Text, Icon } from '@chakra-ui/react'
 
 type Props = {
   size: string; // lg, md, sm
   text: string;
-  icon: string;
+  icon: any;
 }
 
 const Header = ({ size, text, icon}: Props) => {
-  // switch statement 
+  
   let resize;
   let dividerSize;
   let width;
@@ -31,23 +31,21 @@ const Header = ({ size, text, icon}: Props) => {
   }
 
   return (
-      <Stack>
-        <Box 
-            fontSize={resize} 
-            fontWeight={'bold'} 
-            color='white' 
-            bg='blue.900'
-            borderRadius="10px"
-            w={width}
-        >
-            
-            <Text fontWeight={'bold'} color='white' >
-              <Icon as={icon} fontSize="l" color="white" />
-              {text}
-            </Text>
-        </Box>
-        <Divider w={dividerSize} />
-      </Stack>
+      <Box 
+          fontSize={resize} 
+          fontWeight={'bold'} 
+          color='white' 
+          bg='blue.900'
+          borderRadius="10px"
+          w={width}
+          p={'.5em'}
+          mb={'1em'}
+      >
+        <Text fontWeight={'bold'} color='white' display='flex' alignItems='center' >
+          <Icon as={icon} fontSize="l" color="white" mr={'.5em'} />
+          {text}
+        </Text>
+      </Box>
   )
 }
 

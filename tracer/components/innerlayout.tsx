@@ -24,7 +24,6 @@ const InnerLayout = ({
 }: Props) => (
   <>
     <Main>
-      <Header size='lg' text={title} icon='FiGrid' />
       {children}
     </Main>
   </>

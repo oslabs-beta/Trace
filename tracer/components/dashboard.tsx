@@ -7,6 +7,7 @@ import {
   Box,
   Flex,
 } from '@chakra-ui/react';
+import { FiGrid } from 'react-icons/fi'
 import ResolverGraph from './resolverGraph';
 import { useSelector } from 'react-redux';
 
