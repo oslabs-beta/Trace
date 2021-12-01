@@ -41,9 +41,9 @@ const dataReducer = (state = initialState, action) => {
         const newAverage = newData.average[key];
         const newCount = newData.count[key];
         const oldAverage = stateClone.averages[key] ? stateClone.averages[key] : 0;
-        const oldCount = stateClone.count[key] ? stateClone.count[key] : 0;
+        const oldCount = state.count[key] ? state.count[key] : 0;
         
-        const newStateAverage = (oldAverage * oldCount + newAverage * newCount) / (oldCount + newCount);
+        const newStateAverage = ((oldAverage * oldCount) + (newAverage * newCount)) / newCount;
 
         stateClone.averages[key] = newStateAverage;
       }
