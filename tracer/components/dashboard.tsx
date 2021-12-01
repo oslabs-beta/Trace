@@ -6,13 +6,9 @@ import {
   AccordionIcon,
   Box,
   Flex,
-  IconButton
 } from '@chakra-ui/react';
 import ResolverGraph from './resolverGraph';
 import { useSelector } from 'react-redux';
-
-// Feather Icon Imports
-import { FiMinusCircle } from 'react-icons/fi';
 
 const Dashboard = () => {
   const store = useSelector((state) => state.data);
@@ -21,19 +17,13 @@ const Dashboard = () => {
   const accordianItems = Object.keys(store.averages).map((value, index) => {
     if (store.rawdata.hasOwnProperty(value)) {
       return (
-        <AccordionItem key={index}>
+        <AccordionItem id={index.toString()} p='3'>
           <AccordionButton display='flex' justifyContent='space-between'>
-            <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center'>
-              <IconButton
-                aria-label='This is the button to delete this query on the dashboard.'
-                background="none"
-                _hover={{ background: 'none' }}
-                icon={<FiMinusCircle />}
-                onClick={() => {
-                  console.log('Delete!')
-                }}
-                style={ { alignItems: 'center' }}
-              /> {value} | {store.averages[value]}ms
+            <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center' color='blue-400' >
+              {value}
+              <Box ml='2' fontSize="md" borderRadius='20' p='2' bg='blue.500' color='white'>
+                Average duration: {store.averages[value].toFixed(2)}ms
+              </Box>
             </Flex>
             <AccordionIcon />
           </AccordionButton>
