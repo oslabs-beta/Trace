@@ -15,6 +15,9 @@ import {
 function Test() {
   return (
     <InnerLayout title='test'>
+
+      <Header text='Resolver Metrics' size='md' icon={FiGrid}/>
+
     </InnerLayout>
   )
 }

@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import Header from './header';
 
 const Main = styled.main`
   display: flex;
@@ -23,8 +24,7 @@ const InnerLayout = ({
 }: Props) => (
   <>
     <Main>
-      {/* Create header component with customizable size (lg, mg, sm) */}
-      <div>{title}</div>
+      <Header size='lg' text={title} icon='FiGrid' />
       {children}
     </Main>
   </>

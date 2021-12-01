@@ -1,7 +1,5 @@
 import { Stack, Box, Divider, Text, Icon } from '@chakra-ui/react'
 
-
-
 type Props = {
   size: string; // lg, md, sm
   text: string;

@@ -21,7 +21,7 @@ const Dashboard = () => {
           <AccordionButton display='flex' justifyContent='space-between'>
             <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center' color='blue-400' >
               {value}
-              <Box ml='2' fontSize="md" borderRadius='20' p='2' bg='blue.500' color='white'>
+              <Box ml='2' fontSize="sm" borderRadius='20' p='2' pr='4' pl='4' bg='blue.500' color='white'>
                 Average duration: {store.averages[value].toFixed(2)}ms
               </Box>
             </Flex>
