@@ -5,37 +5,40 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
-  Flex
+  Flex,
 } from '@chakra-ui/react';
-import { Key } from 'readline';
+import ResolverGraph from './resolverGraph';
+import { useSelector } from 'react-redux';
 
-type Props = {
-  metrics: Array<any>;
-  averages: any;
-}
+const Dashboard = () => {
+  const store = useSelector((state) => state.data);
+  console.log('Store in Dashboard Component: ', store);
 
-const Dashboard = ({ metrics, averages }: Props) => {
-  const accordianItems = Object.keys(averages).map((value, index) => {
-    return (
-      <AccordionItem key={index}>
-        <AccordionButton>
-          <Flex as="h3" fontSize="lg" fontWeight="bold">
-            {value}
-            {averages[value]}
-          </Flex>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
-          <Box as="p" fontSize="lg" fontWeight="bold">
-            this is where the graph will go
-          </Box>
-        </AccordionPanel>
-      </AccordionItem>
-    );
+  const accordianItems = Object.keys(store.averages).map((value, index) => {
+    if (store.rawdata.hasOwnProperty(value)) {
+      return (
+        <AccordionItem id={index.toString()} p='3'>
+          <AccordionButton display='flex' justifyContent='space-between'>
+            <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center' color='blue-400' >
+              {value}
+              <Box ml='2' fontSize="md" borderRadius='20' p='2' bg='blue.500' color='white'>
+                Average duration: {store.averages[value].toFixed(2)}ms
+              </Box>
+            </Flex>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel>
+            <Box as="p" fontSize="lg" fontWeight="bold">
+              <ResolverGraph data={store.rawdata[value]}/>
+            </Box>
+          </AccordionPanel>
+        </AccordionItem>
+      );
+    }
   });
 
   return (
-    <Accordion>
+    <Accordion w='100%' >
       {accordianItems}
     </Accordion>
   )

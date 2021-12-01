@@ -1,5 +1,6 @@
 import InnerLayout from "../components/innerlayout"
 import Header from "../components/header"
+import ResolverGraph from "../components/resolverGraph"
 
 import {
   FiMenu,
@@ -14,8 +15,6 @@ import {
 function Test() {
   return (
     <InnerLayout title='test'>
-      {/* insert testing component here */}
-      <Header text='Resolver Metrics' size='md' icon={FiGrid}/>
     </InnerLayout>
   )
 }

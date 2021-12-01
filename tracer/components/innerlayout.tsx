@@ -9,6 +9,7 @@ const Main = styled.main`
   margin: 3rem;
   height: 80vh;
   padding: 3rem;
+  overflow-y: scroll;
 `;
 
 type Props = {
