@@ -25,6 +25,7 @@ export default function NavHoverBox({ title, icon, description }: Props) {
                 borderTop="10px solid transparent"
                 borderBottom="10px solid transparent"
                 borderRight="10px solid blue.900"
+                zIndex={99999999}
             />
             <Flex
                 h={200}
