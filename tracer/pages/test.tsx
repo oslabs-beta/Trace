@@ -15,13 +15,9 @@ import {
 function Test() {
   return (
     <InnerLayout title='test'>
-      {/* insert testing component here */}
-<<<<<<< HEAD
-      <Header text='fjladsfjks' size='lg'/>
-      <ResolverGraph/>
-=======
+
       <Header text='Resolver Metrics' size='md' icon={FiGrid}/>
->>>>>>> c268873 (header updates 12/1)
+
     </InnerLayout>
   )
 }
