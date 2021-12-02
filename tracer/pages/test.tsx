@@ -16,15 +16,9 @@ import {
 function Test() {
   return (
     <InnerLayout title='test'>
-<<<<<<< HEAD
-      {/* insert testing component here */}
-      <Header text='fjladsfjks' size='lg'/>
-      {/* <Insights /> */}
-=======
 
       <Header text='Resolver Metrics' size='md' icon={FiGrid}/>
-
->>>>>>> a3082fdaf7939603866b83e448d3d65e09533b79
+      <Insights />
     </InnerLayout>
   )
 }

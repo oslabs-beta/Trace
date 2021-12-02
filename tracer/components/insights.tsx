@@ -1,11 +1,7 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// using chart.js/auto to get started quickly
-// should refactor to import only what is being used
-import Chart from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-
 
 /*
   
@@ -32,20 +28,6 @@ import { Bar } from 'react-chartjs-2';
 
 */
 
-/*
-context = {
-  TQF: {
-    render: Boolean,
-    list: integer(default 5);
-  },
-  AQD: {
-    render: Boolean,
-    list: integer(default 5);
-  },
-  ...others
-}
-*/
-
 /* 
     Insights:
     Top Query by Frequency: TQF
@@ -56,27 +38,25 @@ context = {
     Average Duration of All: ADA
 */
 
-const dummyContext = {
-  TQF: {
-    render: true,
-    list: 4
-  },
-  AQD: {
-    render: true,
-    list: 4
-  },
-  TOF: {
-    render: true,
-    list: 2
-  }
-};
-
-const graphs = (context) => {
+const graphs = (context: any, rawdata: any, averages: any, count: any) => {
   // take in the context object
   // and create the graphs
-  const { rawdata, averages, count } = useSelector((state) => state.data);
-
     const cards = [];
+    const optionTemp = {
+      indexAxis: 'y' as const,
+      elements: {
+        bar: {
+          borderWidth: 1,
+        },
+      },
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: '',
+        },
+      },
+    };
     
     switch (context.TQF.render) {
       case true:
@@ -86,12 +66,14 @@ const graphs = (context) => {
         const sortable = [];
         // add objects into that array
         for (const query in count) {
+          console.log('queer-E', query);
             sortable.push([query, count[query]]);
         }
         // sort the array in numerical order (descending)
         sortable.sort(function(a, b) {
             return a[1] - b[1];
         });
+        console.log('and she\'s SORTABLE', sortable);
         // compile labels & metrics for as many entries as the user selected
         const labels = [];
         const metrics = [];
@@ -100,7 +82,8 @@ const graphs = (context) => {
           labels.push(sortable[i][0]);
           metrics.push(sortable[i][1]);
         }
-      
+      const options = optionTemp;
+      options.plugins.title.text = `Top ${j} Queries by Frequency`;
       const graphData = {
         labels,
         datasets: {
@@ -110,7 +93,7 @@ const graphs = (context) => {
         }
       }
         // turn into a graph and return that graph
-      cards.push(<Bar data={graphData} options={}/>)        
+      cards.push(<Bar data={graphData} options={options}/>)        
             
     }
 
@@ -131,7 +114,8 @@ const graphs = (context) => {
           labels.push(sortable[i][0]);
           metrics.push(sortable[i][1]);
         }
-
+        const options = optionTemp;
+        options.plugins.title.text = `Top ${j} Queries by Average Duration`;
         const graphData = {
           labels,
           datasets: {
@@ -141,7 +125,7 @@ const graphs = (context) => {
           }
         }
 
-        cards.push(<Bar data={graphData} options={}/>)        
+        cards.push(<Bar data={graphData} options={options}/>)        
     }
 
     switch (context.TOF.render) {
@@ -164,7 +148,8 @@ const graphs = (context) => {
           labels.push(sortable[i][0]);
           metrics.push(sortable[i][1]);
         }
-
+        const options = optionTemp;
+        options.plugins.title.text = `Top ${j} Operations by Frequency`;
         const graphData = {
           labels,
           datasets: {
@@ -174,7 +159,7 @@ const graphs = (context) => {
           }
         };
 
-        cards.push(<Bar data={graphData} options={}/>);        
+        cards.push(<Bar data={graphData} options={options}/>);        
     }
 
     switch (context.AOD.render) {
@@ -195,7 +180,8 @@ const graphs = (context) => {
           labels.push(sortable[i][0]);
           metrics.push(sortable[i][1]);
         }
-
+        const options = optionTemp;
+        options.plugins.title.text = `Top ${j} Operations by Average Duration`;
         const graphData = {
           labels,
           datasets: {
@@ -205,7 +191,7 @@ const graphs = (context) => {
           }
         };
 
-        cards.push(<Bar data={graphData} options={}/>);          
+        cards.push(<Bar data={graphData} options={options}/>);          
     }
 
     /*
@@ -224,41 +210,58 @@ const graphs = (context) => {
         //useSelector and create
     }
     */
+   console.log('cards', cards);
     return cards;
 }
-// const graphArray = graphs(context);
 
-const grid = (graphs) => {
+// const graphArray = graphs(dummyContext);
+
+const grid = (graphs: any) => {
   // take in the compiled graphs and
   // return one grid component per graph
   // (up to 3)
   const coordProps = [[1, 2], [2, 1], [2, 2]];
-  
-  // do not return components; map them to an array 
-  // inputting the coordProps to each accordingly.
-  // return that array to be passed into insights
-  return(
-    <GridItem rowStart={coordProps[i][0]} colStart={coordProps[i][1]}>
-
+  // console.log('graphs', graphs);
+  return graphs.map((graph: any, index: any) => {
+    return(
+    <GridItem rowStart={coordProps[index][0]} colStart={coordProps[index][1]}>
+      {graph}
     </GridItem>
-  )
-
-}
+    );
+  });
+};
 
 // const gridComponents = grid(graphArray);
 
 const insights = () => {
-// main wrapper for insights page
-// will take in an array of the
-// (up to) three grid components 
-// generated by the grid function
-// and finally, render them.
-  
+
+  const dummyContext = {
+    TQF: {
+      render: true,
+      list: 4
+    },
+    AQD: {
+      render: true,
+      list: 4
+    },
+    TOF: {
+      render: true,
+      list: 2
+    },
+    AOD: {
+      render: true,
+      list: 4
+    },
+  };
+
+  const { rawdata, averages, count } = useSelector((state) => state.data);
+  console.log('rawdata', rawdata, 'averages', averages, 'count', count);
+  const graphArray = graphs(dummyContext, rawdata, averages, count);
+  const gridComponents = grid(graphArray);
+
   return(
     <Grid templateColumns='repeat(2, 1fr)' templateRows='repeat(2, 1fr)' h='100%' w='100%' gap={4}>
-      <GridItem colStart={2} bg='tomato'></GridItem>
-      <GridItem rowStart={2} bg='tomato'></GridItem>
-      <GridItem rowStart={2} bg='tomato'></GridItem>
+      {gridComponents}
     </Grid>
   )
 }

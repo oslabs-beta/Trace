@@ -5,9 +5,4 @@
   {"Mutation.signup":189.2,"AuthToken.token":0.01},
   {"Mutation.signup":113.72,"AuthToken.token":0.01},
   {"Mutation.signup":107.96,"AuthToken.token":0.01},
-<<<<<<< HEAD
   {"Mutation.signup":382.72,"AuthToken.token":0.05}]
-=======
-  {"Mutation.signup":382.72,"AuthToken.token":0.05},
-  {"Query.quoteOfTheDay":0.21,"Query.random":0.54,"Query.rollThreeDice":0.88},{"Query.quoteOfTheDay":0.32,"Query.random":0.13,"Query.rollThreeDice":0.17},{"Query.quoteOfTheDay":0.05,"Query.random":0.07,"Query.rollThreeDice":0.09},{"Query.random":0.05,"Query.rollThreeDice":0.09},{"Query.random":0.03},{"Query.quoteOfTheDay":0.06,"Query.random":0.09,"Query.rollThreeDice":0.4},{"Query.random":0.04,"Query.rollThreeDice":0.32},{"Query.random":0.03,"Query.rollThreeDice":0.07},{"Query.random":0.03}]
->>>>>>> a3082fdaf7939603866b83e448d3d65e09533b79
