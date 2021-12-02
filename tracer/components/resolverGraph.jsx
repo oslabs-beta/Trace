@@ -28,6 +28,7 @@ import {
   Tooltip
 } from 'chart.js';
 import { useEffect, useState } from 'react';
+import { middleware } from 'graphql-middleware';
 
 Chart.register(
   ArcElement,
@@ -68,7 +69,8 @@ function graphDataInit() {
 let datasetTemplate = {
   label: '',
   data: [],
-  borderWidth: 1,
+  borderWidth: 0,
+  minBarLength: 7,
 }
 
 const options = {
@@ -76,23 +78,24 @@ const options = {
   barThickness: 20,
   plugins: {
     title: {
-      display: true,
-      //text: 'Chart.js Bar Chart - Stacked',
+      display: true
     },
+    tooltip: {
+      backgroundColor: 'rgb(178, 190, 219)',
+    }
   },
   responsive: true,
   scales: {
-    max: 50,
-    x: {
+    xAxes: {
       position: 'bottom',
       stacked: true,
       ticks: {
         callback: function(value, index, values) {
             return value + 'ms';
         }
-      }
+      },
     },
-    y: {
+    yAxes: {
       stacked: true,
       ticks: {
         callback: function(value, index, values) {
@@ -161,9 +164,9 @@ const ResolverGraph = ({ data }) => {
   }, []);
 
   return (
-    <div>
+    <>
       <Bar data={graphData} options={options} />
-    </div>
+    </>
   )
 }
 
