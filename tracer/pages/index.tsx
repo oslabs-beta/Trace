@@ -25,8 +25,6 @@ const Home = ({ data }: Props) => {
     refreshData();
   }, [])
 
-  //console.log('AVERAGES: ', metricsData);
-
   return (
     <>
       <InnerLayout title='Dashboard'>
