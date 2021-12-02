@@ -1,9 +1,10 @@
 import { extendTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
+import { truncateSync } from 'fs';
 
 const config = {
-  initialColorMode: 'light',
-  useSystemColorMode: false,
+  initialColorMode: 'dark',
+  useSystemColorMode: true,
   breakpoints: {
     sm: "0",
     md: "700px",
