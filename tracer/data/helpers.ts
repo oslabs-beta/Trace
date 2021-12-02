@@ -1,4 +1,5 @@
 const resolverData = require('../../resolverData');
+const fs = require('fs');
 
 type FormattedData = {
     [key: string]: any;
@@ -43,14 +44,15 @@ const helpers = {
             average[key] = average[key] / count[key];
         }
         
-        // delete contents of resolverData file
-
         return {
             formattedData,
             count,
             average
         };
     },
+    reset: () => {
+        fs.writeFileSync('../../resolverData.json', '[]');
+    }
 };
 
 export default helpers;

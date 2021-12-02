@@ -71,9 +71,6 @@ let datasetTemplate = {
   minBarLength: 7,
 }
 
-
-
-
 const ResolverGraph = ({ data }) => {
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -143,11 +140,8 @@ const ResolverGraph = ({ data }) => {
   const formatData = () => {
     const newData =  new graphDataInit();
 
-    let i = 0;
-
     for (let obj of data) {
       newData.labels.push(Object.keys(obj)[0]);
-      i++;
       let curr = obj;
   
       for (let resolver in curr) {
@@ -190,6 +184,7 @@ const ResolverGraph = ({ data }) => {
   useEffect(() => {
     const newData = formatData();
     setGraphData(newData);
+    //console.log('inside useeffect', graphData);
   }, []);
 
   return (
