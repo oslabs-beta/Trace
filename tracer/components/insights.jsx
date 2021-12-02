@@ -101,7 +101,7 @@ const graphs = (context, rawdata, averages, count) => {
       TQFData.data.labels = labels;
       TQFData.data.datasets[0].data = metrics;
       TQFData.data.datasets[0].backgroundColor = bgColors;
-    cards.push(<Bar data={TQFData.data} options={TQF.options}/>) 
+    cards.push(<Bar key={'5'} data={TQFData.data} options={TQF.options}/>) 
     break;
   };
 
@@ -132,7 +132,7 @@ const graphs = (context, rawdata, averages, count) => {
       AQDData.data.datasets[0].data = metrics;
       AQDData.data.datasets[0].backgroundColor = bgColors;
       // console.log('AQDDATA', AQDData.data)
-      cards.push(<Bar data={AQDData.data} options={AQD.options}/>);
+      cards.push(<Bar key={'6'} data={AQDData.data} options={AQD.options}/>);
       break;     
   };
 
@@ -166,7 +166,7 @@ const graphs = (context, rawdata, averages, count) => {
       TOFData.data.datasets[0].data = metrics;
       TOFData.data.datasets[0].backgroundColor = bgColors;
       
-      cards.push(<Bar data={TOFData.data} options={TOF.options}/>);
+      cards.push(<Bar key={'7'} data={TOFData.data} options={TOF.options}/>);
       break;        
   };
 
@@ -197,7 +197,7 @@ const graphs = (context, rawdata, averages, count) => {
       AODData.data.labels = labels;
       AODData.data.datasets[0].data = metrics;
       AODData.data.datasets[0].backgroundColor = bgColors;
-      cards.push(<Bar data={AODData.data} options={AOD.options}/>);
+      cards.push(<Bar key={'8'} data={AODData.data} options={AOD.options}/>);
       break;       
   };
   return cards;
