@@ -4,7 +4,7 @@ import { truncateSync } from 'fs';
 
 const config = {
   initialColorMode: 'dark',
-  useSystemColorMode: true,
+  useSystemColorMode: false,
   breakpoints: {
     sm: "0",
     md: "700px",
