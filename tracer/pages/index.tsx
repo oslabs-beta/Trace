@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import Dashboard from '../components/dashboard'
 import Header from '../components/header';
 import InnerLayout from "../components/innerlayout";
+import Insights from "../components/insights"
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/action-creators/export'
@@ -24,6 +25,7 @@ const Home = ({ data }: Props) => {
       <InnerLayout title='Dashboard'>
         <Header size='md' text='Dashboard' icon={FiGrid} />
         <Dashboard />
+        {/* <Insights /> */}
       </InnerLayout>
     </>
   )
