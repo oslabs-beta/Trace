@@ -21,6 +21,7 @@ function Test() {
   return (
     <InnerLayout title='test'>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       <Header text='Resolver Metrics' size='md' icon={FiGrid}/>
 
@@ -29,6 +30,11 @@ function Test() {
       <Header text='fjladsfjks' size='lg'/>
       {/* <Insights /> */}
 >>>>>>> 2eda729 (creating modular graphical insights component)
+=======
+
+      <Header text='Resolver Metrics' size='md' icon={FiGrid}/>
+      <Insights />
+>>>>>>> e9a3c50 (updates on insights.tsx)
     </InnerLayout>
   )
 }
