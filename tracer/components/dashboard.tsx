@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
   const store = useSelector((state) => state.data);
-  //console.log('Store in Dashboard Component: ', store);
 
   const accordianItems = Object.keys(store.averages).map((value, index) => {
     console.log('average: ', value, store.averages[value]);
