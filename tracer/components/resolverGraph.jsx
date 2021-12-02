@@ -1,6 +1,5 @@
 import { Bar } from 'react-chartjs-2';
-import { ChartData } from 'chart.js';
-
+import { useColorMode } from '@chakra-ui/color-mode';
 import {
   Chart,
   ArcElement,
@@ -28,7 +27,6 @@ import {
   Tooltip
 } from 'chart.js';
 import { useEffect, useState } from 'react';
-import { middleware } from 'graphql-middleware';
 
 Chart.register(
   ArcElement,
@@ -73,43 +71,74 @@ let datasetTemplate = {
   minBarLength: 7,
 }
 
-const options = {
-  indexAxis: 'y',
-  barThickness: 20,
-  plugins: {
-    title: {
-      display: true
-    },
-    tooltip: {
-      backgroundColor: 'rgb(178, 190, 219)',
-    }
-  },
-  responsive: true,
-  scales: {
-    xAxes: {
-      position: 'bottom',
-      stacked: true,
-      ticks: {
-        callback: function(value, index, values) {
-            return value + 'ms';
-        }
-      },
-    },
-    yAxes: {
-      stacked: true,
-      ticks: {
-        callback: function(value, index, values) {
-            return '';
-        }
-      }
-    },
-  },
-};
+
 
 
 const ResolverGraph = ({ data }) => {
 
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [ labelColor, setColor ] = useState('#1A365D');
   const [graphData, setGraphData] = useState(graphDataTemplate);
+
+  const colorChange = () => {
+    if (colorMode === 'light') {
+      setColor('#1A365D');
+    } else {
+      setColor('#fff');
+    }
+  }
+
+  useEffect(() => {
+    colorChange();
+  }, [colorMode])
+
+  const options = {
+    indexAxis: 'y',
+    barThickness: 20,
+    plugins: {
+      legend: {
+        labels: {
+          color: labelColor,
+        }
+      },
+      title: {
+        display: true
+      },
+      tooltip: {
+        backgroundColor: 'rgb(178, 190, 219)',
+        titleColor: '#1A365D',
+        bodyColor: '#1A365D',
+      }
+    },
+    responsive: true,
+    scales: {
+      x: {
+        grid: {
+          color: '#8e94ab'
+        },
+        position: 'bottom',
+        stacked: true,
+        ticks: {
+          callback: function(value, index, values) {
+              return value + 'ms';
+          },
+          color: '#8e94ab'
+        },
+      },
+      y: {
+        grid: {
+          color: '#8e94ab'
+        },
+        stacked: true,
+        ticks: {
+          callback: function(value, index, values) {
+              return '';
+          },
+          color: '#8e94ab'
+        }
+      },
+    },
+  };
 
   const formatData = () => {
     const newData =  new graphDataInit();
@@ -129,7 +158,7 @@ const ResolverGraph = ({ data }) => {
             ...datasetTemplate,
             label: resolver,
             data: [curr[resolver]],
-            backgroundColor: '#1A365D',
+            backgroundColor: '#d18136',
             showLine: true
           }) } else {
             // check if there's a dataset with the same label
@@ -165,7 +194,7 @@ const ResolverGraph = ({ data }) => {
 
   return (
     <>
-      <Bar data={graphData} options={options} />
+      <Bar data={graphData} options={options} className='resolver-graph'/>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Flex,
     Text,
@@ -7,7 +7,8 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    useDisclosure
+    useDisclosure,
+    useColorMode
 } from '@chakra-ui/react'
 import { IconType } from 'react-icons';
 import NavHoverBox from './navhoverbox'
@@ -23,6 +24,26 @@ type Props = {
 
 export default function NavItem({ icon, title, path, description, active=false, navSize }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [ bgColor, setBgColor ] = useState('white');
+  const [ iconColor, setIconColor ] = useState('gray');
+  const [ hoverColor, setHoverColor ] = useState('blue.200');
+
+  const colorChange = () => {
+    if (colorMode === 'light') {
+        setBgColor('white');
+        setIconColor('gray');
+        setHoverColor('blue.200');
+    } else {
+        setBgColor('blue.800');
+        setIconColor('white');
+        setHoverColor('blue.600');
+    }
+  }
+
+  useEffect(() => {
+    colorChange();
+  }, [colorMode])
 
   return (
       <Flex
@@ -36,10 +57,10 @@ export default function NavItem({ icon, title, path, description, active=false, 
             isOpen={isOpen}
           >
               <Link
-                  backgroundColor={active ? 'blue.200' : 'white'}
+                  backgroundColor={active ? 'blue.200' : bgColor}
                   p={3}
                   borderRadius={8}
-                  _hover={{ textDecor: 'none', backgroundColor: 'blue.200' }}
+                  _hover={{ textDecor: 'none', backgroundColor: hoverColor }}
                   w={navSize == "big" ? "100%" : 'auto'}
                   href={path}
               >
@@ -49,7 +70,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
                     onMouseLeave={onClose}
                   >
                       <Flex>
-                          <Icon as={icon} fontSize="l" color={active ? "white" : "gray.500"} />
+                          <Icon as={icon} fontSize="l" color={active ? "white" : iconColor} />
                           <Text ml={5} fontSize={{ sm: '.5rem', md: '.8rem', lg: '1rem' }} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
                       </Flex>
                   </MenuButton>
