@@ -18,6 +18,7 @@ const dataReducer = (state = initialState, action) => {
       }
       */
       const stateClone = {...state};
+      console.log('stateClone in Reducer: ', stateClone)
 
       const newRawData = newData.formattedData;
       // see which keys are new and which already exist in state.rawdata

@@ -11,7 +11,9 @@ import { Doughnut } from 'react-chartjs-2';
 // labelsAboveChildren
 // showLabels
 
-const MetricTracker = () => {
+const metrictracker = () => {
+  const currStore = useStore()
+
   return (
     <div>
       <Doughnut
@@ -23,4 +25,4 @@ const MetricTracker = () => {
   )
 }
 
-export default MetricTracker
+export default metrictracker
