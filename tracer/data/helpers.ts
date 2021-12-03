@@ -1,16 +1,14 @@
-const resolverData = require('../../resolverData');
-
 type FormattedData = {
     [key: string]: any;
 }
 
 const helpers = {
-    getAll: () => {
+    format: (data: Object) => {
         const formattedData: FormattedData = {};
         const count: FormattedData = {};
         const average: FormattedData = {};
 
-        for (let obj of resolverData) {
+        for (let obj of data) {
             
             // Grabbing the root name of each metric object
             let objKeys = Object.keys(obj);
@@ -43,14 +41,15 @@ const helpers = {
             average[key] = average[key] / count[key];
         }
         
-        // delete contents of resolverData file
-
         return {
             formattedData,
             count,
             average
         };
     },
+    reset: () => {
+        fs.writeFileSync('../../resolverData.json', '[]');
+    }
 };
 
 export default helpers;

@@ -11,7 +11,8 @@ import {
   IconButton,
   Divider,
   Avatar,
-  Heading
+  Heading,
+  useColorMode
 } from '@chakra-ui/react'
 
 // Feather Icon Imports
@@ -42,6 +43,16 @@ const innerVariants = {
 
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState("small")
+  const { colorMode, toggleColorMode } = useColorMode()
+  const [ shadow, setShadow ] = useState('0px 3px 15px rgba(200,200,200,0.2)')
+
+  const colorChange = () => {
+    if (colorMode === 'light') {
+        setShadow('0 4px 12px 0 rgba(0, 0, 0, 0.05)');
+    } else {
+        setShadow('0 4px 12px 0 #fff');
+    }
+  }
 
   return (
     <motion.div
@@ -53,7 +64,7 @@ const Sidebar = () => {
       <Flex
         pos='sticky'
         h='100vh'
-        boxShadow='0 4px 12px 0 rgba(0, 0, 0, 0.05)'
+        boxShadow={shadow}
         flexDir='column'
         justify='space-between'
       >

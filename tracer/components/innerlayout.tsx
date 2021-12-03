@@ -8,7 +8,7 @@ const Main = styled.main`
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   width: 85vw;
   margin: 3rem;
-  height: 80vh;
+  height: 85vh;
   padding: 3rem;
   overflow-y: scroll;
 `;
@@ -22,11 +22,9 @@ const InnerLayout = ({
   children,
   title
 }: Props) => (
-  <>
-    <Main>
-      {children}
-    </Main>
-  </>
+  <Main>
+    {children}
+  </Main>
 );
 
 export default InnerLayout;

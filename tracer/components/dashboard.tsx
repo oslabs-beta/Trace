@@ -1,47 +1,33 @@
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-  Flex,
-} from '@chakra-ui/react';
-import { FiGrid } from 'react-icons/fi'
-import ResolverGraph from './resolverGraph';
-import { useSelector } from 'react-redux';
+import LiveFeed from "./liveFeed"
+import { useSelector } from "react-redux"
+import { Flex, Container } from "@chakra-ui/layout"
+import { Button } from "@chakra-ui/react"
+import { Key, useState } from "react"
 
 const Dashboard = () => {
-  const store = useSelector((state) => state.data);
-  console.log('Store in Dashboard Component: ', store);
-
-  const accordianItems = Object.keys(store.averages).map((value, index) => {
-    if (store.rawdata.hasOwnProperty(value)) {
-      return (
-        <AccordionItem key={index.toString()} id={index.toString()} p='3'>
-          <AccordionButton display='flex' justifyContent='space-between' id={index.toString()}>
-            <Flex as="h4" fontSize="lg" fontWeight="medium" justifyContent='space-between' alignItems='center' color='blue-400' >
-              {value}
-              <Box ml='2' fontSize="sm" borderRadius='20' p='2' pr='4' pl='4' bg='blue.500' color='white'>
-                Average duration: {store.averages[value].toFixed(2)}ms
-              </Box>
-            </Flex>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel>
-            <Box as="p" fontSize="lg" fontWeight="bold">
-              <ResolverGraph data={store.rawdata[value]}/>
-            </Box>
-          </AccordionPanel>
-        </AccordionItem>
-      );
-    }
-  });
+  const store = useSelector((state) => state)
+  const [ view, setView ] = useState('live')
 
   return (
-    <Accordion w='100%' >
-      {accordianItems}
-    </Accordion>
+    <Container 
+      bg='blue.900' 
+      w={'100%'} 
+      h={'90%'}
+      p={'1em'} 
+      m={0} 
+      maxW={'1000px'}
+      overflowY='scroll'
+      borderRadius='10'
+    >
+      <Flex alignSelf='flex-start' >
+        <Button colorScheme='blue' m='.4rem' onClick={() => setView('live')}>Incoming Resolvers</Button>
+        <Button colorScheme='blue' m='.4rem' onClick={() => setView('avg')}>Resolvers Averages</Button>
+      </Flex>
+
+      {/* <Flex direction='column' w='100%' > */}
+      { view === 'live' ? <LiveFeed data={store.data.rawdata} /> : <p>Sort By Resolver</p>}
+      {/* </Flex> */}
+    </Container>
   )
 }
 

@@ -34,15 +34,13 @@ const Header = ({ size, text, icon}: Props) => {
       <Box 
           fontSize={resize} 
           fontWeight={'bold'} 
-          color='white' 
-          bg='blue.900'
+          color='blue.900' 
           borderRadius="10px"
           w={width}
           p={'.5em'}
-          mb={'1em'}
       >
-        <Text fontWeight={'bold'} color='white' display='flex' alignItems='center' >
-          <Icon as={icon} fontSize="l" color="white" mr={'.5em'} />
+        <Text fontWeight={'bold'} color='blue.900' display='flex' alignItems='center' >
+          <Icon as={icon} fontSize="l" color='blue.900' mr={'.5em'} />
           {text}
         </Text>
       </Box>
