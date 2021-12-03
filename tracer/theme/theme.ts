@@ -3,7 +3,7 @@ import { mode } from '@chakra-ui/theme-tools';
 import { truncateSync } from 'fs';
 
 const config = {
-  initialColorMode: 'dark',
+  initialColorMode: 'light',
   useSystemColorMode: false,
   breakpoints: {
     sm: "0",

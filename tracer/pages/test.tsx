@@ -1,6 +1,6 @@
 import InnerLayout from "../components/innerlayout"
 import Header from "../components/header"
-import ResolverGraph from "../components/resolverGraph"
+import ResolverGraph from "../components/resolverMetric"
 
 import {
   FiMenu,

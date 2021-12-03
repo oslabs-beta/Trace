@@ -1,17 +1,14 @@
-const resolverData = require('../../resolverData');
-const fs = require('fs');
-
 type FormattedData = {
     [key: string]: any;
 }
 
 const helpers = {
-    getAll: () => {
+    format: (data: Object) => {
         const formattedData: FormattedData = {};
         const count: FormattedData = {};
         const average: FormattedData = {};
 
-        for (let obj of resolverData) {
+        for (let obj of data) {
             
             // Grabbing the root name of each metric object
             let objKeys = Object.keys(obj);
