@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next'
 import Dashboard from '../components/dashboard'
 import Header from '../components/header'
 import InnerLayout from "../components/innerlayout"
@@ -7,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/action-creators/export'
 import { FiGrid } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
+import { Flex } from '@chakra-ui/layout'
 import io from 'socket.io-client'
 
 const Home = () => {
@@ -47,22 +47,13 @@ const Home = () => {
   }, [ newData ])
 
   return (
-    <InnerLayout title='Dashboard'>
+    // <InnerLayout title='Dashboard'>
+    <Flex direction='column' w='90vw' h='90vh' p='1.5rem' m='1rem' >
       <Header size='md' text='Dashboard' icon={FiGrid} />
       <Dashboard />
-    </InnerLayout>
+    </Flex>
+    // /* </InnerLayout> */
   )
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const res = await fetch(`http://localhost:3000/api/data`);
-//   const { data } = await res.json()
-//   return {
-//     props: {
-//       data
-//     }, 
-//     revalidate: 5
-//   }
-// }
 
 export default Home
