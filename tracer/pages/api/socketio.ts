@@ -3,6 +3,7 @@ import { Server } from 'socket.io';
 
 export default async (req: NextApiRequest, res: any) => {
   let data = await req.body;
+  console.log(data);
   
   if (!res.socket.server.io) {
 

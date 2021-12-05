@@ -1,5 +1,6 @@
-import { Flex, Container } from "@chakra-ui/layout"
-import { Key, useState } from "react"
+import { Flex } from "@chakra-ui/layout"
+import { Key } from "react"
+import { Line } from 'react-chartjs-2'
 import ResolverMetric from "./resolverMetric"
 
 const LiveFeed = ({ data }: any) => {
