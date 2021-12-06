@@ -11,6 +11,7 @@ ChartJS.register(BarController, BarElement, LinearScale, Title, CategoryScale);
 
 const Dashboard = () => {
   const store = useSelector((state) => state)
+  console.log('store in dashboard', store);
   const [ view, setView ] = useState('live')
 
   return (
