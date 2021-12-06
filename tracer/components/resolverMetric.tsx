@@ -21,10 +21,8 @@ const ResolverMetric = ({ data, id }: any) => {
   const colors = ['orange.300', 'orange.400', 'orange.500', 'orange.600', 'orange.700'];
   let index = 0;
   const filteredData = Object.keys(data).filter(key => (
-    key !== 'dateAndTime' && key !== 'totalDuration' && key !== 'trace_id'
+    key !== 'dateAndTime' && key !== 'totalDuration' && key !== 'trace_id' && key !== 'errors'
   ));
-
-  console.log(filteredData)
 
   for (let str of filteredData) {
     if (index === 5) index = 0;

@@ -4,15 +4,17 @@ import { useSelector } from "react-redux"
 import {
   Table,
   Thead,
+  Tbody,
   Tr,
   Th,
+  Td,
   Accordion,
   AccordionItem,
   AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
+  AccordionPanel
 } from '@chakra-ui/react'
 import ResolverMetric from "./resolverMetric"
+import MetricsTable from "./metricsTable"
 
 const LiveFeed = () => {
 
@@ -31,7 +33,7 @@ const LiveFeed = () => {
           </AccordionButton>
         </h1>
         <AccordionPanel pb={4}>
-          Specific metrics here
+          <MetricsTable data={obj}/>
         </AccordionPanel>
       </AccordionItem>
       
