@@ -1,9 +1,7 @@
 import LiveFeed from "./liveFeed"
-import { useSelector } from "react-redux"
-import { Flex, Container } from "@chakra-ui/layout"
-import { Button } from "@chakra-ui/react"
-import { useState } from "react"
-import { Chart } from 'react-chartjs-2';
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import { Chart as ChartJS, BarController, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
 
 ChartJS.register(BarController, BarElement, LinearScale, Title, CategoryScale);
@@ -13,39 +11,44 @@ const Dashboard = () => {
   const store = useSelector((state) => state)
   const [ view, setView ] = useState('live')
 
+  if (view) {
+
+  }
+
   return (
-    <Container 
-      bg='blue.900' 
-      w={'100%'} 
-      h={'90%'}
-      p={'1em'} 
-      m={0} 
-      maxW={'1000px'}
+    <>
+    <ButtonGroup mt='.4rem' mb='1rem' isAttached pos='-webkit-sticky'>
+      <Button colorScheme='blue'  
+      onClick={() => setView('live')}
+      isActive={ view === 'live' }
+      >
+        Live Tracing Feed
+      </Button>
+      <Button colorScheme='blue' 
+      onClick={() => setView('root')}
+      isActive={ view === 'root' }
+      >
+        Group By Root Operation
+      </Button>
+      <Button colorScheme='blue'   
+      onClick={() => setView('res')}
+      isActive={ view === 'res' }
+      >
+        Group By Resolver
+      </Button>
+    </ButtonGroup>
+
+    <Flex
+      direction='column'
       overflowY='scroll'
-      borderRadius='10'
+      overflowX='auto'
     >
-      <Flex alignSelf='flex-start' >
-        <Button colorScheme='blue' m='.4rem' onClick={() => setView('live')}>Incoming Resolvers</Button>
-        <Button colorScheme='blue' m='.4rem' onClick={() => setView('avg')}>Resolvers Averages</Button>
-      </Flex>
-      <Chart
-        type='bar'
-        datasetIdKey='id'
-        data={{
-          labels: ['Jun', 'Jul', 'Aug'],
-          datasets: [
-            {
-              id: 1,
-              label: '',
-              data: [5, 6, 7],
-            }
-          ],
-        }}
-      />
-      {/* <Flex direction='column' w='100%' > */}
-      { view === 'live' ? <LiveFeed data={store.data.rawdata} /> : <p>Sort By Resolver</p>}
-      {/* </Flex> */}
-    </Container>
+
+      { view === 'live' ? <LiveFeed data={store.data.rawdata} /> : 
+        view === 'root' ? <p>Sort By Root Operation</p> : <p>Sort by Resolver</p> }
+
+    </Flex>
+    </>
   )
 }
 

@@ -1,10 +1,8 @@
 import Dashboard from '../components/dashboard'
 import Header from '../components/header'
-import InnerLayout from "../components/innerlayout"
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/action-creators/export'
-import { FiGrid } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
 import { Flex } from '@chakra-ui/layout'
 import io from 'socket.io-client'
@@ -47,12 +45,10 @@ const Home = () => {
   }, [ newData ])
 
   return (
-    // <InnerLayout title='Dashboard'>
     <Flex direction='column' w='90vw' h='90vh' p='1.5rem' m='1rem' >
-      <Header size='md' text='Dashboard' icon={FiGrid} />
+      <Header size='sm' text='Dashboard' />
       <Dashboard />
     </Flex>
-    // /* </InnerLayout> */
   )
 }
 

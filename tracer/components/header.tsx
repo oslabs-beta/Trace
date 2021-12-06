@@ -1,12 +1,11 @@
-import { Box, Text, Icon } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 
 type Props = {
   size: string; // lg, md, sm
   text: string;
-  icon: any;
 }
 
-const Header = ({ size, text, icon}: Props) => {
+const Header = ({ size, text }: Props) => {
   
   let resize;
   let dividerSize;
@@ -37,10 +36,8 @@ const Header = ({ size, text, icon}: Props) => {
           color='blue.900' 
           borderRadius="10px"
           w={width}
-          p={'.5em'}
       >
         <Text fontWeight={'bold'} color='blue.900' display='flex' alignItems='center' >
-          <Icon as={icon} fontSize="l" color='blue.900' mr={'.5em'} />
           {text}
         </Text>
       </Box>

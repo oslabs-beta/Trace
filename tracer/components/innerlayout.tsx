@@ -15,12 +15,10 @@ const Main = styled.main`
 
 type Props = {
   children: ReactNode;
-  title: string;
 };
 
 const InnerLayout = ({
-  children,
-  title
+  children
 }: Props) => (
   <Main>
     {children}

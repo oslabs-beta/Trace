@@ -42,7 +42,7 @@ const ResolverMetric = ({ data }: any) => {
 
   return (
     <Flex w={`${max}%`} alignItems='center' justifyContent='center'>
-      <p>{data.dateAndTime}</p>
+      <p>{data.trace_id}</p>
       { resolvers }
     </Flex>
   )

@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/layout"
-import { Key } from "react"
-import { Line } from 'react-chartjs-2'
+import { Key, useEffect } from "react"
+import LiveGraph from "./liveGraph"
 import ResolverMetric from "./resolverMetric"
 
 const LiveFeed = ({ data }: any) => {
@@ -11,29 +11,23 @@ const LiveFeed = ({ data }: any) => {
 
   return (
     <Flex 
-      bg='blue.100' 
-      p='1em'
-      m='.4rem'
-      mt='1rem'
-      h='81%'
-      borderRadius='10'
-      overflowY='scroll'
+      w='100%' 
+      flexFlow='row wrap' 
+      justifyContent='space-between'
+      overflowY='hidden'
     >
-
-      <Flex direction='column' flex='1' alignItems='center' >
+      <LiveGraph />
       <Flex
         direction='column'
-        borderRadius='10'
         bg='rgb(255,255,255, 0.5)'
-        p='1em'
-        m='.4rem'
+        p='3rem'
         h='100%'
-        w='100%'
+        w='50%'
         overflowX='clip'
         overflowY='scroll'
+        backgroundColor='blue.500'
       >
         { items }
-      </Flex>
       </Flex>
     </Flex>
   )
