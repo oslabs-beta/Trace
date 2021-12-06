@@ -1,9 +1,8 @@
 import { extendTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
-import { truncateSync } from 'fs';
 
 const config = {
-  initialColorMode: 'light',
+  initialColorMode: 'dark',
   useSystemColorMode: false,
   breakpoints: {
     sm: "0",

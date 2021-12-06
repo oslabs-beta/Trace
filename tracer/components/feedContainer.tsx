@@ -9,6 +9,7 @@ const FeedContainer = () => {
       w='100%' 
       flexFlow='row wrap' 
       justifyContent='space-between'
+      
     >
       <LiveGraph />
       <LiveFeed />

@@ -29,7 +29,7 @@ import {
 // Framer Motion
 import { motion } from 'framer-motion';
 const mainVariants = {
-  'small': { width: '75px' },
+  'small': { width: '80px' },
   'big': { width: '200px' }
 }
 const innerVariants = {
@@ -43,28 +43,20 @@ const innerVariants = {
 
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState("small")
-  const { colorMode, toggleColorMode } = useColorMode()
-  const [ shadow, setShadow ] = useState('0px 3px 15px rgba(200,200,200,0.2)')
-
-  const colorChange = () => {
-    if (colorMode === 'light') {
-        setShadow('0 4px 12px 0 rgba(0, 0, 0, 0.05)');
-    } else {
-        setShadow('0 4px 12px 0 #fff');
-    }
-  }
 
   return (
     <motion.div
       animate={navSize === 'small' ? 'small' : 'big'}
-      style={ { marginTop: '1vh', left: '5' } }
+      style={ { left: '5' } }
       transition={ { ease: 'easeInOut' } }
       variants={mainVariants}
     >
       <Flex
-        pos='sticky'
-        h='100vh'
-        boxShadow={shadow}
+        position='-webkit-sticky'
+        bottom='0'
+        align-self='flex-start'
+        height='100vh'
+        backgroundColor='blue.700'
         flexDir='column'
         justify='space-between'
       >

@@ -43,12 +43,11 @@ const LiveFeed = () => {
   return (
     <Flex
       p='3rem'
-      h='auto'
       w='100%'
+      borderRadius='1rem'
       backgroundColor='blue.500'
-      overflowX='auto'
-      overflowY='scroll'
       direction='column'
+      mb='3rem'
     >
       <Table mb='1rem' >
         <Thead>

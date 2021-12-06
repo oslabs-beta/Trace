@@ -131,10 +131,15 @@ const LiveGraph = () => {
     <Flex 
       key={router.route}
       w='100%'
-      h='300px'
+      h='350px'
       margin='0'
+      mb='1rem'
+      borderRadius='1rem'
       padding='2rem'
+      pt='3rem'
       backgroundColor='blue.700'
+      justifyContent='center'
+      alignItems='center'
     >
       <Bar
         key={router.route}

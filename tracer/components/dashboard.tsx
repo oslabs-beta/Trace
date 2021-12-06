@@ -38,8 +38,6 @@ const Dashboard = () => {
 
     <Flex
       direction='column'
-      overflowY='scroll'
-      overflowX='auto'
     >
 
       { view === 'live' ? <FeedContainer /> : 
