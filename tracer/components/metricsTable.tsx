@@ -34,39 +34,6 @@ const MetricsTable = ({ data }: any) => {
     }
   }
 
-  // useEffect(() => {
-  //   for (let str of Object.keys(data)) {
-  //     console.log(str)
-  //     if (str === 'trace_id') continue;
-  //     if (str === 'error') continue;
-  //     else if (str === 'dateAndTime') {
-  //       details.push(
-  //         <>
-  //           <h2>TIMESTAMP: </h2>
-  //           <p>data[str]</p>
-  //         </>
-  //       )
-  //     }
-  //     else if (str === 'totalDuration') {
-  //       details.push(
-  //         <>
-  //           <h2>TOTAL DURATION: </h2>
-  //           <p>data[str]</p>
-  //         </>
-  //       )
-  //     } else {
-  //       details.push(
-  //         <>
-  //           <h2>{str}</h2>
-  //           <p>data[str]</p>
-  //         </>
-  //       )
-  //     }
-
-  //   }
-  //   console.log(details)
-  // }, [])
-
   return (
     <Flex
       direction='column'
