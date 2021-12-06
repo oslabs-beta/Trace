@@ -1,7 +1,7 @@
 
 import { parse, validate, execute } from 'graphql';
 import { applyMiddleware } from 'graphql-middleware';
-import { v4 as uuidv4 } from 'uuid';
+import { fs } from 'fs';
 
 const loggingMiddleware = async (resolve, root, args, context, info) => {
   const startTime = process.hrtime();
@@ -13,9 +13,6 @@ const loggingMiddleware = async (resolve, root, args, context, info) => {
 }
 
 module.exports = async function goTrace(schema, query, root, context, variables) {
-  // Initial object that will hold all the data we want to send to trace
-  const rootQueryObj = { trace_id: uuidv4() };
-
   schema = applyMiddleware(schema, loggingMiddleware);
 
   const queryAST = parse(query);
@@ -24,19 +21,16 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   if (errors.length === 0) {
     console.log(`Validation successful query can be executed`);  
   } else {
-    Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(errors) : rootQueryObj['errors'] = [...errors];
+    //rewrite this 
+    const formerData = fs.readFileSync('./errors.json') || [];
+    formerData.push(errors);
+    fs.writeFileSync('./errors.json', JSON.stringify(formerData), 'utf8');
   }
 
+  const rootQueryObj = {};
   let endTime;
   let response;
-
   // Execute the query against the schema
-  const currentDate = new Date(); 
-  const timestamp = currentDate. getTime()
-  const dateAndTime = `${currentDate} | ${timestamp}`;
-
-  rootQueryObj['dateAndTime'] = dateAndTime;
-
   const startTime = process.hrtime();
   const queryMetrics = await execute(schema, queryAST, null, rootQueryObj, variables)
     .then((result) => {
@@ -45,18 +39,28 @@ module.exports = async function goTrace(schema, query, root, context, variables)
     })
     .then(() => { return rootQueryObj })
     .catch(err => {
-      Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(err.message) : rootQueryObj['errors'] = [...err.message];
+      const formerData = fs.readFileSync('./errors.json') || [];
+      formerData.push(err, err.message);
+      fs.writeFileSync('./errors.json', JSON.stringify(formerData), 'utf8');
     });
 
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
 
-  fetch('http://localhost:3000/api/socketio', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(rootQueryObj)
-  });
+  let resolverData;
+
+  try {
+    resolverData = JSON.parse(fs.readFileSync('./resolverMetrics.json'));
+  } catch (err) {
+    console.log('Creating resolverData file!');
+    resolverData = [];
+  }
+
+  try {
+    resolverData.push(queryMetrics);
+    fs.writeFileSync('./resolverMetrics.json', JSON.stringify(resolverData), 'utf8');
+  } catch(err) {
+    console.log('Data writing error:', err, err.message);
+  }
 
   return response;
 }

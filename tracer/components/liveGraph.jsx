@@ -1,9 +1,54 @@
-import { Container } from "@chakra-ui/layout";
+import { useRouter } from 'next/router'
+import { Flex } from "@chakra-ui/layout";
 import { useEffect, useState } from "react"
 import { Bar } from 'react-chartjs-2';
-import { useSelector } from "react-redux";
+import {
+  Chart,
+  ArcElement,
+  LineElement,
+  BarElement,
+  PointElement,
+  BarController,
+  BubbleController,
+  DoughnutController,
+  LineController,
+  PieController,
+  PolarAreaController,
+  RadarController,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  LogarithmicScale,
+  RadialLinearScale,
+  TimeScale,
+  TimeSeriesScale,
+  Decimation,
+  Filler,
+  Legend,
+  Title,
+  Tooltip
+} from 'chart.js';
+
+Chart.register(
+  BarElement,
+  BarController,
+  Legend,
+  Title,
+  Tooltip
+);
+
+import { useSelector } from "react-redux"
 
 const LiveGraph = () => {
+
+  const router = useRouter()
+
+  const handleClick = (i) => {
+    console.log(i)
+    const href = '/#' + i;
+    router.push(href)
+  }
+
   const data = {
     labels: [],
     datasets: [
@@ -16,24 +61,32 @@ const LiveGraph = () => {
   }
 
   const options = {
-    maintainAspectRatio: true,
+    onClick: (evt, elem) => {
+      const index = elem[0] ? elem[0].index : null;
+      handleClick(index);
+    },
+    backgroundColor: 'white',
     barThickness: 10,
     plugins: {
       legend: {
-        labels: {
-          color: 'blue.400',
-        }
-      },
-      title: {
         display: false
       },
       tooltip: {
         backgroundColor: 'rgb(178, 190, 219)',
         titleColor: '#1A365D',
         bodyColor: '#1A365D',
+        callbacks: {
+          label: function(context) {
+              return 'Total Duration: ' + context.parsed.y + 'ms';
+          }
+        }
       }
     },
-    responsive: true,
+    //responsive: true,
+    maintainAspectRatio: false,
+    onResize: (chart, size) => {
+      chart.update();
+    },
     scales: {
       x: {
         grid: {
@@ -50,14 +103,13 @@ const LiveGraph = () => {
       },
       y: {
         grid: {
-          color: '#8e94ab'
+          display: false
         },
-        stacked: true,
         ticks: {
           callback: function(value, index, values) {
               return value + 'ms';
           },
-          color: '#8e94ab'
+          color: 'white'
         }
       },
     },
@@ -76,19 +128,20 @@ const LiveGraph = () => {
   }, [store])
 
   return (
-    <Container 
-      maxW='600px' 
-      w='50%' 
-      alignSelf='flex-start'
+    <Flex 
+      key={router.route}
+      w='100%'
+      h='300px'
       margin='0'
-      padding='3rem'
+      padding='2rem'
       backgroundColor='blue.700'
     >
       <Bar
+        key={router.route}
         data={chartData}
         options={options}
       />
-    </Container>
+    </Flex>
     
   )
 }

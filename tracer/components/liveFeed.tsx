@@ -1,35 +1,71 @@
-import { Flex } from "@chakra-ui/layout"
-import { Key, useEffect } from "react"
-import LiveGraph from "./liveGraph"
+import { Box, Flex } from "@chakra-ui/layout"
+import { Key } from "react"
+import { useSelector } from "react-redux"
+import {
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react'
 import ResolverMetric from "./resolverMetric"
 
-const LiveFeed = ({ data }: any) => {
+const LiveFeed = () => {
+
+  const store = useSelector(state => state)
+  const data = store.data.rawdata;
 
   const items = data.map((obj: Object, i: Key) => {
-    return <ResolverMetric data={obj} key={i.toString()} />
+    return (
+      <AccordionItem w='100%' border='none'>
+        <h1>
+          <AccordionButton>
+            <Box width='100%'>
+            <ResolverMetric id={i.toString()} data={obj} key={i.toString()} />
+            {/* <AccordionIcon /> */}
+            </Box>
+          </AccordionButton>
+        </h1>
+        <AccordionPanel pb={4}>
+          Specific metrics here
+        </AccordionPanel>
+      </AccordionItem>
+      
+    )
   });
 
   return (
-    <Flex 
-      w='100%' 
-      flexFlow='row wrap' 
-      justifyContent='space-between'
-      overflowY='hidden'
+    <Flex
+      p='3rem'
+      h='auto'
+      w='100%'
+      backgroundColor='blue.500'
+      overflowX='auto'
+      overflowY='scroll'
+      direction='column'
     >
-      <LiveGraph />
+      <Table mb='1rem' >
+        <Thead>
+          <Tr >
+            <Th textAlign='center' width='200px' color='blue.800' >Trace ID</Th>
+            <Th textAlign='center' color='blue.800' >Duration Metrics</Th>
+          </Tr>
+        </Thead>
+      </Table>
       <Flex
         direction='column'
-        bg='rgb(255,255,255, 0.5)'
-        p='3rem'
-        h='100%'
-        w='50%'
-        overflowX='clip'
-        overflowY='scroll'
-        backgroundColor='blue.500'
+        alignItems='flex-start'
       >
-        { items }
+      <Accordion w='100%' allowMultiple allowToggle>
+        {items}
+      </Accordion>
       </Flex>
     </Flex>
+    
   )
 }
 

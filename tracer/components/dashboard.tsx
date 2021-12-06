@@ -1,6 +1,5 @@
-import LiveFeed from "./liveFeed"
+import FeedContainer from "./feedContainer"
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import { Chart as ChartJS, BarController, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
 
@@ -8,7 +7,6 @@ ChartJS.register(BarController, BarElement, LinearScale, Title, CategoryScale);
 
 
 const Dashboard = () => {
-  const store = useSelector((state) => state)
   const [ view, setView ] = useState('live')
 
   if (view) {
@@ -44,7 +42,7 @@ const Dashboard = () => {
       overflowX='auto'
     >
 
-      { view === 'live' ? <LiveFeed data={store.data.rawdata} /> : 
+      { view === 'live' ? <FeedContainer /> : 
         view === 'root' ? <p>Sort By Root Operation</p> : <p>Sort by Resolver</p> }
 
     </Flex>
