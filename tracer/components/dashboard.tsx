@@ -9,10 +9,6 @@ ChartJS.register(BarController, BarElement, LinearScale, Title, CategoryScale);
 const Dashboard = () => {
   const [ view, setView ] = useState('live')
 
-  if (view) {
-
-  }
-
   return (
     <>
     <ButtonGroup mt='.4rem' mb='2rem' isAttached pos='-webkit-sticky'>

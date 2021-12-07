@@ -36,7 +36,6 @@ const LiveFeed = () => {
           <MetricsTable data={obj}/>
         </AccordionPanel>
       </AccordionItem>
-      
     )
   });
 
