@@ -27,7 +27,7 @@ const dataReducer = (state = initialState, action) => {
         if (clone.count[key]) clone.count[key]++;
         else clone.count[key] = 1;
       }
-
+    
       return clone;
 
     case types.DELETE_DATA:
