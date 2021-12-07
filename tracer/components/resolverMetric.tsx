@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 const ResolverMetric = ({ data, id }: any) => {
   let max: number = 100;
   const [ sum, setSum ] = useState(1)
+  const [ errors, setErrors ] = useState(false)
   let resolvers:any[] = [];
 
   useEffect(() => {
+    if (data.errors) setErrors(true);
+    if (data.response.errors) setErrors(true);
     let preSum = Object.keys(data).reduce((a: number, b: string) => {
-      if (b !== 'dateAndTime' && b !== 'totalDuration' && b !== 'trace_id') {
+      if (b !== 'errors' && b !== 'dateAndTime' && b !== 'totalDuration' && b !== 'trace_id' && b !== 'response') {
         max = Math.max(max, data[b])
         return a + data[b];
       } else return a;
@@ -19,9 +22,10 @@ const ResolverMetric = ({ data, id }: any) => {
   }, [])
 
   const colors = ['orange.300', 'orange.400', 'orange.500', 'orange.600', 'orange.700'];
+  const errColors = ['red.500', 'red.600', 'red.700', 'red.800', 'red.900'];
   let index = 0;
   const filteredData = Object.keys(data).filter(key => (
-    key !== 'dateAndTime' && key !== 'totalDuration' && key !== 'trace_id' && key !== 'errors'
+    key !== 'dateAndTime' && key !== 'totalDuration' && key !== 'trace_id' && key !== 'errors' && key !== 'response'
   ));
 
   for (let str of filteredData) {
@@ -34,7 +38,7 @@ const ResolverMetric = ({ data, id }: any) => {
           id={index.toString()}
           w={data[str]/sum}
           minWidth='100px'
-          backgroundColor={colors[index]} 
+          backgroundColor={errors ? errColors[index] : colors[index]} 
           p={1} 
           fontSize={'.6rem'} 
           color='white'

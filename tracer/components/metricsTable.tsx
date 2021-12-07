@@ -3,11 +3,18 @@ import { Flex, SimpleGrid } from '@chakra-ui/layout';
 
 const MetricsTable = ({ data }: any) => {
   const details: Array<any> = [];
+  let response;
+  let errors;
 
   for (let str of Object.keys(data)) {
     if (str === 'trace_id') continue;
-    if (str === 'errors') continue;
-    else if (str === 'dateAndTime') {
+    if (str === 'errors') {
+      console.log(errors);
+    } else if (str === 'response') {
+      if (data[str].data) response = JSON.stringify(data[str].data)
+      if (data[str].errors) errors = JSON.stringify(data[str].errors)
+      console.log(response, errors)
+    } else if (str === 'dateAndTime') {
       const old = details[0]
       details[0] = (
         <Flex>
@@ -33,6 +40,14 @@ const MetricsTable = ({ data }: any) => {
       )
     }
   }
+
+  details.push(
+    <Flex direction='column'>
+      <p><b>RESULT:</b> {response}</p>
+      { errors ? <p><b>ERRORS:</b> <span style={{ backgroundColor: '#63171B' }}>{errors}</span></p>
+      : null }
+    </Flex>
+  )
 
   return (
     <Flex

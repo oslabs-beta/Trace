@@ -29,7 +29,6 @@ const LiveFeed = () => {
           <AccordionButton>
             <Box width='100%'>
             <ResolverMetric id={i.toString()} data={obj} key={i.toString()} />
-            {/* <AccordionIcon /> */}
             </Box>
           </AccordionButton>
         </h1>

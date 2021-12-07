@@ -4,26 +4,8 @@ import { useEffect, useState } from "react"
 import { Bar } from 'react-chartjs-2';
 import {
   Chart,
-  ArcElement,
-  LineElement,
   BarElement,
-  PointElement,
   BarController,
-  BubbleController,
-  DoughnutController,
-  LineController,
-  PieController,
-  PolarAreaController,
-  RadarController,
-  ScatterController,
-  CategoryScale,
-  LinearScale,
-  LogarithmicScale,
-  RadialLinearScale,
-  TimeScale,
-  TimeSeriesScale,
-  Decimation,
-  Filler,
   Legend,
   Title,
   Tooltip
@@ -56,6 +38,7 @@ const LiveGraph = () => {
         id: 1,
         label: 'Traces',
         data: [],
+        backgroundColor: []
       }
     ],
   }
@@ -65,7 +48,6 @@ const LiveGraph = () => {
       const index = elem[0] ? elem[0].index : null;
       handleClick(index);
     },
-    backgroundColor: 'white',
     barThickness: 10,
     plugins: {
       legend: {
@@ -120,8 +102,11 @@ const LiveGraph = () => {
 
   useEffect(() => {
     for (let obj of store.data.rawdata) {
+      console.log(obj);
       data.labels.push(obj.trace_id)
       data.datasets[0].data.push(obj.totalDuration);
+      if (obj.errors || obj.response.errors) data.datasets[0].backgroundColor.push('#63171B')
+      else data.datasets[0].backgroundColor.push('white')
     }
 
     setChartData(data);
