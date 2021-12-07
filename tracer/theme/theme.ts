@@ -1,6 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
-import { truncateSync } from 'fs';
 
 const config = {
   initialColorMode: 'dark',

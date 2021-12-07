@@ -6,6 +6,9 @@ import styled from 'styled-components';
 const Main = styled.main`
   display: flex;
   justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
+  overflow-y: hidden;
 `;
 
 type Props = {
@@ -25,7 +28,7 @@ const Layout = ({
     </Head>
 
     <Main>
-      <Sidebar/>
+      <Sidebar />
       {children}
     </Main>
   </>

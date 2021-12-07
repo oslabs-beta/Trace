@@ -1,49 +1,55 @@
-import { GetStaticProps } from 'next'
 import Dashboard from '../components/dashboard'
 import Header from '../components/header'
-import InnerLayout from "../components/innerlayout"
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../state/hooks'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/action-creators/export'
-import { FiGrid } from 'react-icons/fi'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Flex } from '@chakra-ui/layout'
+import io from 'socket.io-client'
 
-type Props = {
-  data: Object;
-}
+const Home = () => {
+  const [ newData, setData ] = useState(null);
 
-const Home = ({ data }: Props) => {
-
-  const dispatch = useDispatch();
-  const { updateDataActionCreator } = bindActionCreators(actionCreators, dispatch);
-
-  const refreshData = () => {
-    updateDataActionCreator(data);
-  }
-
+  // SOCKET IO
   useEffect(() => {
-    refreshData();
+    fetch('/api/socketio').finally(() => {
+      const socket = io()
+
+      socket.on('connect', () => {
+        console.log('index.tsx: connected')
+      })
+
+      socket.on('data', data => {
+        setData(data);
+      })
+
+      socket.on('disconnect', () => {
+        console.log('index.tsx: disconnect')
+      })
+    })
   }, [])
 
-  return (
-    <>
-      <InnerLayout title='Dashboard'>
-        <Header size='md' text='Dashboard' icon={FiGrid} />
-        <Dashboard />
-      </InnerLayout>
-    </>
-  )
-}
+  // REDUX
+  const dispatch = useAppDispatch();
+  const { updateDataActionCreator } = bindActionCreators(actionCreators, dispatch);
+  
+  const refreshData = () => {
+    updateDataActionCreator(newData);
+  };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`http://localhost:3000/api/data`);
-  const { data } = await res.json()
-  return {
-    props: {
-      data
-    }, 
-    revalidate: 5
-  }
+  useEffect(() => {
+    if (newData !== null) {
+      console.log('new data updated');
+      refreshData();
+    }
+  }, [ newData ])
+
+  return (
+    <Flex direction='column' w='90%' h='100vh' p='1.5rem' m='1rem' overflowY='scroll' >
+      <Header size='sm' text='Dashboard' />
+      <Dashboard />
+    </Flex>
+  )
 }
 
 export default Home
