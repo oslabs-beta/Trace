@@ -49,6 +49,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
     });
 
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
+  rootQueryObj['response'] = response;
 
   fetch('http://localhost:3000/api/socketio', {
     method: 'POST',
