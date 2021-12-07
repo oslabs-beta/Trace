@@ -7,12 +7,7 @@ import NavItem from './navitem'
 // Chakra Imports
 import {
   Flex,
-  Text,
   IconButton,
-  Divider,
-  Avatar,
-  Heading,
-  useColorMode
 } from '@chakra-ui/react'
 
 // Feather Icon Imports
@@ -20,7 +15,6 @@ import {
   FiMenu,
   FiGrid,
   FiBarChart,
-  FiAlertTriangle,
   FiShare2,
   FiStar,
   FiSettings
@@ -83,7 +77,6 @@ const Sidebar = () => {
             
             <NavItem navSize={navSize} icon={FiGrid} title="Dashboard" description="See all your resolver metrics in one place." path='/' />
             <NavItem navSize={navSize} icon={FiBarChart} title="Insights" description="View valuable insights gathered from your resolver data." path='/insights' />
-            <NavItem navSize={navSize} icon={FiAlertTriangle} title="Error" description="See all your errors all in one place." path='/errors' />
             <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
             <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/>
             <NavItem navSize={navSize} icon={FiSettings} title="Settings" description="Configure Trace to fit your needs." path='/settings'/>

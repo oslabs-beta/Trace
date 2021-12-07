@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useColorMode } from '@chakra-ui/react'
 
@@ -43,17 +43,18 @@ const Header = ({ size, text }: Props) => {
   }
 
   return (
-      <Box 
+      <Flex 
           fontSize={resize} 
-          fontWeight={'bold'} 
-          borderRadius="10px"
           w={width}
           mb='1rem'
+          alignItems='center'
       >
-        <Text fontWeight={'bold'} color={ textColor } display='flex' alignItems='center' >
+        <Text fontFamily='serif' fontSize='3rem' mr='.8rem'>trace </Text>
+        <Text fontWeight={'thin'} fontSize='2rem'>|</Text>
+        <Text fontWeight={'thin'} color={ textColor } ml='.8rem' pt='.6rem'>
           {text}
         </Text>
-      </Box>
+      </Flex>
   )
 }
 

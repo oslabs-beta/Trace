@@ -8,6 +8,7 @@ const Main = styled.main`
   justify-content: flex-start;
   align-items: flex-start;
   height: 100vh;
+  overflow-y: hidden;
 `;
 
 type Props = {
