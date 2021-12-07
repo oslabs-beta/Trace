@@ -37,7 +37,7 @@ Chart.register(
   Tooltip
 );
 
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../state/hooks"
 
 const LiveGraph = () => {
 
@@ -116,7 +116,7 @@ const LiveGraph = () => {
   };
 
   const [ chartData, setChartData ] = useState(data)
-  const store = useSelector((state) => state)
+  const store = useAppSelector((state) => state)
 
   useEffect(() => {
     for (let obj of store.data.rawdata) {

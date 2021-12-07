@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/layout"
 import { Key } from "react"
-import { useSelector } from "react-redux"
+import { useAppSelector } from '../state/hooks'
 import {
   Table,
   Thead,
@@ -18,8 +18,9 @@ import MetricsTable from "./metricsTable"
 
 const LiveFeed = () => {
 
-  const store = useSelector(state => state)
+  const store = useAppSelector(state => state)
   const data = store.data.rawdata;
+  console.log(data)
 
   const items = data.map((obj: Object, i: Key) => {
     return (

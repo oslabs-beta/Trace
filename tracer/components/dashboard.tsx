@@ -1,5 +1,5 @@
 import FeedContainer from "./feedContainer"
-import { useState } from "react";
+import { useState } from 'react'
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import { Chart as ChartJS, BarController, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
 

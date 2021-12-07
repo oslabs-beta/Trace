@@ -1,6 +1,6 @@
 import Dashboard from '../components/dashboard'
 import Header from '../components/header'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../state/hooks'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/action-creators/export'
 import { useEffect, useState } from 'react'
@@ -30,7 +30,7 @@ const Home = () => {
   }, [])
 
   // REDUX
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { updateDataActionCreator } = bindActionCreators(actionCreators, dispatch);
   
   const refreshData = () => {

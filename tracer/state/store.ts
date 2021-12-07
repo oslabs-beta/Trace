@@ -6,12 +6,12 @@ import thunk from "redux-thunk";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 // for shallow merging two levels
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
+// import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 const persistConfig = {
   key: 'root',
   storage,
-  stateReconciler: autoMergeLevel2,
+  // stateReconciler: autoMergeLevel2,
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -22,13 +22,9 @@ export type RootState = {
 }
 
 interface Data {
-  rawdata: RawData;
+  rawdata: [];
   count: Count;
   averages: Averages;
-}
-
-interface RawData {
-  [key: string]: Object[]
 }
 
 interface Count {
@@ -41,26 +37,26 @@ interface Averages {
 
 const defaultRootState: RootState = {
   data: {
-    rawdata: {},
+    rawdata: [],
     count: {},
     averages: {}
   }
 }
  
-// export const store = createStore(
-//   reducers,
-//   defaultRootState,
-//   applyMiddleware(thunk)
-// );
+export const store = createStore(
+  reducers,
+  defaultRootState,
+  applyMiddleware(thunk)
+);
 
-export default () => {
-  let store = createStore(
-    reducers,
-    defaultRootState,
-    applyMiddleware(thunk)
-  );
-  let persistor = persistStore(store);
-  return { store, persistor };
-}
+// export const storePersistor = () => {
+//   let store = createStore(
+//     reducers,
+//     defaultRootState,
+//     applyMiddleware(thunk)
+//   );
+//   let persistor = persistStore(store);
+//   return { store, persistor };
+// }
 
 export type AppDispatch = typeof store.dispatch

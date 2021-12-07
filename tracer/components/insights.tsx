@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../state/hooks';
 import { Bar } from 'react-chartjs-2';
 
 /*
