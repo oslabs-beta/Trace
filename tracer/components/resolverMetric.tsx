@@ -1,14 +1,15 @@
 import { Flex, Box } from "@chakra-ui/layout";
+import { Tooltip } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
 
-const ResolverMetric = ({ data }: any) => {
+const ResolverMetric = ({ data, id }: any) => {
   let max: number = 100;
   const [ sum, setSum ] = useState(1)
   let resolvers:any[] = [];
 
   useEffect(() => {
     let preSum = Object.keys(data).reduce((a: number, b: string) => {
-      if (b !== 'dateAndTime') {
+      if (b !== 'dateAndTime' && b !== 'totalDuration' && b !== 'trace_id') {
         max = Math.max(max, data[b])
         return a + data[b];
       } else return a;
@@ -17,29 +18,59 @@ const ResolverMetric = ({ data }: any) => {
     setSum(preSum);
   }, [])
 
-  for (let str in data) {
-    if (str !== 'dateAndTime') {
-      max = Math.max(max, data[str]);
-      console.log(max);
-      resolvers.push(
+  const colors = ['orange.300', 'orange.400', 'orange.500', 'orange.600', 'orange.700'];
+  let index = 0;
+  const filteredData = Object.keys(data).filter(key => (
+    key !== 'dateAndTime' && key !== 'totalDuration' && key !== 'trace_id' && key !== 'errors'
+  ));
+
+  for (let str of filteredData) {
+    if (index === 5) index = 0;
+
+    max = Math.max(max, data[str]);
+    resolvers.push(
+      <Tooltip hasArrow label={`${str}: ${data[str]}ms`} bg='gray.300' color='black'>
         <Box 
-          w={data[str]/sum} 
-          backgroundColor='red' 
-          ml={2} 
+          id={index.toString()}
+          w={data[str]/sum}
+          minWidth='100px'
+          backgroundColor={colors[index]} 
           p={1} 
-          fontSize={'.8rem'} 
-          h='1rem'
-          _hover={{opacity: '80%'}}
+          fontSize={'.6rem'} 
+          color='white'
+          fontWeight='bold'
+          h='1.5rem'
+          _hover={{backgroundColor: 'blue.800'}}
+          ml={index === 0 ? '1rem' : '0'}
+          borderTopLeftRadius={index === 0 ? '1rem' : 0}
+          borderBottomLeftRadius={index === 0 ? '1rem' : 0}
+          borderTopRightRadius={index === filteredData.length - 1 ? '1rem' : 0}
+          borderBottomRightRadius={index === filteredData.length - 1 ? '1rem' : 0}
         >
           {str}
         </Box>
-      );
-    }
+      </Tooltip>
+    );
+    
+    index++;
   }
 
   return (
-    <Flex w={`${max}%`} alignItems='center' justifyContent='center'>
-      <p>{data.dateAndTime}</p>
+    <Flex alignItems='center'>
+      <Flex
+        id={id}
+        justifyContent='center'
+        // backgroundColor='blue.100'
+        fontSize='.5rem'
+        fontWeight='700'
+        borderRadius='1rem'
+        minWidth='160px'
+        maxWidth='160px'
+        textAlign='center'
+        color='white'
+        // mb='1rem'
+        // mr='1rem' 
+      >{data.trace_id}</Flex>
       { resolvers }
     </Flex>
   )

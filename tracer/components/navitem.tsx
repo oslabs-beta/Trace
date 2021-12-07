@@ -71,7 +71,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
                   >
                       <Flex>
                           <Icon as={icon} fontSize="l" color={active ? "white" : iconColor} />
-                          <Text ml={5} fontSize={{ sm: '.5rem', md: '.8rem', lg: '1rem' }} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
+                          <Text ml={5} fontSize={{ sm: '.8rem', md: '1rem', lg: '1rem' }} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
                       </Flex>
                   </MenuButton>
               </Link>
