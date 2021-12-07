@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../state/hooks';
 import { createContext, useState } from 'react'; // NEED TO SET STATE ON INSIGHTS COMPONENT(?)
 import {
   Checkbox,

@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist' // need to install new dependency
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
  
-import rootReducer from './reducers'
+import rootReducer from './reducers/dataReducer'
  
 const persistConfig = {
   key: 'root',
