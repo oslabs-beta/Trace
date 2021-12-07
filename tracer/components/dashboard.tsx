@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <ButtonGroup mt='.4rem' mb='1rem' isAttached pos='-webkit-sticky'>
+    <ButtonGroup mt='.4rem' mb='2rem' isAttached pos='-webkit-sticky'>
       <Button colorScheme='blue'  
       onClick={() => setView('live')}
       isActive={ view === 'live' }
