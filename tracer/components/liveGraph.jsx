@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { Flex } from "@chakra-ui/layout";
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Bar } from 'react-chartjs-2';
 import {
   Chart,
@@ -23,10 +23,11 @@ import { useAppSelector } from "../state/hooks"
 
 const LiveGraph = () => {
 
+  const chartRef = useRef(null);
+
   const router = useRouter()
 
   const handleClick = (i) => {
-    console.log(i)
     const href = '/#' + i;
     router.push(href)
   }
@@ -102,7 +103,6 @@ const LiveGraph = () => {
 
   useEffect(() => {
     for (let obj of store.data.rawdata) {
-      console.log(obj);
       data.labels.push(obj.trace_id)
       data.datasets[0].data.push(obj.totalDuration);
       if (obj.errors || obj.response.errors) data.datasets[0].backgroundColor.push('#63171B')
@@ -110,7 +110,10 @@ const LiveGraph = () => {
     }
 
     setChartData(data);
+    console.log('ref', chartRef);
   }, [store])
+
+  console.log('ref', chartRef);
 
   return (
     <Flex 
@@ -130,6 +133,7 @@ const LiveGraph = () => {
         key={router.route}
         data={chartData}
         options={options}
+        ref={chartRef}
       />
     </Flex>
     

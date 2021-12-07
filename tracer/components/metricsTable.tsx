@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Flex, SimpleGrid } from '@chakra-ui/layout';
+import { Flex } from '@chakra-ui/layout';
 
 const MetricsTable = ({ data }: any) => {
   const details: Array<any> = [];
@@ -13,7 +13,6 @@ const MetricsTable = ({ data }: any) => {
     } else if (str === 'response') {
       if (data[str].data) response = JSON.stringify(data[str].data)
       if (data[str].errors) errors += JSON.stringify(data[str].errors)
-      console.log(response, errors)
     } else if (str === 'dateAndTime') {
       const old = details[0]
       details[0] = (
@@ -32,7 +31,6 @@ const MetricsTable = ({ data }: any) => {
       )
       details.push(old)
     } else {
-      console.log(data[str])
       details.push(
         <Flex>
           <p><b>{ str }:</b> { data[str] }ms</p>
