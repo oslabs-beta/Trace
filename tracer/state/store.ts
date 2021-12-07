@@ -43,20 +43,18 @@ const defaultRootState: RootState = {
   }
 }
  
-export const store = createStore(
-  reducers,
+export const preStore = createStore(
+  persistedReducer,
   defaultRootState,
   applyMiddleware(thunk)
 );
 
-// export const storePersistor = () => {
-//   let store = createStore(
-//     reducers,
-//     defaultRootState,
-//     applyMiddleware(thunk)
-//   );
-//   let persistor = persistStore(store);
-//   return { store, persistor };
-// }
+const persistedStore = () => {
+  let store = preStore;
+  let persistor = persistStore(store);
+  return { store, persistor };
+}
 
-export type AppDispatch = typeof store.dispatch
+export default persistedStore
+
+export type AppDispatch = typeof preStore.dispatch
