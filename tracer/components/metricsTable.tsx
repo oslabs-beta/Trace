@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Flex } from '@chakra-ui/layout';
 
 const MetricsTable = ({ data }: any) => {
+
   const details: Array<any> = [];
   let response;
   let errors = '';

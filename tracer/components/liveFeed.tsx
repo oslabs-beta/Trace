@@ -23,11 +23,11 @@ const LiveFeed = () => {
 
   const items = data.map((obj: Object, i: Key) => {
     return (
-      <AccordionItem w='100%' border='none'>
+      <AccordionItem w='100%' border='none' key={i.toString()} >
         <h1>
           <AccordionButton>
             <Box width='100%'>
-            <ResolverMetric id={i.toString()} data={obj} key={i.toString()} />
+            <ResolverMetric id={i.toString()} data={obj}/>
             </Box>
           </AccordionButton>
         </h1>

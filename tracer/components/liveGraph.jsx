@@ -23,7 +23,7 @@ import { useAppSelector } from "../state/hooks"
 
 const LiveGraph = () => {
 
-  const chartRef = useRef(null);
+  const clickRef = useRef(null)
 
   const router = useRouter()
 
@@ -110,10 +110,8 @@ const LiveGraph = () => {
     }
 
     setChartData(data);
-    console.log('ref', chartRef);
+    clickRef.current.update();
   }, [store])
-
-  console.log('ref', chartRef);
 
   return (
     <Flex 
@@ -128,12 +126,13 @@ const LiveGraph = () => {
       backgroundColor='blue.700'
       justifyContent='center'
       alignItems='center'
+      // ref={clickRef}
     >
       <Bar
         key={router.route}
         data={chartData}
         options={options}
-        ref={chartRef}
+        ref={clickRef}
       />
     </Flex>
     

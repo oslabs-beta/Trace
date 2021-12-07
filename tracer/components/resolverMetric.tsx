@@ -33,9 +33,10 @@ const ResolverMetric = ({ data, id }: any) => {
 
     max = Math.max(max, data[str]);
     resolvers.push(
-      <Tooltip hasArrow label={`${str}: ${data[str]}ms`} bg='gray.300' color='black'>
+      <Tooltip hasArrow label={`${str}: ${data[str]}ms`} bg='gray.300' color='black' key={index.toString()}>
         <Box 
           id={index.toString()}
+          key={index.toString()}
           w={data[str]/sum}
           minWidth='100px'
           backgroundColor={errors ? errColors[index] : colors[index]} 
