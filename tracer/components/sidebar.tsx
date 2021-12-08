@@ -1,8 +1,12 @@
 // Based off Chakra UI Responsive Sidebar Tutorial: https://github.com/bjcarlson42/chakra-left-responsive-navbar/tree/main/components
 
-// React, Next, and Styled Components Imports
-import { useState, ReactNode } from 'react'
+// React/Redux, Next, and Styled Components Imports
+import { useState } from 'react'
 import NavItem from './navitem'
+import { useAppDispatch } from '../state/hooks'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../state/action-creators/export'
+import { useRouter } from 'next/router'
 
 // Chakra Imports
 import {
@@ -15,8 +19,6 @@ import {
   FiMenu,
   FiGrid,
   FiBarChart,
-  FiShare2,
-  FiStar,
   FiSettings
 } from 'react-icons/fi'
 
@@ -34,9 +36,16 @@ const innerVariants = {
    }
 }
 
-
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState("small")
+  const dispatch = useAppDispatch();
+  const { deleteDataActionCreator } = bindActionCreators(actionCreators, dispatch);
+  const router = useRouter()
+
+  const handleReset = () => {
+    deleteDataActionCreator()
+    router.reload()
+  }
 
   return (
     <motion.div
@@ -77,9 +86,9 @@ const Sidebar = () => {
             
             <NavItem navSize={navSize} icon={FiGrid} title="Dashboard" description="See all your resolver metrics in one place." path='/' />
             <NavItem navSize={navSize} icon={FiBarChart} title="Insights" description="View valuable insights gathered from your resolver data." path='/insights' />
-            <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
-            <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/>
-            <NavItem navSize={navSize} icon={FiSettings} title="Settings" description="Configure Trace to fit your needs." path='/settings'/>
+            {/* <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
+            <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/> */}
+            <NavItem navSize={navSize} icon={FiSettings} title="Reset" description="Reset your query and resolver tracing data." onClick={handleReset} />
         </motion.div>
       </Flex>
     </motion.div>

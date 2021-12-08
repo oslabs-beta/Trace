@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes'
-import helpers from '../../data/helpers';
+import storage from '../sync_storage'
 
 const initialState = {
   rawdata: [],
@@ -8,6 +8,7 @@ const initialState = {
 }
 
 const dataReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case types.UPDATE_DATA:
       const data = action.payload;
@@ -31,6 +32,7 @@ const dataReducer = (state = initialState, action) => {
       return clone;
 
     case types.DELETE_DATA:
+      storage.removeItem('persist:trace')
       return initialState;
     
     default:
