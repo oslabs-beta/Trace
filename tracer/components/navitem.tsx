@@ -47,7 +47,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
     colorChange();
   }, [colorMode])
 
-  return title === "Reset" ? (
+  return title !== "Reset" ? (
       <Flex
           mt={25}
           flexDir="column"
@@ -72,7 +72,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
                     onMouseLeave={onClose}
                     onClick={onClick}
                   >
-                      <Flex>
+                      <Flex alignItems='center'>
                           <Icon as={icon} fontSize="l" color={active ? "white" : iconColor} />
                           <Text ml={5} fontSize={{ sm: '.8rem', md: '1rem', lg: '1rem' }} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
                       </Flex>
@@ -114,8 +114,8 @@ export default function NavItem({ icon, title, path, description, active=false, 
               onMouseLeave={onClose}
               onClick={onClick}
             >
-                <Flex>
-                    <Icon as={icon} fontSize="l" color={active ? "white" : iconColor} />
+                <Flex alignItems='center'>
+                    <Icon as={icon} fontSize="l" color='white' />
                     <Text ml={5} fontSize={{ sm: '.8rem', md: '1rem', lg: '1rem' }} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
                 </Flex>
             </MenuButton>

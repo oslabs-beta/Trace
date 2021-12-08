@@ -18,9 +18,10 @@ import {
 import {
   FiMenu,
   FiGrid,
-  FiBarChart,
-  FiSettings
+  FiBarChart
 } from 'react-icons/fi'
+
+import { BsArrowCounterclockwise } from 'react-icons/bs'
 
 // Framer Motion
 import { motion } from 'framer-motion';
@@ -88,7 +89,7 @@ const Sidebar = () => {
             <NavItem navSize={navSize} icon={FiBarChart} title="Insights" description="View valuable insights gathered from your resolver data." path='/insights' />
             {/* <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
             <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/> */}
-            <NavItem navSize={navSize} icon={FiSettings} title="Reset" description="Reset your query and resolver tracing data." onClick={handleReset} />
+            <NavItem navSize={navSize} icon={BsArrowCounterclockwise} title="Reset" description="Reset your query and resolver tracing data." onClick={handleReset} />
         </motion.div>
       </Flex>
     </motion.div>
