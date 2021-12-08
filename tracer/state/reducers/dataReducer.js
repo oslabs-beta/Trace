@@ -39,3 +39,10 @@ const dataReducer = (state = initialState, action) => {
 };
 
 export default dataReducer;
+
+/*
+initial state = {
+  RootQueries = ['Strings of names that occur as root queries'],
+  
+}
+*/

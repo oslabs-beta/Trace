@@ -53,3 +53,24 @@ const helpers = {
 };
 
 export default helpers;
+
+/*
+Grab all the keys from the new data object. 
+ignore indexes 0 & 1 for now.
+iterate starting at index[2] up until index[.length-1]
+these are the resolvers that make up the query.
+grab the first one and throw it into the RootQuery memory store.
+pass along the changes to Count and Average.
+then loop through all the queries.
+if we spot a query that exists in the rootquery storage
+splice that query and run it through the formatter
+*/
+
+
+/*
+what happens when we splice?
+those metrics can be subtracted from the parent query if we want.
+We can take this partitioned query and pass it in to the helper.format function
+as if it came in on its own.
+Finally we could just record the metrics manually into their respective count and average objects.
+*/
