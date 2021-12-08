@@ -4,10 +4,8 @@ import { useAppSelector } from '../state/hooks'
 import {
   Table,
   Thead,
-  Tbody,
   Tr,
   Th,
-  Td,
   Accordion,
   AccordionItem,
   AccordionButton,

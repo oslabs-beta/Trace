@@ -1,21 +1,10 @@
 import { createStore, applyMiddleware } from "redux";
+import { createWrapper } from 'next-redux-wrapper';
 import reducers from "./index";
 import thunk from "redux-thunk";
-
-// persist redux state using local storage
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-// for shallow merging two levels
-// import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  // stateReconciler: autoMergeLevel2,
-}
-
-const persistedReducer = persistReducer(persistConfig, reducers);
-
+import storage from './sync_storage'
+//import storage from 'redux-persist/lib/storage'
 
 export type RootState = {
   data: Data
@@ -35,26 +24,41 @@ interface Averages {
   [key: string]: number
 }
 
-const defaultRootState: RootState = {
-  data: {
-    rawdata: [],
-    count: {},
-    averages: {}
+// const defaultRootState: RootState = {
+//   data: {
+//     rawdata: [],
+//     count: {},
+//     averages: {}
+//   }
+// }
+
+let reduxStore: any
+
+const makeStore = ({ isServer }: { isServer?: any }) => {
+
+  if (isServer) {
+    reduxStore = createStore(reducers, applyMiddleware(thunk))
+    return reduxStore
+  } else {
+    const persistConfig = {
+      key: 'trace',
+      storage
+    }
+
+    const persistedReducer = persistReducer(persistConfig, reducers)
+
+    reduxStore = createStore(
+      persistedReducer,
+      applyMiddleware(thunk)
+    )
+
+    reduxStore.__persistor = persistStore(reduxStore);
+
+    return reduxStore
   }
-}
- 
-export const preStore = createStore(
-  persistedReducer,
-  defaultRootState,
-  applyMiddleware(thunk)
-);
 
-const persistedStore = () => {
-  let store = preStore;
-  let persistor = persistStore(store);
-  return { store, persistor };
 }
 
-export default persistedStore
+export const wrapper = createWrapper(makeStore as any)
 
-export type AppDispatch = typeof preStore.dispatch
+export type AppDispatch = typeof reduxStore.dispatch

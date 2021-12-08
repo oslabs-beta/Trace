@@ -102,15 +102,19 @@ const LiveGraph = () => {
   const store = useAppSelector((state) => state)
 
   useEffect(() => {
-    for (let obj of store.data.rawdata) {
-      data.labels.push(obj.trace_id)
-      data.datasets[0].data.push(obj.totalDuration);
-      if (obj.errors || obj.response.errors) data.datasets[0].backgroundColor.push('#63171B')
-      else data.datasets[0].backgroundColor.push('white')
+    if (store) {
+      for (let obj of store.data.rawdata) {
+        if (obj) {
+          data.labels.push(obj.trace_id)
+          data.datasets[0].data.push(obj.totalDuration);
+          if (obj.errors || obj.response.errors) data.datasets[0].backgroundColor.push('#63171B')
+          else data.datasets[0].backgroundColor.push('white')
+        }
+      }
+  
+      setChartData(data);
+      clickRef.current.update();
     }
-
-    setChartData(data);
-    clickRef.current.update();
   }, [store])
 
   return (
