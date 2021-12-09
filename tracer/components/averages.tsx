@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 
 const Averages = (props: any) => {
-  const resolverData = props.data;
+  const resolverAverages = props.data;
 
   // iterate through resolverData
   // set count variable for resolvers of same type
@@ -43,7 +43,7 @@ const Averages = (props: any) => {
       <Tfoot>
         <Tr>
           <Th>Total Average</Th>
-          <Th isNumeric>{calculateTA}</Th>
+          {/* <Th isNumeric>{calculateTA}</Th> */}
         </Tr>
       </Tfoot>
     </Table>
