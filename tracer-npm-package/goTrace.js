@@ -1,7 +1,7 @@
-// import { exec } from 'child_process';
-import { parse, validate, execute } from 'graphql';
-import { applyMiddleware } from 'graphql-middleware';
-import { v4 as uuidv4 } from 'uuid';
+const { exec } = require('child_process')
+const { parse, validate, execute } = require('graphql')
+const { applyMiddleware } = require('graphql-middleware')
+const { v4 } = require('uuid')
 
 const loggingMiddleware = async (resolve, root, args, context, info) => {
   const startTime = process.hrtime();
@@ -12,24 +12,16 @@ const loggingMiddleware = async (resolve, root, args, context, info) => {
   return result;
 }
 
-let PORT = 1234;
-let served = false;
+export const runTrace = () => {
+  if (!served) exec('cd node_modules && cd go-trace && npm run start')
+}
+
+//runTrace();
 
 module.exports = async function goTrace(schema, query, root, context, variables) {
 
-  // if (!served) {
-  //   served = true;
-  //   console.log('started app')
-  //   const start = exec('npm run build', {
-  //     encoding: 'utf-8'
-  //   })
-  //     .on('error', function(err){ 
-  //       throw err 
-  //     });
-  // }
-
   // Initial object that will hold all the data we want to send to trace
-  const rootQueryObj = { trace_id: uuidv4() };
+  const rootQueryObj = { trace_id: v4() };
 
   schema = applyMiddleware(schema, loggingMiddleware);
 
@@ -66,7 +58,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
   rootQueryObj['response'] = response;
 
-  fetch('http://localhost:3000/api/socketio', {
+  fetch('http://localhost:2929/api/socketio', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

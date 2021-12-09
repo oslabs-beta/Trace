@@ -1,11 +1,6 @@
 {
-  "name": "tracer-npm-package",
-  "version": "1.0.0",
-  "description": "",
-  "main": "trace.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "tracer",
+  "main": "goTrace.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
