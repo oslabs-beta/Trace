@@ -9,17 +9,19 @@ const ResolverMetric = ({ data, id }: any) => {
   let resolvers:any[] = [];
 
   useEffect(() => {
-    if (data.errors) setErrors(true);
-    if (data.response.errors) setErrors(true);
-    let preSum = Object.keys(data).reduce((a: number, b: string) => {
-      if (b !== 'errors' && b !== 'dateAndTime' && b !== 'totalDuration' && b !== 'trace_id' && b !== 'response') {
-        max = Math.max(max, data[b])
-        return a + data[b];
-      } else return a;
-    }, 0);
-
-    setSum(preSum);
-  }, [])
+    if (data) {
+      if (data.errors) setErrors(true);
+      else if (data.response.errors) setErrors(true);
+      let preSum = Object.keys(data).reduce((a: number, b: string) => {
+        if (b !== 'errors' && b !== 'dateAndTime' && b !== 'totalDuration' && b !== 'trace_id' && b !== 'response') {
+          max = Math.max(max, data[b])
+          return a + data[b];
+        } else return a;
+      }, 0);
+  
+      setSum(preSum);
+    }
+  }, [data])
 
   const colors = ['orange.300', 'orange.400', 'orange.500', 'orange.600', 'orange.700'];
   const errColors = ['red.500', 'red.600', 'red.700', 'red.800', 'red.900'];
@@ -39,7 +41,7 @@ const ResolverMetric = ({ data, id }: any) => {
           key={index.toString()}
           w={data[str]/sum}
           minWidth='100px'
-          backgroundColor={errors ? errColors[index] : colors[index]} 
+          backgroundColor={errors === true ? errColors[index] : colors[index]} 
           p={1} 
           fontSize={'.6rem'} 
           color='white'
