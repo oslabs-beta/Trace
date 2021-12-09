@@ -1,41 +1,70 @@
-import { Flex } from "@chakra-ui/layout"
+import { Box, Flex } from "@chakra-ui/layout"
 import { Key } from "react"
-import { Line } from 'react-chartjs-2'
+import { useAppSelector } from '../state/hooks'
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel
+} from '@chakra-ui/react'
 import ResolverMetric from "./resolverMetric"
+import MetricsTable from "./metricsTable"
 
-const LiveFeed = ({ data }: any) => {
+const LiveFeed = () => {
+
+  const store = useAppSelector(state => state)
+  const data = store.data.rawdata;
 
   const items = data.map((obj: Object, i: Key) => {
-    return <ResolverMetric data={obj} key={i.toString()} />
+    return (
+      <AccordionItem w='100%' border='none' key={i.toString()} >
+        <h1>
+          <AccordionButton>
+            <Box width='100%'>
+            <ResolverMetric id={i.toString()} data={obj}/>
+            </Box>
+          </AccordionButton>
+        </h1>
+        <AccordionPanel pb={4}>
+          <MetricsTable data={obj}/>
+        </AccordionPanel>
+      </AccordionItem>
+    )
   });
 
   return (
-    <Flex 
-      bg='blue.100' 
-      p='1em'
-      m='.4rem'
-      mt='1rem'
-      h='81%'
-      borderRadius='10'
-      overflowY='scroll'
+    <Flex
+      p='3rem'
+      w='100%'
+      borderRadius='1rem'
+      backgroundColor='blue.500'
+      direction='column'
+      mb='3rem'
     >
-
-      <Flex direction='column' flex='1' alignItems='center' >
+      <Table mb='1rem' >
+        <Thead>
+          <Tr >
+            <Th textAlign='center' width='200px' color='blue.800' >Trace ID</Th>
+            <Th textAlign='center' color='blue.800' >Duration Metrics</Th>
+          </Tr>
+        </Thead>
+      </Table>
       <Flex
         direction='column'
-        borderRadius='10'
-        bg='rgb(255,255,255, 0.5)'
-        p='1em'
-        m='.4rem'
-        h='100%'
-        w='100%'
-        overflowX='clip'
-        overflowY='scroll'
+        alignItems='flex-start'
       >
-        { items }
-      </Flex>
+      <Accordion w='100%' allowMultiple allowToggle>
+        {items}
+      </Accordion>
       </Flex>
     </Flex>
+    
   )
 }
 

@@ -27,7 +27,11 @@ const dataReducer = (state = initialState, action) => {
         if (clone.count[key]) clone.count[key]++;
         else clone.count[key] = 1;
       }
+<<<<<<< HEAD
       console.log('redux store', clone);
+=======
+    
+>>>>>>> 3616c8a953caeea7a91d4a68c034a96c6451a22a
       return clone;
 
     case types.DELETE_DATA:
