@@ -10,7 +10,7 @@ const config = {
     lg: "960px",
     xl: "1200px",
   },
-  global: (props) => ({
+  global: (props: any) => ({
     body: {
        color: mode('gray.800', 'whiteAlpha.900')(props),
        bg: mode('gray.100', '#141214')(props),

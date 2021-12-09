@@ -1,4 +1,4 @@
-
+// import { exec } from 'child_process';
 import { parse, validate, execute } from 'graphql';
 import { applyMiddleware } from 'graphql-middleware';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,7 +12,22 @@ const loggingMiddleware = async (resolve, root, args, context, info) => {
   return result;
 }
 
+let PORT = 1234;
+let served = false;
+
 module.exports = async function goTrace(schema, query, root, context, variables) {
+
+  // if (!served) {
+  //   served = true;
+  //   console.log('started app')
+  //   const start = exec('npm run build', {
+  //     encoding: 'utf-8'
+  //   })
+  //     .on('error', function(err){ 
+  //       throw err 
+  //     });
+  // }
+
   // Initial object that will hold all the data we want to send to trace
   const rootQueryObj = { trace_id: uuidv4() };
 
