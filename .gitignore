@@ -38,3 +38,7 @@ yarn-error.log*
 
 # vscode
 settings.json
+
+# icloud
+.icloud
+*.icloud
