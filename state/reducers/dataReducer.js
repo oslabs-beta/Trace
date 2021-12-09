@@ -19,14 +19,16 @@ const dataReducer = (state = initialState, action) => {
 
       // UPDATE AVERAGES + COUNT
       for (let key in data) {
-        if (clone.averages[key]) {
-          let sum = clone.averages[key] * clone.count[key];
-          sum += data[key];
-          clone.averages[key] = sum / (clone.count[key] + 1);
-        } else clone.averages[key] = data[key];
-
-        if (clone.count[key]) clone.count[key]++;
-        else clone.count[key] = 1;
+        if (key !== 'dateAndTime' && key !== 'errors' && key !== 'response' && key !== 'totalDuration' && key !== 'trace_id') {
+          if (clone.averages[key]) {
+            let sum = clone.averages[key] * clone.count[key];
+            sum += data[key];
+            clone.averages[key] = sum / (clone.count[key] + 1);
+          } else clone.averages[key] = data[key];
+  
+          if (clone.count[key]) clone.count[key]++;
+          else clone.count[key] = 1;
+        }
       }
     
       return clone;
