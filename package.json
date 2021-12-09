@@ -1,6 +1,6 @@
 {
   "name": "go-trace",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Lightweight GraphQL resolver-level query tracing tool.",
   "author": "Pat Constant, Alex Hager, Eddy Kwon, Jueun Grace Yun",
   "publishConfig": {
@@ -13,7 +13,9 @@
     "url": "https://github.com/oslabs-beta/trace/"
   },
   "main": "tracer-npm-package/goTrace.js",
-  "files": [ ".next/" ],
+  "files": [
+    ".next/", "tracer-npm-package/"
+  ],
   "scripts": {
     "dev": "next dev",
     "start": "next start -p 2929",
@@ -27,7 +29,6 @@
     "@types/react-vis": "^1.11.10",
     "chart.js": "^3.0.0",
     "framer-motion": "^4.1.17",
-    "graphql-middleware": "^6.1.12",
     "next": "12.0.4",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
@@ -45,6 +46,7 @@
     "@types/node": "16.11.10",
     "@types/react": "^17.0.37",
     "@types/styled-components": "^5.1.15",
+    "dotenv": "^10.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
     "styled-components": "^5.3.3",

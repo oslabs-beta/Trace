@@ -1,32 +1,35 @@
 // Based off Chakra UI Responsive Sidebar Tutorial: https://github.com/bjcarlson42/chakra-left-responsive-navbar/tree/main/components
 
-// React/Redux, Next, and Styled Components Imports
-import { useState } from 'react'
+// React, Next, and Styled Components Imports
+import { useState, ReactNode } from 'react'
 import NavItem from './navitem'
-import { useAppDispatch } from '../state/hooks'
-import { bindActionCreators } from 'redux'
-import { actionCreators } from '../state/action-creators/export'
-import { useRouter } from 'next/router'
 
 // Chakra Imports
 import {
   Flex,
+  Text,
   IconButton,
+  Divider,
+  Avatar,
+  Heading,
+  useColorMode
 } from '@chakra-ui/react'
 
 // Feather Icon Imports
 import {
   FiMenu,
   FiGrid,
-  FiBarChart
+  FiBarChart,
+  FiAlertTriangle,
+  FiShare2,
+  FiStar,
+  FiSettings
 } from 'react-icons/fi'
-
-import { BsArrowCounterclockwise } from 'react-icons/bs'
 
 // Framer Motion
 import { motion } from 'framer-motion';
 const mainVariants = {
-  'small': { width: '80px' },
+  'small': { width: '75px' },
   'big': { width: '200px' }
 }
 const innerVariants = {
@@ -37,30 +40,31 @@ const innerVariants = {
    }
 }
 
+
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState("small")
-  const dispatch = useAppDispatch();
-  const { deleteDataActionCreator } = bindActionCreators(actionCreators, dispatch);
-  const router = useRouter()
+  const { colorMode, toggleColorMode } = useColorMode()
+  const [ shadow, setShadow ] = useState('0px 3px 15px rgba(200,200,200,0.2)')
 
-  const handleReset = () => {
-    deleteDataActionCreator()
-    router.reload()
+  const colorChange = () => {
+    if (colorMode === 'light') {
+        setShadow('0 4px 12px 0 rgba(0, 0, 0, 0.05)');
+    } else {
+        setShadow('0 4px 12px 0 #fff');
+    }
   }
 
   return (
     <motion.div
       animate={navSize === 'small' ? 'small' : 'big'}
-      style={ { left: '5' } }
+      style={ { marginTop: '1vh', left: '5' } }
       transition={ { ease: 'easeInOut' } }
       variants={mainVariants}
     >
       <Flex
-        position='-webkit-sticky'
-        bottom='0'
-        align-self='flex-start'
-        height='100vh'
-        backgroundColor='blue.700'
+        pos='sticky'
+        h='100vh'
+        boxShadow={shadow}
         flexDir='column'
         justify='space-between'
       >
@@ -87,9 +91,10 @@ const Sidebar = () => {
             
             <NavItem navSize={navSize} icon={FiGrid} title="Dashboard" description="See all your resolver metrics in one place." path='/' />
             <NavItem navSize={navSize} icon={FiBarChart} title="Insights" description="View valuable insights gathered from your resolver data." path='/insights' />
-            {/* <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
-            <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/> */}
-            <NavItem navSize={navSize} icon={BsArrowCounterclockwise} title="Reset" description="Reset your query and resolver tracing data." onClick={handleReset} />
+            <NavItem navSize={navSize} icon={FiAlertTriangle} title="Error" description="See all your errors all in one place." path='/errors' />
+            <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
+            <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/>
+            <NavItem navSize={navSize} icon={FiSettings} title="Settings" description="Configure Trace to fit your needs." path='/settings'/>
         </motion.div>
       </Flex>
     </motion.div>

@@ -1,7 +1,8 @@
 const { exec } = require('child_process')
 const { parse, validate, execute } = require('graphql')
 const { applyMiddleware } = require('graphql-middleware')
-const { v4 } = require('uuid')
+const { v4: uuidv4 } = require('uuid')
+const fetch = require("node-fetch");
 
 const loggingMiddleware = async (resolve, root, args, context, info) => {
   const startTime = process.hrtime();
@@ -26,7 +27,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   runTrace();
 
   // Initial object that will hold all the data we want to send to trace
-  const rootQueryObj = { trace_id: v4() };
+  const rootQueryObj = { trace_id: uuidv4() };
 
   schema = applyMiddleware(schema, loggingMiddleware);
 

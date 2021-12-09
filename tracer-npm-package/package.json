@@ -4,8 +4,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions"
+  },
   "dependencies": {
-    "graphql": "^16.0.1",
+    "graphql-middleware": "^6.1.12",
+    "node-fetch": "^2.6.6",
+    "socket.io-client": "^4.4.0",
+    "uuid": "^8.3.2"
+  },
+  "peerDependencies": {
+    "graphql": "^15.3.0",
     "graphql-middleware": "^6.1.12",
     "socket.io-client": "^4.4.0",
     "uuid": "^8.3.2"
