@@ -18,17 +18,11 @@ const Dashboard = () => {
       >
         Live Tracing Feed
       </Button>
-      <Button colorScheme='blue' 
-      onClick={() => setView('root')}
-      isActive={ view === 'root' }
-      >
-        Group By Root Operation
-      </Button>
       <Button colorScheme='blue'   
       onClick={() => setView('res')}
       isActive={ view === 'res' }
       >
-        Group By Resolver
+        Resolver Average View
       </Button>
     </ButtonGroup>
 

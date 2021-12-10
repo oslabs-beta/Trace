@@ -1,6 +1,6 @@
 {
   "name": "go-trace",
-  "version": "1.0.5",
+  "version": "0.2.6",
   "description": "Lightweight GraphQL resolver-level query tracing tool.",
   "author": "Pat Constant, Alex Hager, Eddy Kwon, Jueun Grace Yun",
   "publishConfig": {
@@ -13,37 +13,35 @@
     "url": "https://github.com/oslabs-beta/trace/"
   },
   "main": "tracer-npm-package/goTrace.js",
+  "files": [
+    "tracer-npm-package/"
+  ],
   "scripts": {
     "dev": "next dev",
     "start": "next start -p 2929",
     "lint": "next lint",
-    "prepare": "next build"
+    "export": "next build && next export"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.2",
-    "@emotion/react": "^11.7.0",
-    "@emotion/styled": "^11.6.0",
-    "@types/react-vis": "^1.11.10",
     "chart.js": "^3.0.0",
     "framer-motion": "^4.1.17",
-    "graphql-middleware": "^6.1.12",
     "next": "12.0.4",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.0",
-    "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
-    "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0"
   },
   "devDependencies": {
     "@types/node": "16.11.10",
     "@types/react": "^17.0.37",
     "@types/styled-components": "^5.1.15",
+    "dotenv": "^10.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
     "styled-components": "^5.3.3",
