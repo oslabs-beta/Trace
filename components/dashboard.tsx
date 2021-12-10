@@ -1,4 +1,6 @@
 import FeedContainer from "./feedContainer"
+import GraphContainer from './graphContainer'
+import Averages from './averages'
 import { useState } from 'react'
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import { Chart as ChartJS, BarController, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
@@ -24,6 +26,12 @@ const Dashboard = () => {
       >
         Resolver Average View
       </Button>
+      <Button colorScheme='blue'   
+      onClick={() => setView('in')}
+      isActive={ view === 'in' }
+      >
+        Insights
+      </Button>
     </ButtonGroup>
 
     <Flex
@@ -31,7 +39,7 @@ const Dashboard = () => {
     >
 
       { view === 'live' ? <FeedContainer /> : 
-        view === 'root' ? <p>Sort By Root Operation</p> : <p>Sort by Resolver</p> }
+        view === 'res' ? <Averages /> : <GraphContainer />}
 
     </Flex>
     </>

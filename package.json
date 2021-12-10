@@ -17,7 +17,7 @@
     "tracer-npm-package/"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 2929",
     "start": "next start -p 2929",
     "lint": "next lint",
     "export": "next build && next export"
