@@ -31,7 +31,7 @@ const ResolverMetric = ({ data, id }: any) => {
   ));
 
   for (let str of filteredData) {
-    if (index === 5) index = 0;
+    let color = index % 5
 
     max = Math.max(max, data[str]);
     resolvers.push(
@@ -41,7 +41,7 @@ const ResolverMetric = ({ data, id }: any) => {
           key={index.toString()}
           w={data[str]/sum}
           minWidth='100px'
-          backgroundColor={errors === true ? errColors[index] : colors[index]} 
+          backgroundColor={errors === true ? errColors[color] : colors[color]} 
           p={1} 
           fontSize={'.6rem'} 
           color='white'
