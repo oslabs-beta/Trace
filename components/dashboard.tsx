@@ -1,5 +1,6 @@
 import FeedContainer from "./feedContainer"
 import GraphContainer from './graphContainer'
+import Averages from './averages'
 import { useState } from 'react'
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import { Chart as ChartJS, BarController, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
@@ -38,7 +39,7 @@ const Dashboard = () => {
     >
 
       { view === 'live' ? <FeedContainer /> : 
-        view === 'res' ? <p>Averages</p> : <GraphContainer />}
+        view === 'res' ? <Averages /> : <GraphContainer />}
 
     </Flex>
     </>

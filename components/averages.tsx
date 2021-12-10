@@ -8,7 +8,6 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
 } from '@chakra-ui/react'
 
 const Averages = () => {
@@ -35,12 +34,12 @@ const Averages = () => {
     tableData.push(
       <Tr>
         <Td>{ resolver }</Td>
-        <Td isNumeric>{ resolverData.averages[resolver] }</Td>
+        <Td isNumeric>{ resolverData.averages[resolver].toFixed(2) } <i>ms</i></Td>
       </Tr>
     )
     
     // calculate total sum and count for total average
-    // totalSum += resolverData.averages[resolver] * resolverData.count[resolver]
+    // totalSum += resolverData.averages[resolver] * resolverData.count[resolver];
     // totalCount += resolverData.count[resolver];
   }
 
@@ -50,7 +49,6 @@ const Averages = () => {
 
   return (
     <Table variant='simple' colorScheme=''>
-      <TableCaption placement='top'>Resolver Averages</TableCaption>
       <Thead>
         <Tr>
           <Th>Resolver Name</Th>
@@ -58,7 +56,7 @@ const Averages = () => {
         </Tr>
       </Thead>
       <Tbody>
-         {/* { tableData } */}
+         { tableData }
       </Tbody>
       <Tfoot>
         <Tr>
