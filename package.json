@@ -1,6 +1,6 @@
 {
   "name": "go-trace",
-  "version": "0.1.1",
+  "version": "0.1.7",
   "description": "Lightweight GraphQL resolver-level query tracing tool.",
   "author": "Pat Constant, Alex Hager, Eddy Kwon, Jueun Grace Yun",
   "publishConfig": {
@@ -20,7 +20,7 @@
     "dev": "next dev",
     "start": "next start -p 2929",
     "lint": "next lint",
-    "build": "next build && next export"
+    "build": "next build"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.2",

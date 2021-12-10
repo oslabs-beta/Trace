@@ -1,6 +1,6 @@
 import Dashboard from '../components/dashboard'
 import Header from '../components/header'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../state/hooks'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/action-creators/export'
 import { useEffect, useState } from 'react'
@@ -30,7 +30,7 @@ const Home = () => {
   }, [])
 
   // REDUX
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { updateDataActionCreator } = bindActionCreators(actionCreators, dispatch);
   
   const refreshData = () => {
@@ -45,7 +45,7 @@ const Home = () => {
   }, [ newData ])
 
   return (
-    <Flex direction='column' w='90vw' h='90vh' p='1.5rem' m='1rem' >
+    <Flex direction='column' w='90%' h='100vh' p='1.5rem' m='1rem' overflowY='scroll' >
       <Header size='sm' text='Dashboard' />
       <Dashboard />
     </Flex>

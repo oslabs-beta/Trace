@@ -15,16 +15,18 @@ const loggingMiddleware = async (resolve, root, args, context, info) => {
 
 let served = false;
 
-const runTrace = () => {
+const runTrace = async () => {
   if (!served) {
     served = true;
-    exec('cd node_modules && cd go-trace && npm run start')
+    exec('cd node_modules && cd go-trace && npm start', (err, stdout, stderr) => {
+      console.log(stdout)
+    })
   }
 }
 
 module.exports = async function goTrace(schema, query, root, context, variables) {
 
-  runTrace();
+  await runTrace();
 
   // Initial object that will hold all the data we want to send to trace
   const rootQueryObj = { trace_id: uuidv4() };

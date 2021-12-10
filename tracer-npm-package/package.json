@@ -9,10 +9,5 @@
     "node-fetch": "^2.6.6",
     "socket.io-client": "^4.4.0",
     "uuid": "^8.3.2"
-  },
-  "peerDependencies": {
-    "graphql-middleware": "^6.1.12",
-    "socket.io-client": "^4.4.0",
-    "uuid": "^8.3.2"
   }
 }
