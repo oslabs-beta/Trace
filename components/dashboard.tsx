@@ -1,4 +1,5 @@
 import FeedContainer from "./feedContainer"
+import GraphContainer from './graphContainer'
 import { useState } from 'react'
 import { Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import { Chart as ChartJS, BarController, BarElement, LinearScale, Title, CategoryScale } from 'chart.js';
@@ -37,7 +38,7 @@ const Dashboard = () => {
     >
 
       { view === 'live' ? <FeedContainer /> : 
-        view === 'root' ? <p>Sort By Root Operation</p> : <p>Sort by Resolver</p> }
+        view === 'root' ? <p><GraphContainer /></p> : <p>Sort by Resolver</p> }
 
     </Flex>
     </>

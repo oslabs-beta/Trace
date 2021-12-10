@@ -14,7 +14,7 @@
   },
   "main": "tracer-npm-package/goTrace.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 2929",
     "start": "next start -p 2929",
     "lint": "next lint",
     "prepare": "next build"

@@ -3,7 +3,7 @@ import { Grid } from '@chakra-ui/react'
 import { useAppSelector } from '../state/hooks'
 // display grid
 
-const insights = () => {
+const graphContainer = () => {
 
   const { rawdata, averages, count} = useAppSelector((state) => state.data)
 
@@ -15,3 +15,4 @@ const insights = () => {
   )
 }
 
+export default graphContainer
