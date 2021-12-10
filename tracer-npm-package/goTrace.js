@@ -1,4 +1,4 @@
-const { execSync } = require('child_process')
+const { exec } = require('child_process')
 const { parse, validate, execute } = require('graphql')
 const { applyMiddleware } = require('graphql-middleware')
 const { v4: uuidv4 } = require('uuid')
@@ -18,7 +18,7 @@ let served = false;
 const runTrace = async () => {
   if (!served) {
     served = true;
-    execSync('cd node_modules && cd go-trace && cd tracer-npm-package && node server.js', (err, stdout, stderr) => {
+    exec('cd node_modules && cd go-trace && cd tracer-npm-package && node server.js', (err, stdout, stderr) => {
       console.log(stdout)
     })
   }
