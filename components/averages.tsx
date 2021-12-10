@@ -1,3 +1,5 @@
+import { useAppSelector } from '../state/hooks';
+
 import {
   Table,
   Thead,
@@ -9,8 +11,10 @@ import {
   TableCaption,
 } from '@chakra-ui/react'
 
-const Averages = (props: any) => {
-  const resolverAverages = props.data;
+const Averages = () => {
+  const store = useAppSelector((state) => state);
+  const resolverData = store.data;
+  console.log('averages.tsx || store: ', store);
 
   // iterate through resolverData
   // set count variable for resolvers of same type
@@ -18,19 +22,35 @@ const Averages = (props: any) => {
   // save averages as object { resolverName: averageDuration }
 
   const tableData = [];
+  
+  let totalSum = 0;
+  let totalCount = 0;
+  let totalAverage;
 
-  for (let resolver in resolverAverages) {
+  // if no resolver data set total average to 0
+  totalCount === 0 ? totalAverage = 0 : totalAverage = totalSum / totalCount;
+
+  // create table elements with resolver and corresponding average
+  for (let resolver in resolverData.averages) {
     tableData.push(
       <Tr>
         <Td>{ resolver }</Td>
-        <Td isNumeric>{ resolverAverages[resolver] }</Td>
+        <Td isNumeric>{ resolverData.averages[resolver] }</Td>
       </Tr>
     )
+    
+    // calculate total sum and count for total average
+    // totalSum += resolverData.averages[resolver] * resolverData.count[resolver]
+    // totalCount += resolverData.count[resolver];
   }
+
+  // create table element for total resolver average
+  // iterate through resolverData 
+
 
   return (
     <Table variant='simple' colorScheme=''>
-      <TableCaption placement='top'>Imperial to metric conversion factors</TableCaption>
+      <TableCaption placement='top'>Resolver Averages</TableCaption>
       <Thead>
         <Tr>
           <Th>Resolver Name</Th>
@@ -38,11 +58,11 @@ const Averages = (props: any) => {
         </Tr>
       </Thead>
       <Tbody>
-        { ...tableData }
+         {/* { tableData } */}
       </Tbody>
       <Tfoot>
         <Tr>
-          <Th>Total Average</Th>
+          <Th>Average Execution Time</Th>
           {/* <Th isNumeric>{calculateTA}</Th> */}
         </Tr>
       </Tfoot>
