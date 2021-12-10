@@ -25,6 +25,12 @@ const Dashboard = () => {
       >
         Resolver Average View
       </Button>
+      <Button colorScheme='blue'   
+      onClick={() => setView('in')}
+      isActive={ view === 'in' }
+      >
+        Insights
+      </Button>
     </ButtonGroup>
 
     <Flex
@@ -32,7 +38,7 @@ const Dashboard = () => {
     >
 
       { view === 'live' ? <FeedContainer /> : 
-        view === 'root' ? <p><GraphContainer /></p> : <p>Sort by Resolver</p> }
+        view === 'res' ? <p>Averages</p> : <GraphContainer />}
 
     </Flex>
     </>
