@@ -29,30 +29,26 @@ const Averages = () => {
   // if no resolver data set total average to 0
   totalCount === 0 ? totalAverage = 0 : totalAverage = totalSum / totalCount;
 
-  // create table elements with resolver and corresponding average
   for (let resolver in resolverData.averages) {
     tableData.push(
       <Tr>
-        <Td>{ resolver }</Td>
-        <Td isNumeric>{ resolverData.averages[resolver].toFixed(2) } <i>ms</i></Td>
+        <Td color='#F7F7F7'>{ resolver }</Td>
+        <Td isNumeric color='#F7F7F7'>{ resolverData.averages[resolver].toFixed(2) } <i>ms</i></Td>
       </Tr>
     )
-    
     // calculate total sum and count for total average
-    // totalSum += resolverData.averages[resolver] * resolverData.count[resolver];
-    // totalCount += resolverData.count[resolver];
+    totalSum += resolverData.averages[resolver] * resolverData.count[resolver];
+    totalCount += resolverData.count[resolver];
   }
-
-  // create table element for total resolver average
-  // iterate through resolverData 
+  totalAverage = totalSum / totalCount;
 
 
   return (
-    <Table variant='simple' colorScheme=''>
-      <Thead>
-        <Tr>
-          <Th>Resolver Name</Th>
-          <Th isNumeric>Average Duration</Th>
+    <Table variant='simple' color='#F7F9FA' backgroundColor='blue.700' borderRadius='1rem'>
+      <Thead >
+        <Tr >
+          <Th borderTopLeftRadius='1rem' backgroundColor='blue.500' pt='1rem' pb='1rem' color='FEFEFE' fontSize='1rem'>Resolver Name</Th>
+          <Th borderTopRightRadius='1rem' backgroundColor='blue.500' pt='1rem' pb='1rem' color='FEFEFE' isNumeric fontSize='1rem'>Average Duration</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -60,8 +56,8 @@ const Averages = () => {
       </Tbody>
       <Tfoot>
         <Tr>
-          <Th>Average Execution Time</Th>
-          {/* <Th isNumeric>{calculateTA}</Th> */}
+          <Th pt='1rem' pb='1rem' color='FEFEFE' fontSize='1rem'>Average Execution Time</Th>
+          <Td pt='1rem' pb='1rem' color='FEFEFE' fontSize='1rem' isNumeric>{ totalAverage.toFixed(2) } <i>ms</i></Td>
         </Tr>
       </Tfoot>
     </Table>

@@ -5,11 +5,14 @@ import { useAppSelector } from '../state/hooks'
 
 const graphContainer = () => {
 
-  const { rawdata, averages, count} = useAppSelector((state) => state.data)
+  const { rawdata, averages, count } = useAppSelector((state) => state.data)
 
-  const graphs = makeGraphs(rawdata, averages, count);
+  const graphs = makeGraphs(averages, count);
   return (
-    <Grid>
+    <Grid
+      gap={4}
+      templateColumns='repeat(2, 1fr)'
+    >
       {graphs}
     </Grid>
   )
