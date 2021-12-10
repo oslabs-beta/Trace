@@ -1,4 +1,4 @@
-const { exec } = require('child_process')
+const { execSync } = require('child_process')
 const { parse, validate, execute } = require('graphql')
 const { applyMiddleware } = require('graphql-middleware')
 const { v4: uuidv4 } = require('uuid')
@@ -18,7 +18,7 @@ let served = false;
 const runTrace = async () => {
   if (!served) {
     served = true;
-    exec('cd node_modules && cd go-trace && npm start', (err, stdout, stderr) => {
+    execSync('cd node_modules && cd go-trace && cd tracer-npm-package && node server.js', (err, stdout, stderr) => {
       console.log(stdout)
     })
   }
@@ -66,7 +66,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
   rootQueryObj['response'] = response;
 
-  fetch('http://localhost:2929/api/socketio', {
+  fetch('http://localhost:2929/socketio', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
