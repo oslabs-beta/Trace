@@ -1,6 +1,6 @@
 {
   "name": "go-trace",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Lightweight GraphQL resolver-level query tracing tool.",
   "author": "Pat Constant, Alex Hager, Eddy Kwon, Jueun Grace Yun",
   "publishConfig": {

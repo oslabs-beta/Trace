@@ -18,7 +18,6 @@ import {
 import {
   FiMenu,
   FiGrid,
-  FiBarChart
 } from 'react-icons/fi'
 
 import { BsArrowCounterclockwise } from 'react-icons/bs'
@@ -86,9 +85,6 @@ const Sidebar = () => {
           
             
             <NavItem navSize={navSize} icon={FiGrid} title="Dashboard" description="See all your resolver metrics in one place." path='/' />
-            <NavItem navSize={navSize} icon={FiBarChart} title="Insights" description="View valuable insights gathered from your resolver data." path='/insights' />
-            {/* <NavItem navSize={navSize} icon={FiShare2} title="Visualizer" description="Visualize your Schema AST." path='/visualizer' />
-            <NavItem navSize={navSize} icon={FiStar} title="Playground" description="Connect to any GraphQL server to play around with Trace." path='/playground'/> */}
             <NavItem navSize={navSize} icon={BsArrowCounterclockwise} title="Reset" description="Reset your query and resolver tracing data." onClick={handleReset} />
         </motion.div>
       </Flex>
