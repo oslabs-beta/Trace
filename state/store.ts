@@ -24,14 +24,6 @@ interface Averages {
   [key: string]: number
 }
 
-// const defaultRootState: RootState = {
-//   data: {
-//     rawdata: [],
-//     count: {},
-//     averages: {}
-//   }
-// }
-
 let reduxStore: any
 
 const makeStore = ({ isServer }: { isServer?: any }) => {
