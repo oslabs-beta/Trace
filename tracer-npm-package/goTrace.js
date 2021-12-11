@@ -18,7 +18,11 @@ let served = false;
 const runTrace = async () => {
   if (!served) {
     served = true;
+<<<<<<< HEAD
     exec('cd node_modules && cd go-trace && npm run build && npm run start', (err, stdout, stderr) => {
+=======
+    exec('cd node_modules && cd go-trace && cd tracer-npm-package && node server.js', (err, stdout, stderr) => {
+>>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
       console.log(stdout)
     })
   }
@@ -66,7 +70,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
   rootQueryObj['response'] = response;
 
-  fetch('http://localhost:2929/api/socketio', {
+  fetch('http://localhost:2929/socketio', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

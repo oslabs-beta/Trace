@@ -1,6 +1,10 @@
 {
   "name": "go-trace",
+<<<<<<< HEAD
   "version": "0.2.3",
+=======
+  "version": "0.2.7",
+>>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
   "description": "Lightweight GraphQL resolver-level query tracing tool.",
   "author": "Pat Constant, Alex Hager, Eddy Kwon, Jueun Grace Yun",
   "publishConfig": {
@@ -14,13 +18,17 @@
   },
   "main": "tracer-npm-package/goTrace.js",
   "files": [
+<<<<<<< HEAD
     "tracer-npm-package"
+=======
+    "tracer-npm-package/"
+>>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 2929",
     "start": "next start -p 2929",
     "lint": "next lint",
-    "build": "next build"
+    "export": "next build && next export"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.2",
@@ -35,7 +43,6 @@
     "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
-    "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0"
   },
   "devDependencies": {
