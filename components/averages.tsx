@@ -1,5 +1,4 @@
 import { useAppSelector } from '../state/hooks';
-
 import {
   Table,
   Thead,
@@ -19,7 +18,7 @@ const Averages = () => {
   // sum duration and find average for resolvers of same type
   // save averages as object { resolverName: averageDuration }
 
-  const tableData: any[] = [];
+  const tableData: JSX.Element[] = [];
   
   let totalSum = 0;
   let totalCount = 0;
@@ -44,8 +43,8 @@ const Averages = () => {
 
   return (
     <Table variant='simple' color='#F7F9FA' backgroundColor='blue.700' borderRadius='1rem'>
-      <Thead >
-        <Tr >
+      <Thead>
+        <Tr>
           <Th borderTopLeftRadius='1rem' backgroundColor='blue.500' pt='1rem' pb='1rem' color='FEFEFE' fontSize='1rem'>Resolver Name</Th>
           <Th borderTopRightRadius='1rem' backgroundColor='blue.500' pt='1rem' pb='1rem' color='FEFEFE' isNumeric fontSize='1rem'>Average Duration</Th>
         </Tr>

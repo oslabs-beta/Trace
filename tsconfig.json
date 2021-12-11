@@ -1,48 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": [
-      "esnext"
-    ],
-    "declaration": true,
-    "declarationMap": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "moduleResolution": "node",
-    "noLib": false,
-    "strict": true,
-    "incremental": true,
-    "strictPropertyInitialization": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "noEmitOnError": false,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "extendedDiagnostics": false,
-    "listFiles": false,
-    "typeRoots": [
-      "../../node_modules/@types"
-    ],
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "trace",
-    "node_modules",
-    "**/node_modules",
-    "**/.*/",
-    "**/*.spec.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/resolverGraph.jsx"],
+  "exclude": ["node_modules"]
 }

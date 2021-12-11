@@ -1,15 +1,15 @@
 import FlexComponent from './flexComponent'
 import { GridItem, Heading } from '@chakra-ui/react';
 
-const makeGraphs = (averages: any, count: any): any[] => {
+const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: any}) => {
   // push completed divs into this array
   const graphDivs: any[] = [];
 
   // declare arrays for data to be split between
-  const rootAvg: any[] = []
-  const rootCt: any[] = [];
-  const resolveAvg:any[] = [];
-  const resolveCt: any[] = [];
+  const rootAvg: [string, number][] = []
+  const rootCt: [string, number][] = [];
+  const resolveAvg: [string, number][] = [];
+  const resolveCt: [string, number][] = [];
 
   // Divide the queries into root operations and resolvers
   // while preserving the count - average distinction
@@ -29,6 +29,7 @@ const makeGraphs = (averages: any, count: any): any[] => {
       return graphArr.sort((a: any[], b: any[]) => b[1] - a[1]).splice(5);
     })
   }
+
   // rootAvg.sort((a, b) => b[1] - a[1]).splice(5);
   // rootCt.sort((a, b) => b[1] - a[1]).splice(5);
   // resolveAvg.sort((a, b) => b[1] - a[1]).splice(5);
@@ -80,11 +81,11 @@ const makeGraphs = (averages: any, count: any): any[] => {
         </GridItem>
       )
   }
-// after the while loop has run four times;
-// once for each insight graph,
-// return the four graph components
-// to their final container outside of this file
-return graphDivs
+  // after the while loop has run four times;
+  // once for each insight graph,
+  // return the four graph components
+  // to their final container outside of this file
+  return graphDivs
 };
 
 export default makeGraphs

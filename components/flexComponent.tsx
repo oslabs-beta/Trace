@@ -4,9 +4,16 @@ import { Flex, Box, Heading, Tooltip } from "@chakra-ui/react"
 // get specific with style
 // no form has been given yet
 
-const FlexComponent = ({ max, thisNum, name, label }: any) => {
-  const graphWidth = thisNum === max ? '100%' : ((thisNum / max) * 100).toString() + '%';
-  if (label.length) thisNum = thisNum.toFixed(2);
+type FlexComponentProps = {
+  max: number,
+  thisNum: number | string,
+  name: string,
+  label: string
+}
+
+const FlexComponent = ({ max, thisNum, name, label }: FlexComponentProps) => {
+  const graphWidth = thisNum === max ? '100%' : ((Number(thisNum) / max) * 100).toString() + '%';
+  if (label.length) thisNum = Number(thisNum).toFixed(2);
   return (
     // flex container that represents the entire width of the graph
     <Flex direction='column' mt={'1rem'}>
@@ -37,7 +44,3 @@ const FlexComponent = ({ max, thisNum, name, label }: any) => {
 }
 
 export default FlexComponent
-
-
-// <Tooltip hasArrow label={`${name}: ${thisNum}`} bg='gray.300' color='black'>
-// </Tooltip>
