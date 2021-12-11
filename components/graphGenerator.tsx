@@ -1,4 +1,4 @@
-import FlexKiddo from './flexComponent'
+import FlexComponent from './flexComponent'
 import { GridItem, Heading } from '@chakra-ui/react';
 
 const makeGraphs = (averages: any, count: any): any[] => {
@@ -23,14 +23,19 @@ const makeGraphs = (averages: any, count: any): any[] => {
     }
   }
 
-  // sort the averages and keep only their top 5 entries
-  rootAvg.sort((a, b) => b[1] - a[1]).splice(5);
-  rootCt.sort((a, b) => b[1] - a[1]).splice(5);
-  resolveAvg.sort((a, b) => b[1] - a[1]).splice(5);
-  resolveCt.sort((a, b) => b[1] - a[1]).splice(5);
+  // sort the number metrics by descending and keep only their top 5 entries
+  const mapGraphs = (arr: any[]) => {
+    return arr.map((graphArr) => {
+      return graphArr.sort((a: any[], b: any[]) => b[1] - a[1]).splice(5);
+    })
+  }
+  // rootAvg.sort((a, b) => b[1] - a[1]).splice(5);
+  // rootCt.sort((a, b) => b[1] - a[1]).splice(5);
+  // resolveAvg.sort((a, b) => b[1] - a[1]).splice(5);
+  // resolveCt.sort((a, b) => b[1] - a[1]).splice(5);
 
   // cast graph data and coordinates to arrays
-  const graphData = [rootAvg, rootCt, resolveAvg, resolveCt];
+  const graphData = mapGraphs([rootAvg, rootCt, resolveAvg, resolveCt]);
   const gridCoords = [[1, 1], [2, 1], [1, 2], [2, 2]];
   const headings = [
     'Top 5 Root Operations by Average Duration',
@@ -44,13 +49,13 @@ const makeGraphs = (averages: any, count: any): any[] => {
     // to be used as this graph's props
     
     let label: string = ''
-    const thisGraph: any = graphData.shift();
+    const thisGraph: any[] = graphData.shift();
     const theseCoords: any = gridCoords.shift();
-    const thisLabel: any = headings.shift();
-    if (theseCoords[0] === 1) label = 'ms';
-    // map the iterative props to a FlexKiddo component
+    const thisLabel: string | undefined = headings.shift();
+    if (theseCoords && theseCoords[0] === 1) label = 'ms';
+    // map the iterative props to a FlexComponent component
     // cast to an array
-    const theseComponents = thisGraph.map((item: any) => <FlexKiddo max={thisGraph[0][1]} thisNum={item[1]} name={item[0]} label={label} />);
+    const theseComponents = thisGraph.map((item: any[]) => <FlexComponent max={thisGraph[0][1]} thisNum={item[1]} name={item[0]} label={label} />);
       // render that array into a GridItem div 
       // and push it to the output array
       graphDivs.push(

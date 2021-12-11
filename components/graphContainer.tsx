@@ -6,15 +6,9 @@ import { useAppSelector } from '../state/hooks'
 
 const graphContainer = () => {
 
-<<<<<<< HEAD
-  const { rawdata, averages, count} = useAppSelector((state) => state.data)
-  
-  const graphs = makeGraphs(rawdata, averages, count);
-=======
-  const { rawdata, averages, count } = useAppSelector((state) => state.data)
+  const { averages, count } = useAppSelector((state) => state.data)
 
   const graphs = makeGraphs(averages, count);
->>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
   return (
     <Grid
       gap={4}
