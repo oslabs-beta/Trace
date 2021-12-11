@@ -36,11 +36,13 @@ const ResolverMetric = ({ data, id }: any) => {
     max.current = Math.max(max.current, data[str]);
     resolvers.push(
       <Tooltip hasArrow label={`${str}: ${data[str]}ms`} bg='gray.300' color='black' key={index.toString()}>
-        <Box 
+        <Flex 
+          alignItems='center'
+          justifyContent='center'
           id={index.toString()}
           key={index.toString()}
           w={data[str]/sum}
-          minWidth='100px'
+          minWidth='75px'
           backgroundColor={errors === true ? errColors[color] : colors[color]} 
           p={1} 
           fontSize={'.6rem'} 
@@ -55,7 +57,7 @@ const ResolverMetric = ({ data, id }: any) => {
           borderBottomRightRadius={index === filteredData.length - 1 ? '1rem' : 0}
         >
           {str}
-        </Box>
+        </Flex>
       </Tooltip>
     );
     
@@ -71,12 +73,10 @@ const ResolverMetric = ({ data, id }: any) => {
         fontSize='.5rem'
         fontWeight='700'
         borderRadius='1rem'
-        minWidth='160px'
-        maxWidth='160px'
+        // minWidth='160px'
+        // maxWidth='160px'
         textAlign='center'
         color='white'
-        // mb='1rem'
-        // mr='1rem' 
       >{data.trace_id}</Flex>
       { resolvers }
     </Flex>
