@@ -1,7 +1,7 @@
 import FlexKiddo from './flexComponent'
-import { GridItem } from '@chakra-ui/react';
+import { GridItem, Heading } from '@chakra-ui/react';
 
-const makeGraphs = (rawdata: any, averages: any, count: any) => {
+const makeGraphs = (averages: any, count: any): any[] => {
   // push completed divs into this array
   const graphDivs = [];
 
@@ -14,7 +14,7 @@ const makeGraphs = (rawdata: any, averages: any, count: any) => {
   // Divide the queries into root operations and resolvers
   // while preserving the count - average distinction
   for (const query in averages) {
-    if (query.slice(0, 5) === ("Query" || "Mutat")) {
+    if (query.slice(0, 5) == ("RootQ" || "Mutat" || "Query")) {
       rootAvg.push([query, averages[query]]);
       rootCt.push([query, count[query]]);
     } else {
@@ -24,32 +24,53 @@ const makeGraphs = (rawdata: any, averages: any, count: any) => {
   }
 
   // sort the averages and keep only their top 5 entries
-  rootAvg.sort((a, b) => a[1] - b[1]).splice(5);
-  rootCt.sort((a, b) => a[1] - b[1]).splice(5);
-  resolveAvg.sort((a, b) => a[1] - b[1]).splice(5);
-  resolveCt.sort((a, b) => a[1] - b[1]).splice(5);
+  rootAvg.sort((a, b) => b[1] - a[1]).splice(5);
+  rootCt.sort((a, b) => b[1] - a[1]).splice(5);
+  resolveAvg.sort((a, b) => b[1] - a[1]).splice(5);
+  resolveCt.sort((a, b) => b[1] - a[1]).splice(5);
 
   // cast graph data and coordinates to arrays
   const graphData = [rootAvg, rootCt, resolveAvg, resolveCt];
-  const coordProps = [[1, 1], [2, 1], [1, 2], [2, 2]];
-
+  const gridCoords = [[1, 1], [2, 1], [1, 2], [2, 2]];
+  const headings = [
+    'Top 5 Root Operations by Average Duration',
+    'Top 5 Root Operations by Invocation Count', 
+    'Top 5 Resolvers by Average Duration', 
+    'Top 5 Resolvers by Invocation Count'
+    ];
   // for each item of graph data
   while (graphData.length) {
     // shift the first element of both arrays
     // to be used as this graph's props
-
     
+    let label: string = ''
     const thisGraph: any = graphData.shift();
-    const theseCoords: any = coordProps.shift();
-
+    const theseCoords: any = gridCoords.shift();
+    const thisLabel: any = headings.shift();
+    if (theseCoords[0] === 1) label = 'ms';
     // map the iterative props to a FlexKiddo component
     // cast to an array
-    const theseComponents = thisGraph.map((item: any) => <FlexKiddo max={thisGraph[0][1]} thisNum={item[1]} name={item[0]} />);
+    const theseComponents = thisGraph.map((item: any) => <FlexKiddo max={thisGraph[0][1]} thisNum={item[1]} name={item[0]} label={label} />);
       // render that array into a GridItem div 
       // and push it to the output array
       graphDivs.push(
-        <GridItem rowStart={theseCoords[0]} colStart={theseCoords[1]}>
-          <h1>Heading</h1>
+        <GridItem 
+          rowStart={theseCoords[0]} 
+          colStart={theseCoords[1]}
+          backgroundColor='blue.700'
+          p={'1.5rem'}
+          display='flex'
+          flexDirection='column'
+          h={'1fr'}
+          borderRadius='1rem'
+        >
+          <Heading
+            size='sm'
+            mb='1rem'
+          >
+            {thisLabel}
+          </Heading>
+          <hr/>
           {theseComponents}
         </GridItem>
       )
