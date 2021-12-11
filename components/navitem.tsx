@@ -8,7 +8,6 @@ import {
     MenuButton,
     MenuList,
     useDisclosure,
-    useColorMode,
     Box
 } from '@chakra-ui/react'
 import { IconType } from 'react-icons';
@@ -26,26 +25,6 @@ type Props = {
 
 export default function NavItem({ icon, title, path, description, active=false, navSize, onClick }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const [ bgColor, setBgColor ] = useState('white');
-  const [ iconColor, setIconColor ] = useState('gray');
-  const [ hoverColor, setHoverColor ] = useState('blue.200');
-
-  const colorChange = () => {
-    if (colorMode === 'light') {
-        setBgColor('white');
-        setIconColor('gray');
-        setHoverColor('blue.200');
-    } else {
-        setBgColor('blue.800');
-        setIconColor('white');
-        setHoverColor('blue.600');
-    }
-  }
-
-  useEffect(() => {
-    colorChange();
-  }, [colorMode])
 
   return title !== "Reset" ? (
       <Flex
@@ -59,10 +38,10 @@ export default function NavItem({ icon, title, path, description, active=false, 
             isOpen={isOpen}
           >
               <Link
-                  backgroundColor={active ? 'blue.200' : bgColor}
+                  backgroundColor={active ? 'blue.200' : 'blue.800'}
                   p={3}
                   borderRadius={8}
-                  _hover={{ textDecor: 'none', backgroundColor: hoverColor }}
+                  _hover={{ textDecor: 'none', backgroundColor: 'blue.600' }}
                   w={navSize == "big" ? "100%" : 'auto'}
                   href={path}
               >
@@ -73,7 +52,7 @@ export default function NavItem({ icon, title, path, description, active=false, 
                     onClick={onClick}
                   >
                       <Flex alignItems='center'>
-                          <Icon as={icon} fontSize="l" color={active ? "white" : iconColor} />
+                          <Icon as={icon} fontSize="l" color={active ? "white" : 'blue.100'} />
                           <Text ml={5} fontSize={{ sm: '.8rem', md: '1rem', lg: '1rem' }} display={navSize == "small" ? "none" : "flex"} style={{ alignItems: 'center' }}>{title}</Text>
                       </Flex>
                   </MenuButton>
@@ -102,10 +81,10 @@ export default function NavItem({ icon, title, path, description, active=false, 
       isOpen={isOpen}
     >
         <Box
-            backgroundColor={active ? 'blue.200' : bgColor}
+            backgroundColor={active ? 'blue.200' : 'blue.800'}
             p={3}
             borderRadius={8}
-            _hover={{ textDecor: 'none', backgroundColor: hoverColor }}
+            _hover={{ textDecor: 'none', backgroundColor: 'blue.600' }}
             w={navSize == "big" ? "100%" : 'auto'}
         >
             <MenuButton 

@@ -1,6 +1,4 @@
 import { Flex, Text } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import { useColorMode } from '@chakra-ui/react'
 
 type Props = {
   size: string; // lg, md, sm
@@ -8,21 +6,6 @@ type Props = {
 }
 
 const Header = ({ size, text }: Props) => {
-
-  const { colorMode, toggleColorMode } = useColorMode();
-  const [ textColor, setTextColor ] = useState('blue.100');
-
-  const colorChange = () => {
-    if (colorMode === 'light') {
-        setTextColor('blue.900');
-    } else {
-        setTextColor('blue.100');
-    }
-  }
-
-  useEffect(() => {
-    colorChange();
-  }, [colorMode])
   
   let resize;
   let width;
@@ -51,7 +34,7 @@ const Header = ({ size, text }: Props) => {
       >
         <Text fontFamily='serif' fontSize='3rem' mr='.8rem'>trace </Text>
         <Text fontWeight={'thin'} fontSize='2rem'>|</Text>
-        <Text fontWeight={'thin'} color={ textColor } ml='.8rem' pt='.6rem'>
+        <Text fontWeight={'thin'} color='blue.100' ml='.8rem' pt='.6rem'>
           {text}
         </Text>
       </Flex>

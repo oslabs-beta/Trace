@@ -18,11 +18,7 @@ let served = false;
 const runTrace = async () => {
   if (!served) {
     served = true;
-<<<<<<< HEAD
-    exec('cd node_modules && cd go-trace && npm run build && npm run start', (err, stdout, stderr) => {
-=======
     exec('cd node_modules && cd go-trace && cd tracer-npm-package && node server.js', (err, stdout, stderr) => {
->>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
       console.log(stdout)
     })
   }

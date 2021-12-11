@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { Flex } from "@chakra-ui/layout";
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useMemo } from "react"
 import { Bar } from 'react-chartjs-2';
 import {
   Chart,
@@ -30,18 +30,6 @@ const LiveGraph = () => {
   const handleClick = (i) => {
     const href = '/#' + i;
     router.push(href)
-  }
-
-  const data = {
-    labels: [],
-    datasets: [
-      {
-        id: 1,
-        label: 'Traces',
-        data: [],
-        backgroundColor: []
-      }
-    ],
   }
 
   const options = {
@@ -98,11 +86,29 @@ const LiveGraph = () => {
     },
   };
 
-  const [ chartData, setChartData ] = useState(data)
+  const [ chartData, setChartData ] = useState({
+    labels: [],
+    datasets: [{
+      id: 1,
+      label: 'Traces',
+      data: [],
+      backgroundColor: []
+    }]
+  })
   const store = useAppSelector((state) => state)
 
   useEffect(() => {
     if (store) {
+      const data = {
+        labels: [],
+        datasets: [{
+          id: 1,
+          label: 'Traces',
+          data: [],
+          backgroundColor: []
+        }]
+      }
+
       for (let obj of store.data.rawdata) {
         if (obj) {
           data.labels.push(obj.trace_id)

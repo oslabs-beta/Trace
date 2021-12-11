@@ -1,12 +1,11 @@
 import '../styles/globals.css'
 import Layout from '../components/layout'
-import type { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import { ChakraProvider } from "@chakra-ui/react"
 import theme from '../theme/theme'
-import { Provider } from 'react-redux';
+import { Provider, useStore } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { wrapper } from '../state/store'
-import { useStore } from 'react-redux';
 import Loading from '../components/loading'
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react'
@@ -40,17 +39,13 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   // REDUX
   const dispatch = useAppDispatch();
   const { updateDataActionCreator } = bindActionCreators(actionCreators, dispatch);
-  
-  const refreshData = () => {
-    updateDataActionCreator(newData);
-  };
 
   useEffect(() => {
     if (newData !== null) {
       console.log('new data updated');
-      refreshData();
+      updateDataActionCreator(newData);
     }
-  }, [ newData ])
+  }, [ newData, updateDataActionCreator ])
 
   const store: any = useStore()
 
@@ -82,7 +77,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   ) : (
     <Provider store={store}>
       <ChakraProvider theme={theme}>
-        <PersistGate persistor={store as any} loading={<Loading />} >
+        <PersistGate persistor={store} loading={<Loading />} >
           <motion.div
             key={router.route}
             initial="initial"

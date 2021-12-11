@@ -1,9 +1,6 @@
 {
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
-  "/api/socketio": "pages/api/socketio.js",
-  "/": "pages/index.html",
-  "/insights": "pages/insights.html",
   "/_error": "pages/_error.js",
-  "/404": "pages/404.html"
+  "/": "pages/index.js"
 }

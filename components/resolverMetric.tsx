@@ -1,9 +1,9 @@
 import { Flex, Box } from "@chakra-ui/layout";
 import { Tooltip } from '@chakra-ui/react'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const ResolverMetric = ({ data, id }: any) => {
-  let max: number = 100;
+  let max = useRef(100);
   const [ sum, setSum ] = useState(1)
   const [ errors, setErrors ] = useState(false)
   let resolvers:any[] = [];
@@ -14,7 +14,7 @@ const ResolverMetric = ({ data, id }: any) => {
       else if (data.response.errors) setErrors(true);
       let preSum = Object.keys(data).reduce((a: number, b: string) => {
         if (b !== 'errors' && b !== 'dateAndTime' && b !== 'totalDuration' && b !== 'trace_id' && b !== 'response') {
-          max = Math.max(max, data[b])
+          max.current = Math.max(max.current, data[b])
           return a + data[b];
         } else return a;
       }, 0);
@@ -33,7 +33,7 @@ const ResolverMetric = ({ data, id }: any) => {
   for (let str of filteredData) {
     let color = index % 5
 
-    max = Math.max(max, data[str]);
+    max.current = Math.max(max.current, data[str]);
     resolvers.push(
       <Tooltip hasArrow label={`${str}: ${data[str]}ms`} bg='gray.300' color='black' key={index.toString()}>
         <Box 

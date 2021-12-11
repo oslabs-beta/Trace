@@ -4,7 +4,7 @@ import { useAppSelector } from '../state/hooks'
 // display grid
 // this file will essentially be the insights component
 
-const graphContainer = () => {
+const GraphContainer = () => {
 
   const { averages, count } = useAppSelector((state) => state.data)
 
@@ -19,4 +19,4 @@ const graphContainer = () => {
   )
 }
 
-export default graphContainer
+export default GraphContainer

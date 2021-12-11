@@ -55,7 +55,7 @@ const makeGraphs = (averages: any, count: any): any[] => {
     if (theseCoords && theseCoords[0] === 1) label = 'ms';
     // map the iterative props to a FlexComponent component
     // cast to an array
-    const theseComponents = thisGraph.map((item: any[]) => <FlexComponent max={thisGraph[0][1]} thisNum={item[1]} name={item[0]} label={label} />);
+    const theseComponents = thisGraph.map((item: any[], index: number) => <FlexComponent key={index.toString()} max={thisGraph[0][1]} thisNum={item[1]} name={item[0]} label={label} />);
       // render that array into a GridItem div 
       // and push it to the output array
       graphDivs.push(

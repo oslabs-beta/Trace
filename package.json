@@ -1,10 +1,6 @@
 {
   "name": "go-trace",
-<<<<<<< HEAD
-  "version": "0.2.3",
-=======
   "version": "0.2.7",
->>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
   "description": "Lightweight GraphQL resolver-level query tracing tool.",
   "author": "Pat Constant, Alex Hager, Eddy Kwon, Jueun Grace Yun",
   "publishConfig": {
@@ -18,11 +14,7 @@
   },
   "main": "tracer-npm-package/goTrace.js",
   "files": [
-<<<<<<< HEAD
-    "tracer-npm-package"
-=======
     "tracer-npm-package/"
->>>>>>> 670f1067b92ee23014dc957b3ad05c8e237cbf3f
   ],
   "scripts": {
     "dev": "next dev -p 2929",
@@ -49,6 +41,7 @@
     "@types/node": "16.11.10",
     "@types/react": "^17.0.37",
     "@types/styled-components": "^5.1.15",
+    "babel-eslint": "^10.1.0",
     "dotenv": "^10.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
