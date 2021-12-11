@@ -3,6 +3,7 @@
 # dependencies
 /_tests/goTrace/node_modules
 /node_modules
+/tracer-npm-package/node_modules
 /.pnp
 .pnp.js
 
