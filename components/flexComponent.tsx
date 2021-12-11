@@ -12,6 +12,7 @@ type FlexComponentProps = {
 }
 
 const FlexComponent = ({ max, thisNum, name, label }: FlexComponentProps) => {
+  console.log(max, thisNum, name, label)
   const graphWidth = thisNum === max ? '100%' : ((Number(thisNum) / max) * 100).toString() + '%';
   if (label.length) thisNum = Number(thisNum).toFixed(2);
   return (
@@ -26,14 +27,14 @@ const FlexComponent = ({ max, thisNum, name, label }: FlexComponentProps) => {
       <Flex 
         direction='row'
         h='1.5rem'
-        w = {'100%'} // was previously {max}
+        w={'100%'} 
         backgroundColor = 'white'
         borderRadius='1rem'
       >
         <Tooltip hasArrow label={`${name}: ${thisNum} ${label}`} bg='gray.300' color='black'>
           <Box
-          w = {graphWidth}
-          h = '100%'
+          w={graphWidth}
+          h='100%'
           backgroundColor = 'orange.400'
           borderRadius='1rem'
           />

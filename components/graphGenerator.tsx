@@ -2,14 +2,15 @@ import FlexComponent from './flexComponent'
 import { GridItem, Heading } from '@chakra-ui/react';
 
 const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: any}) => {
+
   // push completed divs into this array
   const graphDivs: any[] = [];
 
   // declare arrays for data to be split between
-  const rootAvg: [string, number][] = []
-  const rootCt: [string, number][] = [];
-  const resolveAvg: [string, number][] = [];
-  const resolveCt: [string, number][] = [];
+  const rootAvg: any[] = []
+  const rootCt: any[] = [];
+  const resolveAvg: any[] = [];
+  const resolveCt: any[] = [];
 
   // Divide the queries into root operations and resolvers
   // while preserving the count - average distinction
@@ -24,12 +25,13 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
   }
 
   // sort the number metrics by descending and keep only their top 5 entries
-  const mapGraphs = (arr: any[]) => {
-    return arr.map((graphArr) => {
-      return graphArr.sort((a: any[], b: any[]) => b[1] - a[1]).splice(5);
+  const mapGraphs = (arr: any[]): any[] => {
+    return arr.map(arr => {
+      arr.sort((a: any, b: any) => b[1] - a[1]).splice(5);
+      return arr
     })
   }
-
+  
   // rootAvg.sort((a, b) => b[1] - a[1]).splice(5);
   // rootCt.sort((a, b) => b[1] - a[1]).splice(5);
   // resolveAvg.sort((a, b) => b[1] - a[1]).splice(5);
@@ -37,6 +39,7 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
 
   // cast graph data and coordinates to arrays
   const graphData = mapGraphs([rootAvg, rootCt, resolveAvg, resolveCt]);
+  console.log(graphData)
   const gridCoords = [[1, 1], [2, 1], [1, 2], [2, 2]];
   const headings = [
     'Top 5 Root Operations by Average Duration',
@@ -44,6 +47,9 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
     'Top 5 Resolvers by Average Duration', 
     'Top 5 Resolvers by Invocation Count'
     ];
+
+  let i = 1000;
+
   // for each item of graph data
   while (graphData.length) {
     // shift the first element of both arrays
@@ -61,6 +67,7 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
       // and push it to the output array
       graphDivs.push(
         <GridItem 
+          key={i.toString()}
           rowStart={theseCoords[0]} 
           colStart={theseCoords[1]}
           backgroundColor='blue.700'
@@ -80,11 +87,14 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
           {theseComponents}
         </GridItem>
       )
+
+      i++
   }
   // after the while loop has run four times;
   // once for each insight graph,
   // return the four graph components
   // to their final container outside of this file
+  
   return graphDivs
 };
 
