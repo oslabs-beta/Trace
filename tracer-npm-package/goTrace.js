@@ -18,7 +18,7 @@ let served = false;
 const runTrace = async () => {
   if (!served) {
     served = true;
-    exec('cd node_modules && cd go-trace && cd tracer-npm-package && node server.js', (err, stdout, stderr) => {
+    exec('cd node_modules && cd @go-trace/tracer && node server.js', (err, stdout, stderr) => {
       console.log(stdout)
     })
   }
