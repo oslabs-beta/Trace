@@ -3,7 +3,7 @@ import { GridItem, Heading } from '@chakra-ui/react';
 
 const makeGraphs = (averages: any, count: any): any[] => {
   // push completed divs into this array
-  const graphDivs = [];
+  const graphDivs: any[] = [];
 
   // declare arrays for data to be split between
   const rootAvg: any[] = []

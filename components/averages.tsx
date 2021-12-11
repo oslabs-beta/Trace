@@ -13,14 +13,13 @@ import {
 const Averages = () => {
   const store = useAppSelector((state) => state);
   const resolverData = store.data;
-  console.log('averages.tsx || store: ', store);
 
   // iterate through resolverData
   // set count variable for resolvers of same type
   // sum duration and find average for resolvers of same type
   // save averages as object { resolverName: averageDuration }
 
-  const tableData = [];
+  const tableData: any[] = [];
   
   let totalSum = 0;
   let totalCount = 0;
@@ -37,8 +36,8 @@ const Averages = () => {
       </Tr>
     )
     // calculate total sum and count for total average
-    totalSum += resolverData.averages[resolver] * resolverData.count[resolver];
-    totalCount += resolverData.count[resolver];
+    totalSum += resolverData.averages[resolver] * Number(resolverData.count[resolver]);
+    totalCount += Number(resolverData.count[resolver]);
   }
   totalAverage = totalSum / totalCount;
 
