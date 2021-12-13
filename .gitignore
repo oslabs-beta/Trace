@@ -16,6 +16,7 @@
 
 # production
 /build
+/trace
 
 # misc
 .DS_Store
