@@ -24,7 +24,7 @@ Code changes related to enhancements and improvements are tracked as pull reques
 6. Issue a pull request!
 
 ## License
-By contributing, you agree that your contributions will be licensed under Quell's MIT License.
+By contributing, you agree that your contributions will be licensed under Trace's MIT License.
 
 ## License
 This document was adapted from the contribution guidelines from [Atom](https://github.com/atom/atom).
