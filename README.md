@@ -8,12 +8,12 @@ As a easy-to-configure and self-contained application, Trace not only equips use
 
 ## Table of Contents 📋
 
-- [Features](#features)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Trace GUI](#trace-gui)
-- [Additional Usage & Examples](#additional-usage--examples)
-- [Contributing](#contributing)
+- [Features](#features-)
+- [Installation](#installation-)
+- [Configuration](#configuration-)
+- [Trace GUI](#trace-gui-)
+- [Additional Usage & Examples](#additional-usage--examples-)
+- [Contributing](#contributing-)
 
 
 ## Features ✨
