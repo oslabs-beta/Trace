@@ -1,9 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/_tests/goTrace/node_modules
-/node_modules
-/tracer-npm-package/node_modules
+/__tests__/goTrace_testing/node_modules/
+/node_modules/
+/tracer-npm-package/node_modules/
+/src/node_modules/
 /.pnp
 .pnp.js
 
