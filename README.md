@@ -12,7 +12,7 @@ As a easy-to-configure and self-contained application, Trace not only equips use
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Trace GUI](#trace-gui)
-- [Usage & Examples](#usage-examples)
+- [Additional Usage & Examples](#additional-usage-examples)
 
 
 ## Features ✨
@@ -106,7 +106,7 @@ To reset the GUI, you can click on the "Reset" button located at the bottom of t
 
 ![Reset](reset.png)
 
-## Usage & Examples ✨
+## Additional Usage & Examples ✨
 
 For those using GraphQL Tools, you can use the following code to generate a GraphQLSchema instance from GraphQL schema language:
 
