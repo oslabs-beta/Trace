@@ -13,6 +13,7 @@ As a easy-to-configure and self-contained application, Trace not only equips use
 - [Configuration](#configuration)
 - [Trace GUI](#trace-gui)
 - [Additional Usage & Examples](#additional-usage-examples)
+- [Contributing](#contributing)
 
 
 ## Features ✨
@@ -168,3 +169,8 @@ For those using GraphQL Tools, you can use the following code to generate a Grap
     ```
 4. Finally, use this 'schema' as the first argument to goTrace!
 
+## Contributing ➕
+
+Interested in making a contribution to Trace? [Click here](./CONTRIBUTING.MD) for our open-source contribution guidelines.
+
+Thank you for your interest and support!
