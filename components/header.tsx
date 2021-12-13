@@ -1,6 +1,4 @@
 import { Flex, Text } from '@chakra-ui/react'
-import Image from 'next/image'
-import logo from '../public/T.png'
 
 type Props = {
   size: string; // lg, md, sm
@@ -34,12 +32,10 @@ const Header = ({ size, text }: Props) => {
           mb='1.2rem'
           alignItems='center'
       >
-        <Image
-          src={logo}
-          alt="Trace"
+        <img
+          src='../public/T.png'
           width='50px'
           height='50px'
-          placeholder="blur"
         />
         <Text fontFamily={'Montserrat'} fontSize='2rem' mt='.5rem' mr='.8rem' ml='0.5rem'>TRACE</Text>
         <Text fontWeight={'thin'} fontSize='2rem'>|</Text>

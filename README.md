@@ -91,21 +91,21 @@ Trace works with one of the simplest ways to run a GraphQL API server: Express, 
 
 When you visit http://localhost:2929/ in your browser, you'll see a simple, intuitive interface that first reveals a live graph of traces. By clicking on a trace, represented by a bar on the graph, you will be navigated to a detailed view of the trace. Detailed view of each trace can be found below the graph. This includes the trace ID, timestamp, total duration, resolver-specific duration, the result and any error messages (more below on error tracing).
 
-![Dashboard](dashboard.gif)
+![Dashboard](/screenshots/dashboard.gif)
 
 Trace additionally provides illustration of real-time error logging. Queries that fail during the GraphQL parsing, validation, or execution phase will be marked in red. You can view the specific error messages by clicking on specific trace.
 
-![Error - View 1](err-1.png)
-![Error - View 2](err-2.png)
+![Error - View 1](/screenshots/err-1.png)
+![Error - View 2](/screenshots/err-2.png)
 
 The dashboard has two additional views: Resolver Average View and Insights.
 
-![Averages](averages.png)
-![Insights](insights.png)
+![Averages](/screenshots/averages.png)
+![Insights](/screenshots/insights.png)
 
 To reset the GUI, you can click on the "Reset" button located at the bottom of the sidebar. This will clear all traces and error messages.
 
-![Reset](reset.png)
+![Reset](/screenshots/reset.png)
 
 ## Additional Usage & Examples ✨
 

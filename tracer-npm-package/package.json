@@ -1,9 +1,19 @@
 {
   "name": "@go-trace/tracer",
   "main": "goTrace.js",
-  "keywords": [],
+  "keywords": ["graphql", "tracing", "end to end testing", "resolvers", "api", "GUI", "performance monitoring", "testing", "GQL"],
   "author": "Grace Yun, Pat Constant, Eddy Kwon, Alex Hager",
-  "license": "ISC",
+  "license": "MIT",
+  "version": "1.0.2",
+  "description": "Lightweight resolver-level GraphQL query tracing tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/trace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/trace/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/trace#readme",
   "dependencies": {
     "graphql": "^15.3.0",
     "express": "^4.17.1",
@@ -14,15 +24,5 @@
   },
   "scripts": {
     "start": "node server.js"
-  },
-  "version": "1.0.1",
-  "description": "Lightweight resolver-level GraphQL query tracing tool",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/oslabs-beta/trace.git"
-  },
-  "bugs": {
-    "url": "https://github.com/oslabs-beta/trace/issues"
-  },
-  "homepage": "https://github.com/oslabs-beta/trace#readme"
+  }
 }
