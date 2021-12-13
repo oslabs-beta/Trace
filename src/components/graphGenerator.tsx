@@ -42,10 +42,10 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
   console.log(graphData)
   const gridCoords = [[1, 1], [2, 1], [1, 2], [2, 2]];
   const headings = [
-    'Top 5 Root Operations by Average Duration',
-    'Top 5 Root Operations by Invocation Count', 
-    'Top 5 Resolvers by Average Duration', 
-    'Top 5 Resolvers by Invocation Count'
+    'Root Operations by Average Duration',
+    'Root Operations by Invocation Count', 
+    'Resolvers by Average Duration', 
+    'Resolvers by Invocation Count'
     ];
 
   let i = 1000;
@@ -57,8 +57,9 @@ const makeGraphs = (averages: {[key: string]: number}, count: {[key: string]: an
     
     let label: string = ''
     const thisGraph: any[] = graphData.shift();
+    const thisCount: number = thisGraph.length;
     const theseCoords: any = gridCoords.shift();
-    const thisLabel: string | undefined = headings.shift();
+    const thisLabel: string | undefined = 'Top ' + `${thisCount} ` + headings.shift();
     if (theseCoords && theseCoords[0] === 1) label = 'ms';
     // map the iterative props to a FlexComponent component
     // cast to an array
