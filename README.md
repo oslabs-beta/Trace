@@ -39,7 +39,7 @@ Trace works with one of the simplest ways to run a GraphQL API server: Express, 
     const goTrace = require('@go-trace/tracer');
     ```
 
-2. Create a GraphQLSchema instance. You can use the same schema as you would in your Express app. If you're using the GraphQL Tools library, you can use 'makeExecutableSchema' to generate a GraphQLSchema instance from GraphQL schema language (see [Additional Usage & Examples](#additional-usage--examples) for sample code). Here's an example:
+2. Create a GraphQLSchema instance. You can use the same schema as you would in your Express app. If you're using the GraphQL Tools library, you can use 'makeExecutableSchema' to generate a GraphQLSchema instance from GraphQL schema language (see [Additional Usage & Examples](#additional-usage--examples-) for sample code). Here's an example:
 
       ```  
       const schema = new GraphQLSchema({
