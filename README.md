@@ -1,4 +1,4 @@
-![Trace-Logo](./Trace-Rectangle.png)
+![Trace-Logo](/screenshots/Trace-Rectangle.png)
 
 ## Trace ✏️
 
