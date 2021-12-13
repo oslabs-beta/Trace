@@ -8,14 +8,11 @@ As a easy-to-configure and self-contained application, Trace not only equips use
 
 ## Table of Contents 📋
 
-- Features
-- Installation
-- Configuration
-- Trace GUI
-- Usage & Examples
-- Contributing
-- License
-- Authors
+- [Features](#features)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Trace GUI](#trace-gui)
+- [Usage & Examples](#usage-examples)
 
 
 ## Features ✨
@@ -108,3 +105,66 @@ The dashboard has two additional views: Resolver Average View and Insights.
 To reset the GUI, you can click on the "Reset" button located at the bottom of the sidebar. This will clear all traces and error messages.
 
 ![Reset](reset.png)
+
+## Usage & Examples ✨
+
+For those using GraphQL Tools, you can use the following code to generate a GraphQLSchema instance from GraphQL schema language:
+
+1. First create your type definitions:
+
+    ```
+    const typeDefs = buildSchema(`
+        type User {
+            id: ID!
+            firstName: String!
+            lastName: String!
+            username: String!
+            password: String!
+            email: String! 
+            avatar_url: String
+        }
+
+        type Query {
+            getUsers: [User]
+            getUser(username: String!): User
+        }
+        );
+    ```
+
+2. Then create your resolvers:
+
+    ```
+    { 
+        Query: {
+          getUsers: async (root, args, context, info) => {
+            try {
+              const query = `SELECT * FROM users`;
+              const users = await pool.query(query);
+              return users.rows;
+            } catch (error) {
+              return error;
+            }
+          },
+          getUser: async (root, args, context, info) => {
+            try {
+              const username = args.username;
+              const query = `SELECT * FROM users WHERE username = $1`;
+              const users = await pool.query(query, [username]);
+              return users.rows[0];
+            } catch (error) {
+              return error;
+            }
+          }
+        }
+    }
+    ```
+3. Use GraphQL Tools' makeExecutableSchema to generate a GraphQLSchema instance:
+
+    ```
+    const schema = makeExecutableSchema({
+      typeDefs,
+      resolvers,
+    });
+    ```
+4. Finally, use this 'schema' as the first argument to goTrace!
+
