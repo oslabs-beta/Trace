@@ -4,7 +4,7 @@
   "keywords": ["graphql", "tracing", "end to end testing", "resolvers", "api", "GUI", "performance monitoring", "testing", "GQL"],
   "author": "Grace Yun, Pat Constant, Eddy Kwon, Alex Hager",
   "license": "MIT",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "Lightweight resolver-level GraphQL query tracing tool",
   "repository": {
     "type": "git",

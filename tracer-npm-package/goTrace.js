@@ -1,4 +1,5 @@
-const { exec } = require('child_process')
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const { parse, validate, execute } = require('graphql')
 const { applyMiddleware } = require('graphql-middleware')
 const { v4: uuidv4 } = require('uuid')
@@ -18,15 +19,13 @@ let served = false;
 const runTrace = async () => {
   if (!served) {
     served = true;
-    exec('cd node_modules && cd @go-trace/tracer && node server.js', (err, stdout, stderr) => {
-      console.log(stdout)
-    })
+    await exec('cd node_modules && cd @go-trace/tracer && node server.js')
   }
 }
 
 module.exports = async function goTrace(schema, query, root, context, variables) {
 
-  await runTrace();
+  runTrace();
 
   // Initial object that will hold all the data we want to send to trace
   const rootQueryObj = { trace_id: uuidv4() };
@@ -66,13 +65,25 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
   rootQueryObj['response'] = response;
 
-  fetch('http://localhost:2929/socketio', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(rootQueryObj)
-  });
+  try {
+    await fetch('http://localhost:2929/socketio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rootQueryObj)
+    })
+  } catch {
+    setTimeout(() => {
+      fetch('http://localhost:2929/socketio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rootQueryObj)
+    })
+    }, 1000)
+  }
 
   return response;
 }
