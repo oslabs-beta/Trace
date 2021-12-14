@@ -4,7 +4,7 @@
 
 Trace is a lightweight, open-source GraphQL query performance monitoring GUI that provides users with real-time, resolver-level performance tracing metrics and error logging. At its inception, Trace was created for the developer looking for a straightforward option for query performance monitoring on their Express-GraphQL server -- without having to install hefty libraries full of tools they'll never use such as Apollo or Hasura. Trace provides a simple, intuitive interface for users looking to test queries for their Express-GraphQL servers.
 
-As a easy-to-configure and self-contained application, Trace not only equips users with resolver-level query tracing but also illustrative insights on specific resolvers. Trace is designed to be used in a development environment for debugging and performance tuning. 
+As an easy-to-configure and self-contained application, Trace not only equips users with resolver-level query tracing but also illustrative insights on specific resolvers. Trace is designed to be used in a development environment for debugging and performance tuning. 
 
 ## Table of Contents 📋
 
@@ -81,7 +81,7 @@ Trace works with one of the simplest ways to run a GraphQL API server: Express, 
         schema,
         query,
         null, // Optional: rootValue, which will get passed as the root value to the executor
-        null, // Important: leave this nulL!
+        null, // Important: leave this null!
         variables
       )
     });
