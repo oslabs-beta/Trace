@@ -107,7 +107,7 @@ The dashboard has two additional views: Resolver Average View and Insights.
 
 To reset the GUI, you can click on the "Reset" button located at the bottom of the sidebar. This will clear all traces and error messages.
 
-![Reset](/screenshots/Reset.gif)
+![Reset](/screenshots/reset.png)
 
 ## Additional Usage & Examples ✨
 
