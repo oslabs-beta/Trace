@@ -8,7 +8,10 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@chakra-ui/react": "^1.7.2",
+    "react": "17.0.2"
+  },
   "devDependencies": {
     "jest": "^27.4.5"
   }
