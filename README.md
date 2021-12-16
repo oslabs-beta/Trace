@@ -103,11 +103,11 @@ Trace additionally provides illustration of real-time error logging. Queries tha
 The dashboard has two additional views: Resolver Average View and Insights.
 
 ![Averages](/screenshots/averages.png)
-![Insights](/screenshots/insights.png)
+![Insights](/screenshots/Insights-hover.gif)
 
 To reset the GUI, you can click on the "Reset" button located at the bottom of the sidebar. This will clear all traces and error messages.
 
-![Reset](/screenshots/reset.png)
+![Reset](/screenshots/Reset.gif)
 
 ## Additional Usage & Examples ✨
 
