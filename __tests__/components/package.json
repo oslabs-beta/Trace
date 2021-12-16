@@ -1,0 +1,15 @@
+{
+  "name": "components-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test_server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^27.4.5"
+  }
+}

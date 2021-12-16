@@ -1,7 +1,9 @@
-
-import { parse, validate, execute } from 'graphql';
-import { applyMiddleware } from 'graphql-middleware';
-import { fs } from 'fs';
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const { parse, validate, execute } = require('graphql')
+const { applyMiddleware } = require('graphql-middleware')
+const { v4: uuidv4 } = require('uuid')
+const fetch = require("node-fetch");
 
 const loggingMiddleware = async (resolve, root, args, context, info) => {
   const startTime = process.hrtime();
@@ -12,7 +14,22 @@ const loggingMiddleware = async (resolve, root, args, context, info) => {
   return result;
 }
 
+let served = false;
+
+const runTrace = async () => {
+  if (!served) {
+    served = true;
+    await exec('cd node_modules && cd @go-trace/tracer && node server.js')
+  }
+}
+
 module.exports = async function goTrace(schema, query, root, context, variables) {
+
+  runTrace();
+
+  // Initial object that will hold all the data we want to send to trace
+  const rootQueryObj = { trace_id: uuidv4() };
+
   schema = applyMiddleware(schema, loggingMiddleware);
 
   const queryAST = parse(query);
@@ -21,16 +38,19 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   if (errors.length === 0) {
     console.log(`Validation successful query can be executed`);  
   } else {
-    //rewrite this 
-    const formerData = fs.readFileSync('./errors.json') || [];
-    formerData.push(errors);
-    fs.writeFileSync('./errors.json', JSON.stringify(formerData), 'utf8');
+    Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(errors) : rootQueryObj['errors'] = [...errors];
   }
 
-  const rootQueryObj = {};
   let endTime;
   let response;
+
   // Execute the query against the schema
+  const currentDate = new Date(); 
+  const timestamp = currentDate. getTime()
+  const dateAndTime = `${currentDate} | ${timestamp}`;
+
+  rootQueryObj['dateAndTime'] = dateAndTime;
+
   const startTime = process.hrtime();
   const queryMetrics = await execute(schema, queryAST, null, rootQueryObj, variables)
     .then((result) => {
@@ -39,27 +59,30 @@ module.exports = async function goTrace(schema, query, root, context, variables)
     })
     .then(() => { return rootQueryObj })
     .catch(err => {
-      const formerData = fs.readFileSync('./errors.json') || [];
-      formerData.push(err, err.message);
-      fs.writeFileSync('./errors.json', JSON.stringify(formerData), 'utf8');
+      Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(err.message) : rootQueryObj['errors'] = [...err.message];
     });
 
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
-
-  let resolverData;
-
-  try {
-    resolverData = JSON.parse(fs.readFileSync('./resolverMetrics.json'));
-  } catch (err) {
-    console.log('Creating resolverData file!');
-    resolverData = [];
-  }
+  rootQueryObj['response'] = response;
 
   try {
-    resolverData.push(queryMetrics);
-    fs.writeFileSync('./resolverMetrics.json', JSON.stringify(resolverData), 'utf8');
-  } catch(err) {
-    console.log('Data writing error:', err, err.message);
+    await fetch('http://localhost:2929/socketio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rootQueryObj)
+    })
+  } catch {
+    setTimeout(() => {
+      fetch('http://localhost:2929/socketio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rootQueryObj)
+    })
+    }, 1000)
   }
 
   return response;

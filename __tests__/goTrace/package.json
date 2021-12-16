@@ -1,0 +1,22 @@
+{
+  "name": "gotrace-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test_server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "socket.io-client": "^4.4.0"
+  },
+  "devDependencies": {
+    "@go-trace/tracer": "^1.0.5",
+    "jest": "^27.4.5",
+    "supertest": "^6.1.6"
+  }
+}
