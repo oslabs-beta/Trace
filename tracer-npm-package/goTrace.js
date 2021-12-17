@@ -8,7 +8,7 @@ const fetch = require("node-fetch");
 const loggingMiddleware = (_context) => {
   return async (resolve, root, args, context, info) => {
     const startTime = process.hrtime();
-    const result = await resolve(root, args, context, info);
+    const result = await resolve(root, args, _context, info);
     const endTime = process.hrtime(startTime);
     const duration = JSON.parse((endTime[1] / 1e6).toFixed(2));
     context[`${info.parentType}.${info.fieldName}`] = duration;
