@@ -81,7 +81,7 @@ Trace works with one of the simplest ways to run a GraphQL API server: Express, 
         schema,
         query,
         null, // Optional: rootValue, which will get passed as the root value to the executor
-        null, // Important: leave this null!
+        null, // Optional: use this for custom context or leave null!
         variables
       )
     });
