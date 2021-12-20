@@ -5,13 +5,15 @@ const { applyMiddleware } = require('graphql-middleware')
 const { v4: uuidv4 } = require('uuid')
 const fetch = require("node-fetch");
 
-const loggingMiddleware = async (resolve, root, args, context, info) => {
-  const startTime = process.hrtime();
-  const result = await resolve(root, args, context, info);
-  const endTime = process.hrtime(startTime);
-  const duration = JSON.parse((endTime[1] / 1e6).toFixed(2));
-  context[`${info.parentType}.${info.fieldName}`] = duration;
-  return result;
+const loggingMiddleware = (_context) => {
+  return async (resolve, root, args, context, info) => {
+    const startTime = process.hrtime();
+    const result = await resolve(root, args, _context, info);
+    const endTime = process.hrtime(startTime);
+    const duration = JSON.parse((endTime[1] / 1e6).toFixed(2));
+    context[`${info.parentType}.${info.fieldName}`] = duration;
+    return result;
+  }
 }
 
 let served = false;
@@ -30,7 +32,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   // Initial object that will hold all the data we want to send to trace
   const rootQueryObj = { trace_id: uuidv4() };
 
-  schema = applyMiddleware(schema, loggingMiddleware);
+  schema = applyMiddleware(schema, loggingMiddleware(context));
 
   const queryAST = parse(query);
   // Validate the incoming queryAST against the GraphQLSchema Object
