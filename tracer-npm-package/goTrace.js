@@ -61,6 +61,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
     })
     .then(() => { return rootQueryObj })
     .catch(err => {
+      // rootQueryObj.hasOwnProperty('errors')
       Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(err.message) : rootQueryObj['errors'] = [...err.message];
     });
 
