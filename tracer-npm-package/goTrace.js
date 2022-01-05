@@ -54,7 +54,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   rootQueryObj['dateAndTime'] = dateAndTime;
 
   const startTime = process.hrtime();
-  const queryMetrics = await execute(schema, queryAST, null, rootQueryObj, variables)
+  const queryMetrics = await execute(schema, queryAST, null, null, variables)
     .then((result) => {
       endTime = process.hrtime(startTime);
       response = result;
