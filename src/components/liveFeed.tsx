@@ -18,6 +18,7 @@ const LiveFeed = () => {
 
   const store = useAppSelector(state => state)
   const data = store.data.rawdata;
+  console.log('DATA FROM LIVE FEED: ', data);
 
   const items = data.map((obj: Object, i: Key) => {
     return (
