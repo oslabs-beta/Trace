@@ -23,10 +23,10 @@ const ResolverMetric = ({ data, id }: any) => {
     }
   }, [data])
 
-  const colors = ['orange.300', 'orange.400', 'orange.500', 'orange.600', 'orange.700'];
-  const errColors = ['red.500', 'red.600', 'red.700', 'red.800', 'red.900'];
+  const colors: string[] = ['orange.300', 'orange.400', 'orange.500', 'orange.600', 'orange.700'];
+  const errColors: string[] = ['red.500', 'red.600', 'red.700', 'red.800', 'red.900'];
   let index = 0;
-  const filteredData = Object.keys(data).filter(key => (
+  const filteredData: any[] = Object.keys(data).filter(key => (
     key !== 'dateAndTime' && key !== 'totalDuration' && key !== 'trace_id' && key !== 'errors' && key !== 'response'
   ));
 

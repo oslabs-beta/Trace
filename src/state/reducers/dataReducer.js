@@ -17,9 +17,10 @@ const dataReducer = (state = initialState, action) => {
       // UPDATE RAW DATA ARRAY
       clone.rawdata.push(data);
 
-      // UPDATE AVERAGES + COUNT
+      // UPDATE AVERAGES + COUNT 
+      const unrelatedKeys = ['dateAndTime', 'errors', 'response', 'totalDuration', 'trace_id'];
       for (let key in data) {
-        if (key !== 'dateAndTime' && key !== 'errors' && key !== 'response' && key !== 'totalDuration' && key !== 'trace_id') {
+        if (!unrelatedKeys.includes(key)) {
           if (clone.averages[key]) {
             let sum = clone.averages[key] * clone.count[key];
             sum += data[key];

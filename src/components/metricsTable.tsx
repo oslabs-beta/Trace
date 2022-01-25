@@ -4,10 +4,10 @@ import { Flex } from '@chakra-ui/layout';
 const MetricsTable = ({ data }: any) => {
 
   const details: Array<any> = [];
-  let response;
-  let errors = '';
+  let response: string | undefined;
+  let errors: string = '';
 
-  for (let str of Object.keys(data)) {
+  for (let str of Object.keys(data)) { 
     if (str === 'trace_id') continue;
     if (str === 'errors') {
       errors += JSON.stringify(data[str]);

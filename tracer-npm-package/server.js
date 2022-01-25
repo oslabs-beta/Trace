@@ -9,7 +9,6 @@ app.use(express.static('out'))
 app.use(express.json())
 
 app.post('/socketio', (req, res) => {
-  console.log(req.body)
   req.app.io.emit('data', req.body)
   res.end()
 })

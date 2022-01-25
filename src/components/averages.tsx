@@ -13,16 +13,11 @@ const Averages = () => {
   const store = useAppSelector((state) => state);
   const resolverData = store.data;
 
-  // iterate through resolverData
-  // set count variable for resolvers of same type
-  // sum duration and find average for resolvers of same type
-  // save averages as object { resolverName: averageDuration }
-
   const tableData: JSX.Element[] = [];
   
-  let totalSum = 0;
-  let totalCount = 0;
-  let totalAverage;
+  let totalSum: number = 0;
+  let totalCount: number = 0;
+  let totalAverage: number | undefined;
 
   // if no resolver data set total average to 0
   totalCount === 0 ? totalAverage = 0 : totalAverage = totalSum / totalCount;
