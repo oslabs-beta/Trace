@@ -40,7 +40,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
   if (errors.length === 0) {
     console.log(`Validation successful query can be executed`);  
   } else {
-    Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(errors) : rootQueryObj['errors'] = [...errors];
+    rootQueryObj.hasOwnProperty('errors') ? rootQueryObj['errors'].push(errors) : rootQueryObj['errors'] = [...errors];
   }
 
   let endTime;
@@ -48,7 +48,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
 
   // Execute the query against the schema
   const currentDate = new Date(); 
-  const timestamp = currentDate. getTime()
+  const timestamp = currentDate.getTime()
   const dateAndTime = `${currentDate} | ${timestamp}`;
 
   rootQueryObj['dateAndTime'] = dateAndTime;
@@ -62,7 +62,7 @@ module.exports = async function goTrace(schema, query, root, context, variables)
     .then(() => { return rootQueryObj })
     .catch(err => {
       // rootQueryObj.hasOwnProperty('errors')
-      Object.keys(rootQueryObj).includes('errors') ? rootQueryObj['errors'].push(err.message) : rootQueryObj['errors'] = [...err.message];
+      rootQueryObj.hasOwnProperty('errors') ? rootQueryObj['errors'].push(err.message) : rootQueryObj['errors'] = [...err.message];
     });
 
   rootQueryObj.totalDuration = JSON.parse((endTime[1] / 1e6).toFixed(2));
