@@ -7,7 +7,7 @@ const MetricsTable = ({ data }: any) => {
   let response;
   let errors = '';
 
-  for (let str of Object.keys(data)) {
+  for (let str of Object.keys(data)) { 
     if (str === 'trace_id') continue;
     if (str === 'errors') {
       errors += JSON.stringify(data[str]);
